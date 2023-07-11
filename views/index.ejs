@@ -1,0 +1,19 @@
+<%- include("partials/header"); -%>
+<div id="Body">
+    <h1 id="Titletxt"><%= titleTxt %></h1>
+    <p><%= descTxt %></p>
+    <p id="emphasis"><%= emphasis %>!</p>
+</div>
+<%- include("components/statbox"); -%>
+<% if(!feedbackState){ %>
+    <%- include("components/feedback_block"); -%>
+<% }else { %>
+    <%- include("components/feedback_btn"); -%>
+<%}%>
+<%- include("partials/footer"); -%>
+<script>
+    function toggleform()
+    {
+        console.log("button clicked");
+    }
+</script>
