@@ -1,0 +1,38 @@
+<% var feedbackState = true; %>
+<div id="feedback-block" onclick="togglefb()" data-feedbackstate="<%= feedbackState %>">
+    <p>💬</p>
+</div>
+
+<div id="contactformbox" style="display: none;">
+    <button onclick="togglefb()" id="close-button">&times;</button>
+    <form action="/submitform" method="post">
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username"/>
+
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email"/>
+
+        <label htmlFor="feedback">Feedback:</label>
+        <textarea id="feedback"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function togglefb() {
+        var feedbackBlock = document.getElementById("feedback-block");
+        var contactFormBox = document.getElementById("contactformbox");
+        var currentFeedbackState = feedbackBlock.getAttribute("data-feedbackstate");
+
+        if (currentFeedbackState === "true") {
+            feedbackBlock.style.display = "none";
+            contactFormBox.style.display = "block";
+            feedbackBlock.setAttribute("data-feedbackstate", "false");
+        } else {
+            feedbackBlock.style.display = "flex";
+            contactFormBox.style.display = "none";
+            feedbackBlock.setAttribute("data-feedbackstate", "true");
+        }
+    }
+</script>

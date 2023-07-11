@@ -1,0 +1,9 @@
+<div id="boxes">
+    <% cardData.forEach((prop)=>{%>
+        <div onclick="window.location.href='/signupform'" id="cardlayout">
+            <h2><%=prop.title%></h2>
+            <div id="horizontal-line"></div>
+            <p><%=prop.desc%></p>
+        </div>
+    <%})%>
+</div>

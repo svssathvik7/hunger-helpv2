@@ -12,19 +12,15 @@ app.get("/donate-food",(req,res)=>{
 });
 
 app.get("/request-food",(req,res)=>{
-    res.render("donate_food");
+    res.render("req_food");
 });
 
 app.get("/statistics",(req,res)=>{
-    res.render("donate_food");
-});
-
-app.get("/join",(req,res)=>{
-    res.render("donate_food");
+    res.render("stats");
 });
 
 app.get("/about",(req,res)=>{
-    res.render("donate_food");
+    res.render("about");
 });
 
 app.listen(3000,()=>{
@@ -68,11 +64,28 @@ var statBoxData = [
 ];
 app.get("/",function(req,res)
 {
-    res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,feedbackState:curFeedbackState,obj:statBoxData});
+    res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData});
 });
 
 // Join page
+var card_Data = [
+    {
+        title : "Member",
+        desc : "Join as a Member with HungerHelp and make a difference in fighting food waste and hunger. As a member, you can contribute surplus food from your restaurant or become a donor by supporting our mission financially. By partnering with us, you'll help redirect perfectly good food to those in need and actively participate in building a more sustainable and compassionate community. Together, we can reduce food waste and ensure that no one goes hungry.",
+        func : "cardClicked1"
+    },
+    {
+        title : "Volunteer",
+        desc : "Volunteer with HungerHelp and make a meaningful impact in your community. Join our dedicated team of volunteers to help collect and distribute surplus food, organize food drives, assist at local events, and spread awareness about food waste and hunger. By volunteering with us, you can be a part of the solution and contribute to creating a hunger-free future for all.",
+        func : "cardClicked2"
+    }
+];
 app.get("/join",function(req,res)
 {
-    res.render("join",{feedbackState:curFeedbackState});
+    res.render("join",{cardData:card_Data});
+});
+
+app.get("/signupform",function(req,res){
+    res.render("register");
+    console.log("clicked");
 });

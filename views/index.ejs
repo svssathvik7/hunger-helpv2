@@ -5,9 +5,5 @@
     <p id="emphasis"><%= emphasis %>!</p>
 </div>
 <%- include("components/statbox"); -%>
-<% if(!feedbackState){ %>
-    <%- include("components/feedback_block"); -%>
-<% }else { %>
-    <%- include("components/feedback_btn"); -%>
-<%}%>
+<%- include("components/feedback"); -%>
 <%- include("partials/footer"); -%>
