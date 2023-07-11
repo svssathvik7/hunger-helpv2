@@ -70,3 +70,9 @@ app.get("/",function(req,res)
 {
     res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,feedbackState:curFeedbackState,obj:statBoxData});
 });
+
+// Join page
+app.get("/join",function(req,res)
+{
+    res.render("join",{feedbackState:curFeedbackState});
+});

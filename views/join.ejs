@@ -1,2 +1,7 @@
 <%- include("partials/header"); -%>
+<% if(!feedbackState){ %>
+    <%- include("components/feedback_block"); -%>
+<% }else { %>
+    <%- include("components/feedback_btn"); -%>
+<%}%>
 <%- include("partials/footer"); -%>
