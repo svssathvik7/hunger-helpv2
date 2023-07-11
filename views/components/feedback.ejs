@@ -7,13 +7,13 @@
     <button onclick="togglefb()" id="close-button">&times;</button>
     <form action="/submitform" method="post">
         <label htmlFor="username">Username:</label>
-        <input type="text" id="username"/>
+        <input name="username" type="text" id="username"/>
 
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email"/>
+        <input name="usermail" type="email" id="email"/>
 
         <label htmlFor="feedback">Feedback:</label>
-        <textarea id="feedback"></textarea>
+        <textarea name="userfeedback" id="feedback"></textarea>
 
         <button type="submit">Submit</button>
     </form>

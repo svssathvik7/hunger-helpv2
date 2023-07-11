@@ -2,6 +2,8 @@
 const es = require("express");
 const app = es();
 const bp = require("body-parser");
+const reques = require("request");
+const http = require("http");
 
 app.use(bp.urlencoded({extended:true}));
 app.set("view engine","ejs");
@@ -89,3 +91,41 @@ app.get("/signupform",function(req,res){
     res.render("register");
     console.log("clicked");
 });
+
+app.post("/submitform",(req,res)=>{
+    var uname = req.body.username;
+    var umail = req.body.usermail;
+    var ufeedback = req.body.userfeedback;
+
+    var data = {
+        members : {
+            email_address: umail,
+            status: "subscribed",
+            merge_fields: {
+                FNAME : uname,
+                MERGE6 : ufeedback
+            }
+        }
+    };
+    var jsonData = JSON.stringify(data);
+    console.log(uname,umail,ufeedback);
+    const url = "http://us14.api.mailchimp.com/3.0/lists/1aa086d217";
+    const options = {
+        method: "POST",
+        auth: "sathvik:806df14882647ee42acc3d2c4e0923ba-us14"
+    }
+    const request = http.request(url,options,(response)=>{
+        response.on("data",(data)=>{
+            console.log(JSON.parse(data));
+        });
+    });
+    request.write(jsonData);
+    request.end();
+    res.redirect("/");
+});
+
+
+// api key
+// 806df14882647ee42acc3d2c4e0923ba-us14
+// uniq id
+// 1aa086d217
