@@ -3,6 +3,7 @@ const es = require("express");
 const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 app.use(bp.urlencoded({extended:true}));
 app.set("view engine","ejs");
@@ -111,3 +112,21 @@ app.post("/submitform",(req,res)=>{
     res.redirect("/");
 });
 
+app.post("/newuser",(req,res)=>{
+    mongoose.connect(("mongodb://127.0.0.1:27017/userdb"));
+    var db = mongoose.connection;
+    db.on("error",()=>console.log("Error in connection to Database"))
+    db.once("open",()=>console.log("Connected to Database Successfully"));
+    var data = {
+        name : req.body.name,
+        org : req.body.orgname,
+        mail : req.body.email,
+        pass : req.body.password
+    };
+    db.collection("members").insertOne(data,(err,collection)=>{
+        if(err) throw err;
+        console.log("Record Inserted Successfully");
+    });
+    console.log(data.name,data.org,data.mail,data.pass);
+    res.redirect("/");
+});

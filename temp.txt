@@ -1,0 +1,46 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+const mongoose = require("mongoose");
+
+const app = express();
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({extended:true}));
+app.set('view engine',ejs);
+
+mongoose.connect("mongodb://127.0.0.1:27017/registrationDB", { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on("error",()=>console.log("Error in connection to Database"))
+db.once("open",()=>console.log("Connected to Database Successfully"));
+
+let name,rollno,branch,section,email;
+
+app.get("/",function(req,res){
+    res.sendFile(__dirname+"/index.html");
+})
+
+app.post("/",function(req,res){
+    name = req.body.name;
+    rollno = req.body.rollno;
+    branch = req.body.branch;
+    section = req.body.section;
+    email = req.body.email;
+
+    var data = {
+        "name": name,
+        "rollno" : rollno,
+        "branch" : branch,
+        "section" : section,
+        "email" : email
+    }
+    db.collection("registers").insertOne(data,(err,collection)=>{
+        if(err) throw err;
+        console.log("Record Inserted Successfully");
+    })
+    console.log(name,rollno,branch,section,email);
+    res.redirect("/");
+})
+
+app.listen(3000,function(){
+    console.log("Running on port 3000");
+})

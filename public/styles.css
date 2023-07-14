@@ -153,11 +153,7 @@ footer{
     top: 0;bottom: 0;left: 0;right: 0;
     margin: auto;
 }
-#cardlayout:hover{
-    -webkit-transform: rotateX(180deg);
-    transform: rotateY(180deg);
-    transform-origin: center;
-}
+
 /* Signup box */
 #signupbox{
     position: absolute;
