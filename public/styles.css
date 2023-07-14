@@ -53,7 +53,7 @@ footer{
     left: 10dvw;
     color: #000;
     width: 70dvw;
-    animation: show 0.3s ease;
+    animation: show 0.8s ease;
 }
 #Titletxt{
     font-size: 3em;
@@ -70,6 +70,7 @@ footer{
     right: 2dvw;
     z-index: -1;
     top: 27dvh;
+    animation: show 0.8s ease;
 }
 #feedback-block{
     width: 5dvw;
@@ -84,14 +85,6 @@ footer{
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-@keyframes show{
-    0%{
-        opacity: 0%;
-    }
-    100%{
-        opacity: 100%;
-    }
 }
 #feedback-block p{
     font-size: 2em;
@@ -113,6 +106,7 @@ footer{
     margin: auto;
     width: 40dvw;
     text-align: center;
+    animation: show 0.8s ease;
 }
 
 /* Join page */
@@ -159,6 +153,11 @@ footer{
     top: 0;bottom: 0;left: 0;right: 0;
     margin: auto;
 }
+#cardlayout:hover{
+    -webkit-transform: rotateX(180deg);
+    transform: rotateY(180deg);
+    transform-origin: center;
+}
 /* Signup box */
 #signupbox{
     position: absolute;
@@ -166,7 +165,7 @@ footer{
     margin: auto;
     width: fit-content;
     height: 60dvh;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     text-align: center;
 }
@@ -178,10 +177,12 @@ footer{
     line-height: 2;
 }
 #signupform{
+    border: thin solid #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    backdrop-filter: blur(10px);
 }
 #signupform #submit{
     padding: 2%;
@@ -199,6 +200,7 @@ footer{
     border-radius: 2%;
     animation: show 0.3s ease;
   }
+
   
   form {
     display: flex;
@@ -235,4 +237,36 @@ footer{
     color: red;
     cursor: pointer;
   }
-  
+  #close-button:active #contactformbox{
+    animation: hide 0.8s ease;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Keyframes */
+@keyframes show {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 100%;
+    }
+}
+@keyframes hide {
+    from{
+        opacity: 100%;
+    }
+    to{
+        opacity: 0;
+    }
+}

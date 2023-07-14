@@ -63,9 +63,13 @@ var statBoxData = [
         count : 300
     }
 ];
+const aside_img = [
+    "https://media.istockphoto.com/id/1355624220/vector/vector-illustration-please-dont-waste-food-designs-for-world-food-day-and-international.jpg?s=612x612&w=0&k=20&c=_noGR7l39IG46d6RGE4x54DBC8sg1pD1xzDUfz5pb4E=",
+    "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg"
+];
 app.get("/",function(req,res)
 {
-    res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData});
+    res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
 });
 
 // Join page
@@ -88,7 +92,6 @@ app.get("/join",function(req,res)
 
 app.get("/signupform",function(req,res){
     res.render("register");
-    console.log("clicked");
 });
 
 app.post("/submitform",(req,res)=>{
@@ -108,34 +111,3 @@ app.post("/submitform",(req,res)=>{
     res.redirect("/");
 });
 
-
-// api key
-// 806df14882647ee42acc3d2c4e0923ba-us14
-// uniq id
-// 1aa086d217
-
-
-// var data = {
-//     members : {
-//         email_address: umail,
-//         status: "subscribed",
-//         merge_fields: {
-//             FNAME : uname,
-//             LNAME : uname
-//         }
-//     }
-// };
-// var jsonData = JSON.stringify(data);
-// console.log(uname,umail,ufeedback);
-// const url = "https://us14.api.mailchimp.com/3.0/lists/1aa086d217";
-// const options = {
-//     method: "POST",
-//     auth: "sathvik:806df14882647ee42acc3d2c4e0923ba-us14"
-// }
-// const request = http.request(url,options,(response)=>{
-//     response.on("data",(data)=>{
-//         console.log(JSON.parse(data));
-//     });
-// });
-// request.write(jsonData);
-// request.end();
