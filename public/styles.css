@@ -10,7 +10,8 @@ body{
     background-color: #fff;
 }
 header{
-    background-color: #86dc3d;
+    /* background-color: #86dc3d; */
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -381,6 +382,7 @@ footer{
     transition: all 0.5s ease;
     cursor: pointer;
     transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
 }
 .availcard:hover{
     transform: scale(0.9);
@@ -408,4 +410,49 @@ footer{
     to{
         opacity: 0;
     }
+}
+
+
+/* Miniatures */
+#background{
+    position: absolute;
+    width: 100dvw;
+    height: 100vh;
+    top: 0;left: 0;
+    z-index: -1;
+}
+.circles{
+    border-radius: 100%;
+    background-color: #87dc3d8e;
+    position: relative;
+}
+#left-small{
+    width: 150px;
+    height: 150px;
+    left: 10%;
+    bottom: 8dvh;
+}
+#left-mini{
+    width: 20px;
+    height: 20px;
+    left: 35%;
+    bottom: 8%;
+}
+#right-big{
+    width: 500px;
+    height: 500px;
+    bottom: 65%;
+    left: 50%;
+}
+#right-mini{
+    width: 15px;
+    height: 15px;
+    left: 90%;
+    bottom: 80%;
+}
+#rbottom-small{
+    width: 175px;
+    height: 175px;
+    left: 90%;
+    bottom: 16dvh;
 }
