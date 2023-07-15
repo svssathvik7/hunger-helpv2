@@ -15,10 +15,6 @@ var db = mongoose.connection;
 db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
-app.get("/request-food",(req,res)=>{
-    res.render("req_food");
-});
-
 app.get("/statistics",(req,res)=>{
     res.render("stats");
 });
@@ -127,8 +123,9 @@ app.post("/newuser",(req,res)=>{
 
 // Donate food
 var isLoggedIn = false;
+var errmsg = "";
 app.get("/donate-food",(req,res)=>{
-    res.render("donate_food",{loginState:isLoggedIn});
+    res.render("donate_food",{loginState:isLoggedIn,errortxt:errmsg});
 });
 app.post("/login",(req,res)=>{
     var lmail = req.body.email;
@@ -137,12 +134,31 @@ app.post("/login",(req,res)=>{
         if(err){
             console.log(err);
         }
-        else{
+        if(foundUser){
             if(foundUser.pass === lpass)
             {
                 isLoggedIn = true;
                 res.redirect("/donate-food");
             }
+            else{
+                errmsg = "No user found";
+                isLoggedIn = false;
+                res.redirect("/donate-food");
+            }
+        }
+        else{
+            errmsg = "No user found";
+            isLoggedIn = false;
+            res.redirect("/donate-food");
         }
     })
+});
+
+
+
+
+
+// Request food
+app.get("/request-food",(req,res)=>{
+    res.render("req_food",{loginState:isLoggedIn,errortxt:errmsg});
 });
