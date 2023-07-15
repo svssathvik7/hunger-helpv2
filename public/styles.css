@@ -110,78 +110,53 @@ footer{
 }
 
 /* Join page */
-#cardlayout{
+#signuppage{
     display: flex;
-    width: fit-content;
-    max-width: 25dvw;
-    min-width: 10dvw;
-    max-height: 25dvw;
-    min-height: 10dvw;
-    height: 35dvh;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 4%;
-    border-radius: 2%;
-    box-shadow: 2px 2px 8px #86dc3d;
-    cursor: pointer;
-    transition: box-shadow 0.8s ease;
-}
-#cardlayout:hover{
-    box-shadow: inset 2px 2px 8px #86dc3d;
-}
-#horizontal-line{
-    width: 100px;
-    height: 2px;
-    background-color: #526D82;
-}
-#cardlayout p{
-    font-size: 0.8em;
-    text-align: center;
-    margin-top: 4%;
-    color: #808080;
-}
-#boxes{
-    display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 70dvw;
+    animation: show 0.8s ease;
+    width: 60dvw;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
     height: fit-content;
-    position: absolute;
-    top: 0;bottom: 0;left: 0;right: 0;
-    margin: auto;
+    flex-direction: row-reverse;
 }
-
-/* Signup box */
 #signupbox{
-    position: absolute;
-    top: 0;bottom: 0;left: 0;right: 0;
-    margin: auto;
     width: fit-content;
     height: 60dvh;
-    background-color: transparent;
+    background-color: white;
     display: flex;
     text-align: center;
+    justify-content: center;
 }
 #signupform input{
     display: block;
     text-align: left;
     padding: 2%;
-    width: 30dvw;
+    width: 25dvw;
     line-height: 2;
+    border: none;
+    border-bottom: thin solid #86dc3d;
 }
 #signupform{
-    border: thin solid #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    backdrop-filter: blur(10px);
 }
 #signupform #submit{
     padding: 2%;
+}
+::placeholder{
+    color: #000;
+}
+#dropdown{
+    width: 25vw;
+    
+}
+#vectorsignup{
+    transform: scale(1.5);
 }
 /* Contact form */
 #contactformbox {
@@ -208,14 +183,14 @@ footer{
     margin-bottom: 5px;
   }
   
-  input[type="text"],
-  input[type="email"],
+  #username,
+  #email,
   textarea {
     padding: 5px;
     margin-bottom: 10px;
   }
   
-  button[type="submit"] {
+  #fsubmit {
     padding: 10px 20px;
     background-color: #4caf50;
     color: white;

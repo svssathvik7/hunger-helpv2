@@ -86,12 +86,8 @@ var card_Data = [
         func : "cardClicked2"
     }
 ];
-app.get("/join",function(req,res)
-{
-    res.render("join",{cardData:card_Data});
-});
 
-app.get("/signupform",function(req,res){
+app.get("/register",function(req,res){
     res.render("register");
 });
 
@@ -121,12 +117,12 @@ app.post("/newuser",(req,res)=>{
         name : req.body.name,
         org : req.body.orgname,
         mail : req.body.email,
-        pass : req.body.password
+        pass : req.body.password,
+        type : req.body.role
     };
     db.collection("members").insertOne(data,(err,collection)=>{
         if(err) throw err;
         console.log("Record Inserted Successfully");
     });
-    console.log(data.name,data.org,data.mail,data.pass);
     res.redirect("/");
 });

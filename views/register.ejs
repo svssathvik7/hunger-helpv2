@@ -1,13 +1,26 @@
 <%- include("partials/header"); -%>
-<div id="signupbox">
-    <form action="/newuser" method="post" id="signupform">
-        <h1>Hello!</h1>
-        <input autoComplete="off" required="true" onChange={prop.func1} name="name" type="text" placeHolder="Name" autofocus/>
-        <input autoComplete="off"  required="true" name="orgname" type="text" placeholder="Organisation name" onChange={prop.func2}/>
-        <input autoComplete="off"  required="true" name="email" type="mail" placeholder="Email" onChange={prop.func3}/>
-        <input autoComplete="off" required="true" name="password" type="password" placeholder="Password" onChange={prop.func4}/>
-        <button id="submit" type="submit">Submit</button>
-    </form>
+<div id="signuppage">
+    <div id="vectorsignup">
+        <img alt="vector" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvCdlEWi5_mYifvvUrtnHitAR-Lkzh-rYNFw&usqp=CAU">
+    </div>
+    <div id="signupbox">
+        <form action="/newuser" method="post" id="signupform">
+            <input autoComplete="off" required="true" onChange={prop.func1} name="name" type="text" placeHolder="Name" autofocus/>
+            <input autoComplete="off"  required="true" name="orgname" type="text" placeholder="Organisation name" onChange={prop.func2}/>
+            <input autoComplete="off"  required="true" name="email" type="mail" placeholder="Email" onChange={prop.func3}/>
+            <input autoComplete="off" required="true" name="password" type="password" placeholder="Password" onChange={prop.func4}/>
+        
+            <div class="dropdown-container">
+                <select id="dropdown" name="role" required="true">
+                    <option value="">Select Role</option>
+                    <option value="member">Member</option>
+                    <option value="volunteer">Volunteer</option>
+                </select>
+            </div>
+        
+            <button id="submit" type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 <%- include("components/feedback"); -%>
 <%- include("partials/footer"); -%>
