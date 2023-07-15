@@ -1,3 +1,9 @@
 <%- include("partials/header"); -%>
 <%- include("components/feedback"); -%>
+
+<% if(!loginState){%>
+    <%- include("components/login"); -%>
+<%}%>
+
+
 <%- include("partials/footer"); -%>

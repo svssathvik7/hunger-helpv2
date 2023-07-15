@@ -9,9 +9,11 @@ app.use(bp.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(es.static("public"));
 
-app.get("/donate-food",(req,res)=>{
-    res.render("donate_food");
-});
+// Database connection
+mongoose.connect(("mongodb://127.0.0.1:27017/userdb"));
+var db = mongoose.connection;
+db.on("error",()=>console.log("Error in connection to Database"))
+db.once("open",()=>console.log("Connected to Database Successfully"));
 
 app.get("/request-food",(req,res)=>{
     res.render("req_food");
@@ -109,10 +111,6 @@ app.post("/submitform",(req,res)=>{
 });
 
 app.post("/newuser",(req,res)=>{
-    mongoose.connect(("mongodb://127.0.0.1:27017/userdb"));
-    var db = mongoose.connection;
-    db.on("error",()=>console.log("Error in connection to Database"))
-    db.once("open",()=>console.log("Connected to Database Successfully"));
     var data = {
         name : req.body.name,
         org : req.body.orgname,
@@ -125,4 +123,26 @@ app.post("/newuser",(req,res)=>{
         console.log("Record Inserted Successfully");
     });
     res.redirect("/");
+});
+
+// Donate food
+var isLoggedIn = false;
+app.get("/donate-food",(req,res)=>{
+    res.render("donate_food",{loginState:isLoggedIn});
+});
+app.post("/login",(req,res)=>{
+    var lmail = req.body.email;
+    var lpass = req.body.password;
+    db.collection("members").findOne({mail:lmail},(err,foundUser)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            if(foundUser.pass === lpass)
+            {
+                isLoggedIn = true;
+                res.redirect("/donate-food");
+            }
+        }
+    })
 });
