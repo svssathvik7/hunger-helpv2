@@ -4,7 +4,7 @@ const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
 const mongoose = require("mongoose");
-
+var availableFood = [];
 app.use(bp.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(es.static("public"));
@@ -147,11 +147,34 @@ app.post("/login",(req,res)=>{
             }
         }
         else{
-            errmsg = "No user found";
+            errmsg = "No user found :(";
             isLoggedIn = false;
             res.redirect("/donate-food");
         }
     })
+});
+app.post("/addFood",(req,res)=>{
+    var temp = {
+        ftype : req.body.foodtype,
+        quality : req.body.quality,
+        quantity : req.body.quantity,
+        contact : req.body.contactnumber,
+        organisation : req.body.organisation,
+        expiry : req.body.expiry,
+        message : req.body.custommessage,
+        time : new Date().getDate() +'th at '+ new Date().toLocaleTimeString()
+    };
+    availableFood = availableFood + temp;
+    db.collection("food").insertOne(temp,(err,collection)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            console.log("item added");
+        }
+        res.redirect("/donate-food");
+    });
+    console.log(availableFood);
 });
 
 
@@ -160,5 +183,17 @@ app.post("/login",(req,res)=>{
 
 // Request food
 app.get("/request-food",(req,res)=>{
-    res.render("req_food",{loginState:isLoggedIn,errortxt:errmsg});
+    var availableFood = [];
+    db.collection("food")
+    .find({})
+    .toArray()
+    .then((documents) => {
+      availableFood = documents;
+
+      res.render("req_food", { loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+    })
+    .catch((error) => {
+      console.log("Error retrieving documents from the 'food' collection:", error);
+      // Handle the error appropriately, e.g., display an error message
+    });
 });

@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+textarea{
+    resize: none;
+}
 *{
     margin: 0;padding: 0;
     font-family: 'Open Sans', sans-serif;
@@ -73,6 +76,7 @@ footer{
     animation: show 0.8s ease;
 }
 #feedback-block{
+    z-index: 3!important;
     width: 5dvw;
     height: 5dvw;
     position: absolute;
@@ -85,6 +89,8 @@ footer{
     align-items: center;
     justify-content: center;
     text-align: center;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
 #feedback-block p{
     font-size: 2em;
@@ -149,12 +155,27 @@ footer{
     padding: 2%;
 }
 ::placeholder{
-    color: #000;
+    color: #000000d0;
 }
-#dropdown{
-    width: 25vw;
-    
-}
+.dropdown-container {
+    width: 25dvw;
+    padding: 2%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: thin solid #4caf50; /* Green line at the bottom */
+    display: inline-block;
+    margin-bottom: 10px; /* Adjust as needed */
+    text-align: left;
+  }
+  
+  #dropdown {
+    width: 100%;
+    border: none; /* Remove the default dropdown border */
+    outline: none; /* Remove the default outline */
+    background-color: transparent; /* Make the dropdown background transparent */
+  }
+  
 #vectorsignup{
     transform: scale(1.5);
 }
@@ -170,6 +191,9 @@ footer{
     border: thin solid #000;
     border-radius: 2%;
     animation: show 0.3s ease;
+    z-index: 3;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
   }
 
   
@@ -249,10 +273,119 @@ footer{
 #loginsubmit{
     font-size: 1em;
     padding: 2%;
+    animation: show 0.3s ease;
+}
+#errortxt{
+    color: red;
 }
 
+/* add food */
+#addfoodcont{
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;
+    margin: auto;
+    width: 70dvw;
+    height: 35dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    z-index: 0;
+}
+#addfooddisclaimer{
+    margin: 2%;
+}
+#addfoodform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#addfoodform input{
+    display: block;
+    text-align: left;
+    padding: 2%;
+    width: 25dvw;
+    line-height: 2;
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    color: #0000009e;
+}
+.adddrop-container {
+    width: 25dvw;
+    padding: 2%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: thin solid #4caf50; /* Green line at the bottom */
+    display: inline-block;
+    margin-bottom: 10px; /* Adjust as needed */
+    text-align: left;
+  }
+  
+.adddropdown {
+    width: 100%;
+    border: none; /* Remove the default dropdown border */
+    outline: none; /* Remove the default outline */
+    background-color: transparent; /* Make the dropdown background transparent */
+}
+.adddrop-container select{
+    color: #0000009e;
+}
+#addsubmit{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#custom-message{
+    width: 25dvw;
+    padding: 2%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: thin solid #4caf50; /* Green line at the bottom */
+    display: inline-block;
+    color: #0000009e;
+}
 
+/* request food */
 
+#reqfood_body{
+    position: absolute;
+    left: 0;right: 0;top: 0;bottom: 0;
+    margin: auto;
+    width: 85vw;
+    height: 70vh;
+}
+#available{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    max-width: 85vw;
+    height: fit-content;
+    max-height: 75dvh;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+.availcard{
+    width: 15dvw;
+    height: fit-content;
+    box-shadow: 1px 1px 10px #86dc3d;
+    margin: 2%;
+    text-align: center;
+    padding: 2%;
+    line-height: 1.5;
+    color: #0000009e;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+.availcard:hover{
+    transform: scale(0.9);
+    box-shadow: 4px 4px 40px #86dc3d;
+}
 
 
 
