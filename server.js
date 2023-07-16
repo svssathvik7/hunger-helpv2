@@ -70,6 +70,8 @@ const aside_img = [
 ];
 app.get("/",function(req,res)
 {
+    isLoggedIn = false;
+    errmsg = "";
     res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
 });
 
