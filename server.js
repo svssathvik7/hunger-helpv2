@@ -10,7 +10,7 @@ app.set("view engine","ejs");
 app.use(es.static("public"));
 
 // Database connection
-mongoose.connect(("mongodb://127.0.0.1:27017/userdb"));
+mongoose.connect(("mongodb+srv://sathvikcodes:sathvikcodes@cluster0.hyujunf.mongodb.net/?retryWrites=true&w=majority"));
 var db = mongoose.connection;
 db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
