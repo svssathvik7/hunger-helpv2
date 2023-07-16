@@ -118,7 +118,7 @@ app.post("/newuser",(req,res)=>{
         if(err) throw err;
         console.log("Record Inserted Successfully");
     });
-    res.redirect("/");
+    res.render("success");
 });
 
 // Donate food

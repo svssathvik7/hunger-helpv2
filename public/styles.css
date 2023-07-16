@@ -19,8 +19,8 @@ header{
 }
 header h1{
     padding: 1.5%;
-    font-size: 1em;
-    color: white;
+    font-size: 1.5em;
+    color: black;
 }
 #buttons{
     display: flex;
@@ -238,6 +238,11 @@ footer{
   }
 
 /* Login box */
+#success {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 24px;
+}
 #logindiv{
     position: absolute;
     top: 0;
@@ -279,7 +284,16 @@ footer{
 #errortxt{
     color: red;
 }
-
+#addfoodimg{
+    width: 15dvw;
+}
+#addfoodchild{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 55dvh;
+}
 /* add food */
 #addfoodcont{
     position: absolute;
@@ -417,9 +431,10 @@ footer{
 #background{
     position: absolute;
     width: 100dvw;
-    height: 100vh;
+    height: 100dvh;
     top: 0;left: 0;
     z-index: -1;
+    overflow: hidden;
 }
 .circles{
     border-radius: 100%;
