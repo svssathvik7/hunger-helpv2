@@ -3,6 +3,8 @@ const es = require("express");
 const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
+var isLoggedIn = false;
+var errmsg = "";
 const mongoose = require("mongoose");
 var availableFood = [];
 app.use(bp.urlencoded({extended:true}));
@@ -68,6 +70,8 @@ const aside_img = [
 ];
 app.get("/",function(req,res)
 {
+    isLoggedIn = false;
+    errmsg = "";
     res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
 });
 
@@ -122,8 +126,6 @@ app.post("/newuser",(req,res)=>{
 });
 
 // Donate food
-var isLoggedIn = false;
-var errmsg = "";
 app.get("/donate-food",(req,res)=>{
     res.render("donate_food",{loginState:isLoggedIn,errortxt:errmsg});
 });
@@ -162,7 +164,7 @@ app.post("/addFood",(req,res)=>{
         organisation : req.body.organisation,
         expiry : req.body.expiry,
         message : req.body.custommessage,
-        time : new Date().getDate() +'th at '+ new Date().toLocaleTimeString()
+        time : new Date().getDate() +'th at '+ new Date().getTimezoneOffset
     };
     availableFood = availableFood + temp;
     db.collection("food").insertOne(temp,(err,collection)=>{
