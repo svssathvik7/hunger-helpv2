@@ -162,7 +162,7 @@ app.post("/addFood",(req,res)=>{
         organisation : req.body.organisation,
         expiry : req.body.expiry,
         message : req.body.custommessage,
-        time : new Date().getDate() +'th at '+ new Date().getTimezoneOffset
+        time : new Date().getDate() +'th at '+ new Date().toLocaleTimeString()
     };
     availableFood = availableFood + temp;
     db.collection("food").insertOne(temp,(err,collection)=>{

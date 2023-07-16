@@ -1,16 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 textarea{
     resize: none;
+    color: #0000009e;
 }
 *{
     margin: 0;padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 body{
     background-color: #fff;
 }
 header{
     /* background-color: #86dc3d; */
+    font-family: 'Montserrat', sans-serif;
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -153,7 +156,15 @@ footer{
     justify-content: space-around;
 }
 #signupform #submit{
-    padding: 2%;
+    padding: 3%;
+    background-color: #86dc3d;
+    border-radius: 2rem;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.2s ease;
+}
+#signupform #submit:hover{
+    box-shadow: 2px 2px #000;
 }
 ::placeholder{
     color: #000000d0;
@@ -221,6 +232,11 @@ footer{
     color: white;
     border: none;
     cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+  }
+  #fsubmit:hover{
+    border-radius: 2rem;
   }
   #close-button {
     position: absolute;
@@ -280,6 +296,13 @@ footer{
     font-size: 1em;
     padding: 2%;
     animation: show 0.3s ease;
+    background-color: #86dc3d;
+    border-radius: 2rem;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+#loginsubmit:hover{
+    box-shadow: 2px 2px #000;
 }
 #errortxt{
     color: red;
@@ -315,6 +338,7 @@ footer{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    backdrop-filter: blur(2px);
 }
 #addfoodform input{
     display: block;
@@ -350,8 +374,15 @@ footer{
 #addsubmit{
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 7%;
+    padding-right: 7%;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+    background-color: #86dc3d;
+    border-radius: 2rem;
+}
+#addsubmit:hover{
+    box-shadow: 2px 2px #000;
 }
 #custom-message{
     width: 25dvw;
@@ -365,7 +396,36 @@ footer{
 }
 
 /* request food */
-
+#vegetarian{
+    width: 20px;
+    height: 20px;
+    border: thin solid #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4caf50;
+}
+#vegetarian .vnv{
+    background-color: #4caf50;
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+}
+#non-vegetarian{
+    width: 20px;
+    height: 20px;
+    border: thin solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4caf50;
+}
+#non-vegetarian .vnv{
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+}
 #reqfood_body{
     position: absolute;
     left: 0;right: 0;top: 0;bottom: 0;
@@ -376,7 +436,7 @@ footer{
 #available{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: fit-content;
     max-width: 85vw;
     height: fit-content;
@@ -387,12 +447,11 @@ footer{
 .availcard{
     width: 15dvw;
     height: fit-content;
-    box-shadow: 1px 1px 10px #86dc3d;
+    /* box-shadow: 1px 1px 10px #86dc3d; */
     margin: 2%;
     text-align: center;
     padding: 2%;
     line-height: 1.5;
-    color: #0000009e;
     transition: all 0.5s ease;
     cursor: pointer;
     transform-style: preserve-3d;
@@ -400,14 +459,7 @@ footer{
 }
 .availcard:hover{
     transform: scale(0.9);
-    box-shadow: 4px 4px 40px #86dc3d;
 }
-
-
-
-
-
-
   /* Keyframes */
 @keyframes show {
     from{
