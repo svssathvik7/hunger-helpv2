@@ -140,12 +140,12 @@ app.post("/login",(req,res)=>{
             if(foundUser.pass === lpass)
             {
                 isLoggedIn = true;
-                res.redirect("/donate-food");
+                res.redirect(req.get('referer'));
             }
             else{
                 errmsg = "No user found";
                 isLoggedIn = false;
-                res.redirect("/donate-food");
+                res.redirect(req.get('referer'));
             }
         }
         else{
@@ -164,7 +164,7 @@ app.post("/addFood",(req,res)=>{
         organisation : req.body.organisation,
         expiry : req.body.expiry,
         message : req.body.custommessage,
-        time : new Date().getDate() +'th at '+ new Date().toLocaleTimeString()
+        time: new Date().getDate() + 'th at ' + new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     availableFood = availableFood + temp;
     db.collection("food").insertOne(temp,(err,collection)=>{

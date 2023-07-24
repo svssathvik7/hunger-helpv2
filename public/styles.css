@@ -78,6 +78,8 @@ footer{
     z-index: -1;
     top: 27dvh;
     animation: show 0.8s ease;
+    backdrop-filter: blur(10px);
+    background: transparent;
 }
 #feedback-block{
     z-index: 3!important;
@@ -494,8 +496,8 @@ footer{
     position: relative;
 }
 #left-small{
-    width: 150px;
-    height: 150px;
+    width: 12dvw;
+    height: 12dvw;
     left: 10%;
     bottom: 8dvh;
 }
@@ -506,8 +508,8 @@ footer{
     bottom: 8%;
 }
 #right-big{
-    width: 500px;
-    height: 500px;
+    width: 38dvw;
+    height: 38dvw;
     bottom: 65%;
     left: 50%;
 }
