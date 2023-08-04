@@ -18,11 +18,11 @@ db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
 app.get("/statistics",(req,res)=>{
-    res.render("stats");
+    res.render("stats",{cdevmsg:devtxt});
 });
 
 app.get("/about",(req,res)=>{
-    res.render("about");
+    res.render("about",{cdevmsg:devtxt});
 });
 
 app.listen(3000,()=>{
@@ -68,11 +68,12 @@ const aside_img = [
     "https://media.istockphoto.com/id/1355624220/vector/vector-illustration-please-dont-waste-food-designs-for-world-food-day-and-international.jpg?s=612x612&w=0&k=20&c=_noGR7l39IG46d6RGE4x54DBC8sg1pD1xzDUfz5pb4E=",
     "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg"
 ];
+var devtxt = "A msg from the developer - This a beta feature under testing";
 app.get("/",function(req,res)
 {
     isLoggedIn = false;
     errmsg = "";
-    res.render("index",{titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
+    res.render("index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
 });
 
 // Join page
@@ -90,7 +91,7 @@ var card_Data = [
 ];
 
 app.get("/register",function(req,res){
-    res.render("register");
+    res.render("register",{cdevmsg:devtxt});
 });
 
 app.post("/submitform",(req,res)=>{
@@ -122,12 +123,12 @@ app.post("/newuser",(req,res)=>{
         if(err) throw err;
         console.log("Record Inserted Successfully");
     });
-    res.render("success");
+    res.render("success",{cdevmsg:devtxt});
 });
 
 // Donate food
 app.get("/donate-food",(req,res)=>{
-    res.render("donate_food",{loginState:isLoggedIn,errortxt:errmsg});
+    res.render("donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
 });
 app.post("/login",(req,res)=>{
     var lmail = req.body.email;
@@ -163,8 +164,7 @@ app.post("/addFood",(req,res)=>{
         contact : req.body.contactnumber,
         organisation : req.body.organisation,
         expiry : req.body.expiry,
-        message : req.body.custommessage,
-        time: new Date().getDate() + 'th at ' + new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })
+        message : req.body.custommessage
     };
     availableFood = availableFood + temp;
     db.collection("food").insertOne(temp,(err,collection)=>{
@@ -192,7 +192,7 @@ app.get("/request-food",(req,res)=>{
     .then((documents) => {
       availableFood = documents;
 
-      res.render("req_food", { loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+      res.render("req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
     })
     .catch((error) => {
       console.log("Error retrieving documents from the 'food' collection:", error);

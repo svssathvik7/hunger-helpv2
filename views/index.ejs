@@ -1,11 +1,13 @@
 <%- include("partials/header"); -%>
 <%- include("partials/bg"); -%>
+<%- include("components/devmsg"); -%>
 <div id="Body">
     <h1 id="Titletxt"><%= titleTxt %></h1>
     <p><%= descTxt %></p>
     <p id="emphasis"><%= emphasis %>!</p>
 </div>
 <img id="poverty-img" src=<%= imgsrc %> alt = "poverty-img">
+<!-- <iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe> -->
 <%- include("components/statbox"); -%>
 <%- include("components/feedback"); -%>
 <%- include("partials/footer"); -%>

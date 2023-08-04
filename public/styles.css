@@ -68,6 +68,7 @@ footer{
     margin: auto;
     opacity: 50%;
     font-size: 0.8em;
+    z-index: 5;
 }
 #Body{
     position: absolute;
@@ -106,16 +107,18 @@ footer{
     margin: 2%;
     border-radius: 20px;
     box-shadow: 2px 2px 8px #86dc3d;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    transition: all 0.8s ease;
-    transform-style: preserve-3d;
     animation: try 0.3s ease;
 }
 #feedback-block p{
     font-size: 2em;
+    align-self: center;
+    margin: 0;
+    padding: 0;
 }
 #feedback-block:hover{
     box-shadow: inset 2px 2px 8px #86dc3d;
@@ -158,6 +161,12 @@ footer{
     display: flex;
     text-align: center;
     justify-content: center;
+    animation: slider 0.3s ease;
+}
+@keyframes slider {
+    from{
+        transform: translate(-20%);
+    }
 }
 #signupform input{
     display: block;
@@ -280,6 +289,8 @@ footer{
     position: absolute;
     top: 0;bottom: 0;left: 0;right: 0;
     margin: auto;
+    width: fit-content;
+    height: fit-content;
 }
 #logindiv{
     position: absolute;
@@ -291,7 +302,7 @@ footer{
     align-items: center;
     justify-content: center;
     width: 50dvw;
-    height: 50dvw;
+    height: 40dvw;
     /* backdrop-filter: blur(2px);  */
     animation: show 0.8s ease;
     margin: auto;
@@ -308,6 +319,7 @@ footer{
 }
 #loginform h1{
     text-decoration: underline;
+    padding-bottom: 1%;
 }
 #loginform input{
     padding: 4%;
@@ -354,6 +366,7 @@ footer{
     justify-content: space-between;
     flex-direction: row;
     z-index: 0;
+    animation: slider 0.3s ease;
 }
 #addfooddisclaimer{
     margin: 2%;
@@ -364,13 +377,14 @@ footer{
     align-items: center;
     justify-content: space-between;
     backdrop-filter: blur(2px);
+    margin-top: 2%;
 }
 #addfoodform input{
     display: block;
     text-align: left;
     padding: 2%;
     width: 25dvw;
-    line-height: 2;
+    line-height: 1;
     border: none;
     border-bottom: thin solid #86dc3d;
     color: #0000009e;
@@ -465,23 +479,35 @@ footer{
     width: fit-content;
     max-width: 85vw;
     height: fit-content;
-    max-height: 75dvh;
+    max-height: 72dvh;
     flex-wrap: wrap;
     overflow-x:hidden;
     overflow: scroll;
 }
 .availcard{
-    width: 15dvw;
+    width: 20dvw;
     height: fit-content;
-    /* box-shadow: 1px 1px 10px #86dc3d; */
+    max-height: 40dvh;
+    overflow-y: scroll;
     margin: 2%;
     text-align: center;
-    padding: 2%;
     line-height: 1.5;
     transition: all 0.5s ease;
     cursor: pointer;
     transform-style: preserve-3d;
     backdrop-filter: blur(10px);
+    background-color: #EDEADE;
+    padding: 4%;
+    border-radius: 2rem;
+    animation: fadepop 0.3s ease;
+}
+.availcard p{
+    line-height: 1;
+}
+@keyframes fadepop {
+    from{
+        transform: scale(0.8);
+    }
 }
 /* .availcard:hover{
     transform: scale(0.9);
@@ -563,4 +589,75 @@ footer{
     left: 90%;
     bottom: 16dvh;
     animation: try2 0.8s ease;
+}
+
+
+/* BOOTSTRAP */
+#accordion{
+    width: 80dvw;
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;margin: auto;
+    height: 50dvh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.btn-link{
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 500;
+}
+.btn-link:hover{
+    font-weight: 500;
+    color: #4caf50;
+}
+.btn-link:focus{
+    text-decoration: none;
+}
+.card-header{
+    background-color: white;
+}
+
+/* DevMsg */
+#devmsg{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-20dvw);
+    z-index: 5;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+#msgcontainer{
+    width: 20dvw;
+    overflow-x: scroll;
+    height: 10dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 5;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    background-color: brown;
+    color: white;
+    border-radius: 4%;
+}
+#msgcontainer h6{
+    padding: 2%;
+}
+#devmsgbtn{
+    width: 2dvw;
+    height: 1dvw;
+    border-top-right-radius: 2rem;
+    z-index: 5;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    background-color: brown;
+}
+#devmsg:hover {
+    transform: translate(0);
+    z-index: 5;
 }

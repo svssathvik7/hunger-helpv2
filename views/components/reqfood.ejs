@@ -1,18 +1,25 @@
 <div id="reqfood_body">
     <h2>Available : </h2>
     <div id="available">
-        <% data.forEach((item)=>{%>
+        <% data.forEach((item) => { %>
             <div class="availcard">
                 <h4> Quality : <%= item.quality %></h4>
                 <p>Available(kg) : <%= item.quantity %></p>
                 <p>Offered by <%= item.organisation %></p>
                 <p>Contact : <%= item.contact %></p>
-                <p>Placed on <%= item.time %></p>
                 <p>Expires in <%= item.expiry %>hrs</p>
-                <div id=<%= item.ftype %>>
+                <div id="<%= item.ftype %>">
                     <div class="vnv"></div>
                 </div>
             </div>
-        <%})%>
+        <% }) %>
     </div>
 </div>
+<script>
+    var cards = document.getElementsByClassName("availcard");
+    var datal = "<%= data %>";
+    for(var i=0;i<datal.length;i++)
+    {
+        console.log(datal[i]);
+    }
+</script>
