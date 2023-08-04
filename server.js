@@ -68,7 +68,7 @@ const aside_img = [
     "https://media.istockphoto.com/id/1355624220/vector/vector-illustration-please-dont-waste-food-designs-for-world-food-day-and-international.jpg?s=612x612&w=0&k=20&c=_noGR7l39IG46d6RGE4x54DBC8sg1pD1xzDUfz5pb4E=",
     "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg"
 ];
-var devtxt = "A msg from the developer - This a beta feature under testing";
+var devtxt = "Recent update - Timer on avail. food";
 app.get("/",function(req,res)
 {
     isLoggedIn = false;
