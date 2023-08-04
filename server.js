@@ -163,7 +163,7 @@ app.post("/addFood",(req,res)=>{
         quantity : req.body.quantity,
         contact : req.body.contactnumber,
         organisation : req.body.organisation,
-        expiry : req.body.expiry,
+        expiry : req.body.expiry*60,
         message : req.body.custommessage
     };
     availableFood = availableFood + temp;

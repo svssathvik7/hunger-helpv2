@@ -487,8 +487,8 @@ footer{
 .availcard{
     width: 20dvw;
     height: fit-content;
-    max-height: 40dvh;
-    overflow-y: scroll;
+    max-height: 45dvh;
+    overflow-y: none;
     margin: 2%;
     text-align: center;
     line-height: 1.5;
