@@ -1,9 +1,9 @@
 <div id="statbar">
     <% obj.forEach((prop)=>{%>
         <div class="statbox">
-            <img alt=<%=prop.alt%> src=<%=prop.src%>></img>
-            <h4><%=prop.desc%></h4>
-            <p><%=prop.count%></p>
+            <img id="simg" alt=<%=prop.alt%> src=<%=prop.src%>></img>
+            <h4 id="spdesc"><%=prop.desc%></h4>
+            <p id="spcnt"><%=prop.count%></p>
         </div>
     <%})%>
 </div>

@@ -3,6 +3,9 @@
 ::selection{
     background-color: #86dc3d;
 }
+#hamburger{
+    display: none;
+}
 header h1::selection{
     color: #86dc86;
     background-color: #000;
@@ -27,7 +30,6 @@ body{
     background-color: #fff;
 }
 header{
-    /* background-color: #86dc3d; */
     font-family: 'Montserrat', sans-serif;
     background-color: transparent;
     display: flex;
@@ -660,4 +662,104 @@ footer{
 #devmsg:hover {
     transform: translate(0);
     z-index: 5;
+}
+
+
+
+@media (max-height:760px) {
+    #statbar{
+        bottom: 5dvh;
+    }
+    footer p{
+        padding: 0;
+        margin: 0;
+    }
+}
+@media (min-height:761px) {
+    #statbar{
+        bottom: 15dvh;
+    }
+}
+@media (max-width:1023px){
+    #buttons{
+        display: none;
+    }
+    header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    header h1{
+        margin: 2%;
+    }
+    #hamburger{
+        display: flex;
+        margin: 2%;
+    }
+    #theslider{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 5dvh;
+    }
+    .hline{
+        background-color: #86dc3d;
+        width: 10dvw;
+        height: 0.7dvh;
+        border-radius: 2rem;
+    }
+    #background{
+        display: none;
+    }
+    #poverty-img{
+        display: none;
+    }
+    #devmsg{
+        display: none;
+    }
+    #Body{
+        position: absolute;
+        left: 0;right: 0;margin: auto;
+        width: fit-content;
+        height: fit-content;
+        text-align: center;
+    }
+    #emphasis{
+        /* font-size: 1em;
+        width: 65dvw;
+        text-align: left; */
+        display: none;
+    }
+    #Titletxt{
+        font-size: 2.5em;
+        width: 80dvw;
+        background: linear-gradient(to right,#87dc3d64,#86dc3d);
+        -webkit-background-clip: text;
+        background-clip: text;
+	    -webkit-text-fill-color: transparent;
+    }
+    #descTxt{
+        display: none;
+    }
+    #statbar{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 60dvw;
+        position: absolute;
+        bottom: 15dvh;
+        height: 30dvh;
+    }
+    #spdesc{
+        font-size: 0.8em;
+    }
+    #simg{
+        width: 15dvw;
+    }
+    #feedback-block{
+        margin: 4%;
+    }
 }
