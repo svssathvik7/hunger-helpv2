@@ -111,24 +111,21 @@ footer{
     bottom: 0;
     left: 0;
     margin: 2%;
-    border-radius: 20px;
-    box-shadow: 2px 2px 8px #86dc3d;
-    transition: all 0.8s ease;
+    transition: all 0.3s ease;
     transform-style: preserve-3d;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: try 0.3s ease;
+    box-shadow: 2px 2px 8px #013220;
+    border-radius: 2rem;
 }
-#feedback-block p{
-    font-size: 2em;
-    align-self: center;
-    margin: 0;
-    padding: 0;
+#feedback-block img{
+    width: 4dvw;
 }
 #feedback-block:hover{
-    box-shadow: inset 2px 2px 8px #86dc3d;
     cursor: pointer;
+    box-shadow: 2px 2px 16px #013220;
 }
 .statbox img{
     width: 4dvw;
