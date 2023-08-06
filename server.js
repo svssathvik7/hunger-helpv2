@@ -23,7 +23,14 @@ app.get("/statistics",(req,res)=>{
 });
 
 app.get("/about",(req,res)=>{
-    res.render("desktop/about",{cdevmsg:devtxt});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/about");
+    }
+    else{
+        res.render("desktop/about",{cdevmsg:devtxt});
+    }
 });
 
 app.listen(3000,()=>{

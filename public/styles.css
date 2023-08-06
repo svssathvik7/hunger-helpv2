@@ -844,6 +844,36 @@ footer{
     }
     footer{
         z-index: 1;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+    }
+    footer p{
+        margin-bottom: 0;
+    }
+    /* About */
+    #about_page{
+        display: flex;
+        align-items: center;
+        justify-content: space-center;
+        flex-direction: column;
+        position: absolute;
+        left: 5dvw;
+        width: 80dvw;
+        height: fit-content;
+    }
+    #accordion{
+        width: 80dvw;
+        height: 50dvh;
+        overflow: scroll;
+        border: none;
+    }
+    .btn-link{
+        color: #4caf50;
+        width: 80dvw;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.8em;
     }
 }
 @keyframes dropdown {
