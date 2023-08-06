@@ -598,18 +598,32 @@ footer{
 
 
 /* BOOTSTRAP */
-#accordion{
-    width: 80dvw;
+#about_page{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     position: absolute;
     top: 0;left: 0;right: 0;bottom: 0;margin: auto;
+    width: 80dvw;
+    height: fit-content;
+}
+#about_vector{
+    width: 300px;
+}
+#accordion{
+    width: 50dvw;
     height: 50dvh;
     overflow: scroll;
     overflow-x: hidden;
+    border: none;
 }
 .btn-link{
     color: #4caf50;
     text-decoration: none;
     font-weight: 500;
+}
+.card{
+    border: none;
 }
 .btn-link:hover{
     font-weight: 500;
