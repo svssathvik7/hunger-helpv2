@@ -794,6 +794,9 @@ footer{
         position: absolute;
         top: 0;left: 0;right: 0;bottom: 0;margin: auto;
     }
+    #navbuttons a{
+        font-size: 1.5em;
+    }
     a{
         text-decoration: underline;
         color: #000;
@@ -828,6 +831,19 @@ footer{
     }
     #simg{
         width: 10dvw;
+    }
+    #feedback-block img{
+        width: 8dvw;
+    }
+    #feedback-block{
+        width: 10dvw;
+        height: 10dvw;
+    }
+    #contactformbox{
+        z-index: 2;
+    }
+    footer{
+        z-index: 1;
     }
 }
 @keyframes dropdown {
