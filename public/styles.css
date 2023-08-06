@@ -745,13 +745,13 @@ footer{
         justify-content: space-around;
         flex-direction: column;
         height: 5dvh;
-        width: 12dvw;
+        width: 10dvw;
         margin: 2%;
         z-index: 3;
     }
     .menuline{
         background-color: #86dc3d;
-        width: 12dvw;
+        width: 10dvw;
         height: 0.6dvh;
         border-radius: 2rem;
         cursor: pointer;
@@ -798,6 +798,36 @@ footer{
         text-decoration: underline;
         color: #000;
         font-weight: 500;
+    }
+    #Body{
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 20dvh;
+    }
+    #Titletxt{
+        color: #86dc3d;
+    }
+    #agendalist{
+        width: 75dvw;
+        justify-content: center;
+    }
+    #agendalist li{
+        margin: 1%;
+    }
+    #statbar{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 70dvw;
+        height: 20dvh;
+        position: absolute;
+        bottom: 10dvh;
+    }
+    #simg{
+        width: 10dvw;
     }
 }
 @keyframes dropdown {
