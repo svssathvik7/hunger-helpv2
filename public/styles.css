@@ -1,5 +1,9 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+*{
+    padding: 0;margin: 0;
+    box-sizing: border-box;
+}
 ::selection{
     background-color: #86dc3d;
 }
@@ -716,5 +720,88 @@ footer{
     #right-big{
         width: 30dvw;
         height: 30dvw;
+    }
+}
+
+/* Mobile viewport */
+@media (max-width:1023px) {
+
+    #opennav{
+        display: none;
+    }
+    header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100dvw;
+    }
+    header h1{
+        margin: 2%;
+    }
+    #menubar{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 5dvh;
+        width: 12dvw;
+        margin: 2%;
+        z-index: 3;
+    }
+    .menuline{
+        background-color: #86dc3d;
+        width: 12dvw;
+        height: 0.6dvh;
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 3;
+    }
+    #header.active .menuline{
+        background-color: red;
+    }
+    #menubar:nth-child(2){
+        transform-origin: center;
+    }
+    #header.active .menuline:nth-child(1){
+        transform: translateY(4dvw) rotate(45deg);
+    }
+    #header.active .menuline:nth-child(3){
+        transform: translateY(-4dvw) rotate(-45deg);
+    }
+    #header.active .menuline:nth-child(2){
+        transform: scale(0);
+    }
+    #header.active #opennav{
+        position: absolute;
+        width: 100dvw;
+        height: 100dvh;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom,#86dc3d,#fff);
+        display: flex;
+        animation: dropdown 0.4s ease;
+        transition: all 0.4s ease;
+    }
+    #navbuttons{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 50dvh;
+        position: absolute;
+        top: 0;left: 0;right: 0;bottom: 0;margin: auto;
+    }
+    a{
+        text-decoration: underline;
+        color: #000;
+        font-weight: 500;
+    }
+}
+@keyframes dropdown {
+    from{
+        transform: translateY(-100%);
     }
 }

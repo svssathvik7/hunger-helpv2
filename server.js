@@ -3,6 +3,7 @@ const es = require("express");
 const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
+const browser = require('browser-detect') 
 var isLoggedIn = false;
 var errmsg = "";
 const mongoose = require("mongoose");
@@ -18,11 +19,11 @@ db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
 app.get("/statistics",(req,res)=>{
-    res.render("stats",{cdevmsg:devtxt});
+    res.render("desktop/stats",{cdevmsg:devtxt});
 });
 
 app.get("/about",(req,res)=>{
-    res.render("about",{cdevmsg:devtxt});
+    res.render("desktop/about",{cdevmsg:devtxt});
 });
 
 app.listen(3000,()=>{
@@ -94,12 +95,19 @@ app.get("/",function(req,res)
 {
     isLoggedIn = false;
     errmsg = "";
-    res.render("index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(!isMobile)
+    {
+        res.render("desktop/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+    }
+    else{
+        res.render("mobile/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+    }
 });
 
 // Join page
 app.get("/register",function(req,res){
-    res.render("register",{cdevmsg:devtxt});
+    res.render("desktop/register",{cdevmsg:devtxt});
 });
 
 app.post("/submitform",(req,res)=>{
@@ -140,14 +148,14 @@ app.post("/newuser",(req,res)=>{
                 else
                     statBoxData[2].count++;
             });
-            res.render("success",{cdevmsg:devtxt});
+            res.render("desktop/success",{cdevmsg:devtxt});
         }
     })
 });
 
 // Donate food
 app.get("/donate-food",(req,res)=>{
-    res.render("donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
+    res.render("desktop/donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
 });
 app.post("/login",(req,res)=>{
     var lmail = req.body.email;
@@ -195,7 +203,7 @@ app.post("/addFood",(req,res)=>{
             console.log("item added");
             statBoxData[0].count = statBoxData[0].count+1;
         }
-        res.redirect("/donate-food");
+        res.redirect("desktop/donate-food");
     });
     console.log(availableFood);
 });
@@ -213,7 +221,7 @@ app.get("/request-food",(req,res)=>{
     .then((documents) => {
       availableFood = documents;
 
-      res.render("req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+      res.render("desktop/req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
     })
     .catch((error) => {
       console.log("Error retrieving documents from the 'food' collection:", error);
