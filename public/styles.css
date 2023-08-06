@@ -3,6 +3,9 @@
 ::selection{
     background-color: #86dc3d;
 }
+img{
+    user-select: none;
+}
 #hamburger{
     display: none;
 }
@@ -128,9 +131,11 @@ footer{
     cursor: pointer;
 }
 .statbox img{
-    width: 5dvw;
+    width: 4dvw;
 }
-
+.statbox h6{
+    margin-bottom: 0;
+}
 #statbar{
     display: flex;
     align-items: center;
@@ -467,7 +472,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4caf50;
+    /* color: #4caf50; */
 }
 #non-vegetarian .vnv{
     background-color: red;
@@ -495,7 +500,7 @@ footer{
     overflow: scroll;
 }
 .availcard{
-    width: 20dvw;
+    width: 20dvw; 
     height: fit-content;
     max-height: 45dvh;
     overflow-y: none;
@@ -511,6 +516,9 @@ footer{
     border-radius: 2rem;
     animation: fadepop 0.3s ease;
 }
+.availcard:hover{
+    transform: scale(0.95);
+}
 .availcard p{
     line-height: 1;
 }
@@ -519,9 +527,6 @@ footer{
         transform: scale(0.8);
     }
 }
-/* .availcard:hover{
-    transform: scale(0.9);
-} */
   /* Keyframes */
 @keyframes show {
     from{
@@ -621,6 +626,7 @@ footer{
     overflow: scroll;
     overflow-x: hidden;
     border: none;
+    text-align: left;
 }
 .btn-link{
     color: #4caf50;
@@ -668,6 +674,7 @@ footer{
     background-color: brown;
     color: white;
     border-radius: 4%;
+    user-select: none;
 }
 #msgcontainer h6{
     padding: 2%;
@@ -688,7 +695,7 @@ footer{
 
 
 
-@media (max-height:760px) {
+@media (max-height:649px) {
     #statbar{
         bottom: 5dvh;
     }
@@ -697,7 +704,7 @@ footer{
         margin: 0;
     }
 }
-@media (min-height:761px) {
+@media (min-height:650px) {
     #statbar{
         bottom: 15dvh;
     }
@@ -708,9 +715,9 @@ footer{
         height: 30dvw;
     }
 }
-@media (max-height:652px){
+@media (max-height:661px){
     #right-big{
-        width: 25dvw;
-        height: 25dvw;
+        width: 30dvw;
+        height: 30dvw;
     }
 }

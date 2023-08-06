@@ -16,7 +16,6 @@
     "express": "^4.18.2",
     "mongoose": "^7.3.4",
     "nodemailer": "^6.9.3",
-    "request": "^2.88.2",
-    "vanilla-tilt": "^1.8.0"
+    "request": "^2.88.2"
   }
 }

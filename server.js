@@ -34,32 +34,50 @@ const title_txt = "Welcome to HungerHelp!";
 const desc_txt = "Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.";
 const emphasis_txt = "Together, we can fight hunger, one meal at a time.";
 const curFeedbackState = true;
+var volunteercnt=0;
+var membercnt=0;
+async function getMembersCounts(){
+    volunteercnt = await db.collection("members").countDocuments({type:"volunteer"});
+    membercnt = await db.collection("members").countDocuments({type:"member"});
+    console.log(volunteercnt);
+    console.log(membercnt);
+    return [volunteercnt,membercnt];
+}
+async function getDonationCount(){
+    var numdonations = db.collection("food").countDocuments({});
+    return numdonations;
+}
 var statBoxData = [
     {
         key : 1,
         alt : "donations",
-        src : "https://static.vecteezy.com/system/resources/previews/004/327/955/original/donation-box-throwing-hearts-in-a-box-for-donations-donate-giving-money-and-love-concept-of-charity-give-and-share-your-love-with-people-humanitarian-volunteer-activity-vector.jpg",
+        src : "/donatepic.svg",
         desc : "Donations",
-        count : 150
+        count : getDonationCount().then((donationCount)=>{
+            statBoxData[0].count = donationCount;
+        })
     },
     {
         key : 2,
         alt : "volunteers",
-        src : "https://media.istockphoto.com/id/931069122/vector/icon-with-the-concept-of-family-care-care-about-humanity.jpg?s=612x612&w=0&k=20&c=RWgHjgTaVOwdSQtPQcqQcTZ8t0MHdie7Jr0bnHZKvZc=",
+        src : "/volunteer-card.svg",
         desc : "Volunteers",
-        count : 80
+        count : getMembersCounts().then((countval)=>{
+            statBoxData[1].count = countval[0];
+            statBoxData[2].count = countval[1];
+        })
     },
     {
         key : 3,
         alt : "members image",
-        src : "https://orgalim.eu/sites/default/files/styles/large/public/pebble_impressive_image/group-chat%20%281%29.png?itok=efpAi0Cl",
+        src : "/members.svg",
         desc : "Members",
-        count : 15
+        count : membercnt
     },
     {
         key : 4,
         alt : "love image",
-        src : "https://static.thenounproject.com/png/1592695-200.png",
+        src : "/heart.svg",
         desc : "Fed",
         count : 300
     }
@@ -122,6 +140,10 @@ app.post("/newuser",(req,res)=>{
     db.collection("members").insertOne(data,(err,collection)=>{
         if(err) throw err;
         console.log("Record Inserted Successfully");
+        if(data.type == "volunteer")
+            statBoxData[1].count++;
+        else
+            statBoxData[2].count++;
     });
     res.render("success",{cdevmsg:devtxt});
 });
@@ -173,6 +195,7 @@ app.post("/addFood",(req,res)=>{
         }
         else{
             console.log("item added");
+            statBoxData[0].count = statBoxData[0].count+1;
         }
         res.redirect("/donate-food");
     });
