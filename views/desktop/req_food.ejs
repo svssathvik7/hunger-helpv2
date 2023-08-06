@@ -1,0 +1,10 @@
+<%- include("../partials/header"); -%>
+<%- include("../components/feedback"); -%>
+<%- include("../components/devmsg"); -%>
+<% if(!loginState){%>
+    <%- include("../components/login"); -%>
+<%}else{%>
+    <%- include("../components/reqfood"); -%>
+<%}%>
+<%- include("../partials/footer"); -%>
+<%- include("../partials/bg"); -%>
