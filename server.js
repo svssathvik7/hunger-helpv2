@@ -84,30 +84,20 @@ var statBoxData = [
 ];
 const aside_img = [
     "https://media.istockphoto.com/id/1355624220/vector/vector-illustration-please-dont-waste-food-designs-for-world-food-day-and-international.jpg?s=612x612&w=0&k=20&c=_noGR7l39IG46d6RGE4x54DBC8sg1pD1xzDUfz5pb4E=",
-    "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg"
+    "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg",
+    "https://media.istockphoto.com/id/1223169200/vector/food-and-grocery-donation.jpg?s=612x612&w=0&k=20&c=0fv8hwXeS9RCL-ewqkr2oyi0Nu8jAQxGtroS0XA9nsQ=",
+    "https://cdn1.i-scmp.com/sites/default/files/styles/1200x800/public/2013/10/16/4541f88991b90cae31fe995a28027086.jpg?itok=w_-PQMW2",
+    "https://static.vecteezy.com/system/resources/previews/013/926/882/original/biofuel-life-cycle-of-natural-materials-and-plants-with-green-barrels-or-biogas-production-energy-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg"
 ];
 var devtxt = "Making it responsive to your monitor size :)";
 app.get("/",function(req,res)
 {
     isLoggedIn = false;
     errmsg = "";
-    res.render("index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.round(Math.random())]]});
+    res.render("index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
 });
 
 // Join page
-var card_Data = [
-    {
-        title : "Member",
-        desc : "Join as a Member with HungerHelp and make a difference in fighting food waste and hunger. As a member, you can contribute surplus food from your restaurant or become a donor by supporting our mission financially. By partnering with us, you'll help redirect perfectly good food to those in need and actively participate in building a more sustainable and compassionate community. Together, we can reduce food waste and ensure that no one goes hungry.",
-        func : "cardClicked1"
-    },
-    {
-        title : "Volunteer",
-        desc : "Volunteer with HungerHelp and make a meaningful impact in your community. Join our dedicated team of volunteers to help collect and distribute surplus food, organize food drives, assist at local events, and spread awareness about food waste and hunger. By volunteering with us, you can be a part of the solution and contribute to creating a hunger-free future for all.",
-        func : "cardClicked2"
-    }
-];
-
 app.get("/register",function(req,res){
     res.render("register",{cdevmsg:devtxt});
 });
@@ -137,15 +127,22 @@ app.post("/newuser",(req,res)=>{
         pass : req.body.password,
         type : req.body.role
     };
-    db.collection("members").insertOne(data,(err,collection)=>{
-        if(err) throw err;
-        console.log("Record Inserted Successfully");
-        if(data.type == "volunteer")
-            statBoxData[1].count++;
-        else
-            statBoxData[2].count++;
-    });
-    res.render("success",{cdevmsg:devtxt});
+    db.collection("members").findOne({mail:data.mail},(found,err)=>{
+        if(found){
+            console.log("User exists!");
+        }
+        else{
+            db.collection("members").insertOne(data,(err,collection)=>{
+                if(err) throw err;
+                console.log("Record Inserted Successfully");
+                if(data.type == "volunteer")
+                    statBoxData[1].count++;
+                else
+                    statBoxData[2].count++;
+            });
+            res.render("success",{cdevmsg:devtxt});
+        }
+    })
 });
 
 // Donate food
@@ -164,6 +161,7 @@ app.post("/login",(req,res)=>{
             {
                 isLoggedIn = true;
                 res.redirect(req.get('referer'));
+                console.log("Login detected");
             }
             else{
                 errmsg = "No user found";

@@ -94,14 +94,14 @@ footer{
 }
 #poverty-img{
     width: 18dvw;
+    aspect-ratio: 4/4;
     position: absolute;
     right: 2dvw;
-    z-index: -1;
     top: 27dvh;
     animation: show 0.8s ease;
-    backdrop-filter: blur(10px);
-    background: transparent;
+    mix-blend-mode: darken;
     user-select: none;
+    object-fit: contain;
 }
 #feedback-block{
     z-index: 3!important;
