@@ -20,34 +20,6 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      var expiryTimes = document.querySelectorAll(".expiryTime");
+<script>
 
-      function updateExpiry() {
-        expiryTimes.forEach((expiryTime) => {
-            var minutes = parseInt(expiryTime.getAttribute("data-expiry"));
-
-          if (minutes > 0) {
-            expiryTime.textContent = `Expires in ${minutes} mins`;
-            expiryTime.setAttribute("data-expiry", minutes - 1);
-          } else {
-            var parentDiv = expiryTime.closest(".availcard");
-            parentDiv.style.display = "none";
-
-            var itemId = expiryTime.dataset.itemId;
-            <!-- moveItemToBiogas(itemId); -->
-          }
-        });
-      }
-
-      // Call the updateExpiry function initially
-      updateExpiry();
-
-      // Call the updateExpiry function every 60 seconds (1000 milliseconds)
-      setInterval(updateExpiry, 60*1000);
-
-      // Function to move an item to "biogas" collection
-      
-    });
-  </script>
+</script>
