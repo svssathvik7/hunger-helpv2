@@ -1,0 +1,8 @@
+<%- include("../mobile_partials/header"); -%>
+<%- include("../components/feedback"); -%>
+<% if(!loginState){%>
+    <%- include("../components/login"); -%>
+<%}else{%>
+    <%- include("../components/reqfood"); -%>
+<%}%>
+<%- include("../mobile_partials/footer"); -%>

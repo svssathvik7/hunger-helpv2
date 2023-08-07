@@ -49,3 +49,4 @@ app.listen(3000,function(){
 Inferences:
 - All public files can be found by / + filename
 - for function promises are made and can be resolved by async, then
+-     var isMobile = browser(req.headers['user-agent']).mobile;

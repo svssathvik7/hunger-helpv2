@@ -892,6 +892,15 @@ footer{
     .dropdown-container{
         width: 75dvw;
     }
+    #loginform input{
+        width: 75dvw;
+    }
+    #loginsubmit{
+        width: 20dvw;
+    }
+    .availcard{
+        width: 65dvw;
+    }
 }
 @keyframes dropdown {
     from{

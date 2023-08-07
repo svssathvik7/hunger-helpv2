@@ -169,7 +169,14 @@ app.post("/newuser",(req,res)=>{
 
 // Donate food
 app.get("/donate-food",(req,res)=>{
-    res.render("desktop/donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/donate_food",{loginState:isLoggedIn,errortxt:errmsg});
+    }
+    else{
+        res.render("desktop/donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
+    }
 });
 app.post("/login",(req,res)=>{
     var lmail = req.body.email;
@@ -234,8 +241,14 @@ app.get("/request-food",(req,res)=>{
     .toArray()
     .then((documents) => {
       availableFood = documents;
-
-      res.render("desktop/req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+      var isMobile = browser(req.headers['user-agent']).mobile;
+        if(isMobile)
+        {
+            res.render("mobile/req_food",{loginState:isLoggedIn,errortxt:errmsg,data:availableFood});
+        }
+        else{
+            res.render("desktop/req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+        }
     })
     .catch((error) => {
       console.log("Error retrieving documents from the 'food' collection:", error);
