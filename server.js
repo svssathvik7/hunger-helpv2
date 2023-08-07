@@ -114,7 +114,14 @@ app.get("/",function(req,res)
 
 // Join page
 app.get("/register",function(req,res){
-    res.render("desktop/register",{cdevmsg:devtxt});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/register");
+    }
+    else{
+        res.render("desktop/register",{cdevmsg:devtxt});
+    }
 });
 
 app.post("/submitform",(req,res)=>{
