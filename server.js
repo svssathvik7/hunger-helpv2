@@ -3,6 +3,7 @@ const es = require("express");
 const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
+const encrypt = require("mongoose-encryption");
 const browser = require('browser-detect') 
 var isLoggedIn = false;
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
@@ -44,7 +45,6 @@ const MemberSchema = new mongoose.Schema({
         type : String,
     }
 });
-var Memberdb = new mongoose.model("members",MemberSchema);
 
 const DonateSchema = new mongoose.Schema({
     ftype : {
@@ -69,6 +69,14 @@ const DonateSchema = new mongoose.Schema({
         type : String
     }
 });
+
+// Encryptions
+const secret = "saregapanisa.";
+MemberSchema.plugin(encrypt,{secret:secret,encryptedFields:["password"]});
+
+
+
+var Memberdb = new mongoose.model("members",MemberSchema);
 var Fooddb = new mongoose.model("food",DonateSchema);
 // Home page code
 
