@@ -1,4 +1,5 @@
 // Program imports
+require("dotenv").config();
 const es = require("express");
 const app = es();
 const bp = require("body-parser");
@@ -71,8 +72,7 @@ const DonateSchema = new mongoose.Schema({
 });
 
 // Encryptions
-const secret = "saregapanisa.";
-MemberSchema.plugin(encrypt,{secret:secret,encryptedFields:["password"]});
+MemberSchema.plugin(encrypt,{secret:process.env.SECRET,encryptedFields:["password"]});
 
 
 
