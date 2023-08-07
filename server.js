@@ -5,6 +5,8 @@ const bp = require("body-parser");
 const fs = require("fs");
 const browser = require('browser-detect') 
 var isLoggedIn = false;
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security";
 var errmsg = "";
 const mongoose = require("mongoose");
 var availableFood = [];
@@ -104,7 +106,6 @@ const aside_img = [
     "https://cdn1.i-scmp.com/sites/default/files/styles/1200x800/public/2013/10/16/4541f88991b90cae31fe995a28027086.jpg?itok=w_-PQMW2",
     "https://static.vecteezy.com/system/resources/previews/013/926/882/original/biofuel-life-cycle-of-natural-materials-and-plants-with-green-barrels-or-biogas-production-energy-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg"
 ];
-var devtxt = "Making it responsive to your monitor size :)";
 app.get("/",function(req,res)
 {
     isLoggedIn = false;

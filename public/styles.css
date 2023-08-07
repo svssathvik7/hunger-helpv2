@@ -663,7 +663,7 @@ footer{
 }
 #msgcontainer{
     width: 20dvw;
-    overflow-x: scroll;
+    overflow-x: none;
     height: 10dvw;
     display: flex;
     align-items: center;
@@ -694,6 +694,19 @@ footer{
     z-index: 5;
 }
 
+/* Stats */
+#statcont{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    height: fit-content;
+    max-width: 80dvw;
+    max-height: 70dvh;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
+}
 
 
 @media (max-height:649px) {
