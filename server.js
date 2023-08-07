@@ -9,10 +9,12 @@ const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','No
 var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security";
 var errmsg = "";
 const mongoose = require("mongoose");
+const { isErrored } = require("stream");
 var availableFood = [];
 app.use(bp.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(es.static("public"));
+
 
 // Database connection
 mongoose.connect(("mongodb+srv://sathvikcodes:sathvikcodes@cluster0.hyujunf.mongodb.net/?retryWrites=true&w=majority"));
@@ -20,33 +22,56 @@ var db = mongoose.connection;
 db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
-app.get("/statistics",(req,res)=>{
-    var isMobile = browser(req.headers['user-agent']).mobile;
-    if(isMobile)
-    {
-        res.render("mobile/stats");
-    }    
-    else{
-        res.render("desktop/stats",{cdevmsg:devtxt});
+const MemberSchema = new mongoose.Schema({
+    name : {
+        type : String,
+        required : true
+    },
+    orgname : {
+        type : String,
+        required : true
+    },
+    email : {
+        type : String,
+        required : true,
+        unique : true
+    },
+    password : {
+        type : String,
+        required : true
+    },
+    role : {
+        type : String,
     }
 });
+var Memberdb = new mongoose.model("members",MemberSchema);
 
-app.get("/about",(req,res)=>{
-    var isMobile = browser(req.headers['user-agent']).mobile;
-    if(isMobile)
-    {
-        res.render("mobile/about");
-    }
-    else{
-        res.render("desktop/about",{cdevmsg:devtxt});
+const DonateSchema = new mongoose.Schema({
+    ftype : {
+        type : String
+    },
+    quality : {
+        type : String
+    },
+    quantity : {
+        type : Number
+    },
+    contact : {
+        type : String
+    },
+    organisation : {
+        type : String
+    },
+    expiry : {
+        type : Number
+    },
+    message : {
+        type : String
     }
 });
-
-app.listen(3000,()=>{
-    console.log("Running");
-});
-
+var Fooddb = new mongoose.model("food",DonateSchema);
 // Home page code
+
 const title_txt = "Welcome to HungerHelp!";
 const desc_txt = "Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.";
 const emphasis_txt = "Together, we can fight hunger, one meal at a time.";
@@ -54,14 +79,14 @@ const curFeedbackState = true;
 var volunteercnt=0;
 var membercnt=0;
 async function getMembersCounts(){
-    volunteercnt = await db.collection("members").countDocuments({type:"volunteer"});
-    membercnt = await db.collection("members").countDocuments({type:"member"});
+    volunteercnt = await Memberdb.countDocuments({role:"volunteer"});
+    membercnt = await Memberdb.countDocuments({role:"member"});
     console.log(volunteercnt);
     console.log(membercnt);
     return [volunteercnt,membercnt];
 }
 async function getDonationCount(){
-    var numdonations = db.collection("food").countDocuments({});
+    var numdonations = Fooddb.countDocuments({quantity:3});
     return numdonations;
 }
 var statBoxData = [
@@ -137,42 +162,41 @@ app.post("/submitform",(req,res)=>{
     var umail = req.body.usermail;
     var ufeedback = req.body.userfeedback;
     const formData = `Username: ${uname}\nUsermail: ${umail}\nUserfeedback: ${ufeedback}\n\n`;
-
-  // Append the form data to a file
+    
+    // Append the form data to a file
     fs.appendFile(__dirname+"/views/data.txt", formData, (error) => {
-    if (error) {
-      console.log("Error occurred while writing to file:", error.message);
-      res.redirect("/"); // Redirect to home page or handle the error accordingly
-    }
-    console.log("Form data written to file successfully"); // Redirect to home page or a success page
-  });
+        if (error) {
+            console.log("Error occurred while writing to file:", error.message);
+            res.redirect("/"); // Redirect to home page or handle the error accordingly
+        }
+        console.log("Form data written to file successfully"); // Redirect to home page or a success page
+    });
     res.redirect("/");
 });
 
-app.post("/newuser",(req,res)=>{
-    var data = {
+app.post("/newuser",async(req,res)=>{
+    var data = new Memberdb({
         name : req.body.name,
-        org : req.body.orgname,
-        mail : req.body.email,
-        pass : req.body.password,
-        type : req.body.role
-    };
-    db.collection("members").findOne({mail:data.mail},(found,err)=>{
-        if(found){
-            console.log("User exists!");
-        }
-        else{
-            db.collection("members").insertOne(data,(err,collection)=>{
-                if(err) throw err;
-                console.log("Record Inserted Successfully");
-                if(data.type == "volunteer")
-                    statBoxData[1].count++;
-                else
-                    statBoxData[2].count++;
-            });
+        orgname : req.body.orgname,
+        email : req.body.email,
+        password : req.body.password,
+        role : req.body.role
+    });
+    try{
+        await data.save();
+        if(data.role == "volunteer"){
+            statBoxData[1].count++;
             res.render("desktop/success",{cdevmsg:devtxt});
         }
-    })
+        else{
+            statBoxData[2].count++;
+            res.render("desktop/success",{cdevmsg:devtxt});
+        }
+    }
+    catch(error){
+        console.log("Error saving");
+        res.render("desktop/failentry",{cdevmsg:devtxt});
+    }
 });
 
 // Donate food
@@ -186,80 +210,92 @@ app.get("/donate-food",(req,res)=>{
         res.render("desktop/donate_food",{cdevmsg:devtxt,loginState:isLoggedIn,errortxt:errmsg});
     }
 });
-app.post("/login",(req,res)=>{
+app.post("/login",async(req,res)=>{
     var lmail = req.body.email;
     var lpass = req.body.password;
-    db.collection("members").findOne({mail:lmail},(err,foundUser)=>{
-        if(err){
-            console.log(err);
-        }
-        if(foundUser){
-            if(foundUser.pass === lpass)
+    try{
+        var userLoggingIn = await Memberdb.findOne({email:lmail});
+        if(userLoggingIn)
+        {
+            if(userLoggingIn.password === lpass)
             {
                 isLoggedIn = true;
                 res.redirect(req.get('referer'));
                 console.log("Login detected");
             }
             else{
-                errmsg = "No user found";
+                errmsg = "Password incorrect";
                 isLoggedIn = false;
                 res.redirect(req.get('referer'));
             }
         }
         else{
-            errmsg = "No user found :(";
+            errmsg = "No user found";
             isLoggedIn = false;
-            res.redirect("/donate-food");
+            res.redirect(req.get('referer'));
         }
-    })
+    }
+    catch(error){
+        console.log("error logging in");
+    }
 });
 app.post("/addFood",(req,res)=>{
-    var temp = {
+    var data = new Fooddb({
         ftype : req.body.foodtype,
         quality : req.body.quality,
-        quantity : req.body.quantity,
+        quantity : parseInt(req.body.quantity),
         contact : req.body.contactnumber,
         organisation : req.body.organisation,
-        expiry : req.body.expiry*60,
+        expiry : req.body.expiry,
         message : req.body.custommessage
-    };
-    availableFood = availableFood + temp;
-    db.collection("food").insertOne(temp,(err,collection)=>{
-        if(err){
-            throw err;
-        }
-        else{
-            console.log("item added");
-            statBoxData[0].count = statBoxData[0].count+1;
-        }
-        res.redirect("desktop/donate-food");
     });
-    console.log(availableFood);
+    try{
+        data.save();
+        statBoxData[0].count = statBoxData[0].count+1;
+    }
+    catch(error){
+        console.log("Error adding food");
+    }
+    res.redirect("desktop/donate-food");
 });
-
-
-
 
 
 // Request food
-app.get("/request-food",(req,res)=>{
+app.get("/request-food",async(req,res)=>{
     var availableFood = [];
-    db.collection("food")
-    .find({})
-    .toArray()
-    .then((documents) => {
-      availableFood = documents;
-      var isMobile = browser(req.headers['user-agent']).mobile;
-        if(isMobile)
-        {
-            res.render("mobile/req_food",{loginState:isLoggedIn,errortxt:errmsg,data:availableFood});
-        }
-        else{
-            res.render("desktop/req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
-        }
-    })
-    .catch((error) => {
-      console.log("Error retrieving documents from the 'food' collection:", error);
-      // Handle the error appropriately, e.g., display an error message
-    });
+    var availableFood = await Fooddb.find({});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/req_food",{loginState:isLoggedIn,errortxt:errmsg,data:availableFood});
+    }
+    else{
+        res.render("desktop/req_food", {cdevmsg:devtxt, loginState: isLoggedIn, errortxt: errmsg, data: availableFood });
+    }// Handle the error appropriately, e.g., display an error message
+});
+
+app.get("/statistics",(req,res)=>{
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/stats");
+    }    
+    else{
+        res.render("desktop/stats",{cdevmsg:devtxt});
+    }
+});
+
+app.get("/about",(req,res)=>{
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/about");
+    }
+    else{
+        res.render("desktop/about",{cdevmsg:devtxt});
+    }
+});
+
+app.listen(3000,()=>{
+    console.log("Running");
 });
