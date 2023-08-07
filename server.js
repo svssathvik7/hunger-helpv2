@@ -19,7 +19,14 @@ db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
 app.get("/statistics",(req,res)=>{
-    res.render("desktop/stats",{cdevmsg:devtxt});
+    var isMobile = browser(req.headers['user-agent']).mobile;
+    if(isMobile)
+    {
+        res.render("mobile/stats");
+    }    
+    else{
+        res.render("desktop/stats",{cdevmsg:devtxt});
+    }
 });
 
 app.get("/about",(req,res)=>{
