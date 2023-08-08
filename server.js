@@ -8,7 +8,7 @@ const encrypt = require("mongoose-encryption");
 const browser = require('browser-detect') 
 var isLoggedIn = false;
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security";
+var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security ";
 var errmsg = "";
 const mongoose = require("mongoose");
 const { isErrored } = require("stream");
@@ -64,7 +64,8 @@ const DonateSchema = new mongoose.Schema({
         type : String
     },
     expiry : {
-        type : Number
+        type : String,
+        required : true
     },
     message : {
         type : String
@@ -248,23 +249,27 @@ app.post("/login",async(req,res)=>{
     }
 });
 app.post("/addFood",(req,res)=>{
+    var expirationTimestamp = new Date();
+    expirationTimestamp.setTime(new Date().getTime() + req.body.expiry * 60 * 1000);
+    var expirationTime = expirationTimestamp.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
     var data = new Fooddb({
         ftype : req.body.foodtype,
         quality : req.body.quality,
         quantity : parseInt(req.body.quantity),
         contact : req.body.contactnumber,
         organisation : req.body.organisation,
-        expiry : req.body.expiry,
+        expiry : expirationTime,
         message : req.body.custommessage
     });
     try{
         data.save();
         statBoxData[0].count = statBoxData[0].count+1;
     }
-    catch(error){
-        console.log("Error adding food");
+    catch(error)
+    {
+        console.log(error);
     }
-    res.redirect("desktop/donate-food");
+    res.redirect("/donate-food");
 });
 
 
