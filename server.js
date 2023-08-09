@@ -4,8 +4,8 @@ const es = require("express");
 const app = es();
 const bp = require("body-parser");
 const fs = require("fs");
-const encrypt = require("mongoose-encryption");
-const browser = require('browser-detect') 
+const browser = require('browser-detect');
+const md5 = require("md5");
 var isLoggedIn = false;
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security ";
@@ -72,8 +72,6 @@ const DonateSchema = new mongoose.Schema({
     }
 });
 
-// Encryptions
-MemberSchema.plugin(encrypt,{secret:process.env.SECRET,encryptedFields:["password"]});
 
 
 
@@ -188,7 +186,7 @@ app.post("/newuser",async(req,res)=>{
         name : req.body.name,
         orgname : req.body.orgname,
         email : req.body.email,
-        password : req.body.password,
+        password : md5(req.body.password),
         role : req.body.role
     });
     try{
@@ -221,7 +219,7 @@ app.get("/donate-food",(req,res)=>{
 });
 app.post("/login",async(req,res)=>{
     var lmail = req.body.email;
-    var lpass = req.body.password;
+    var lpass = md5(req.body.password);
     try{
         var userLoggingIn = await Memberdb.findOne({email:lmail});
         if(userLoggingIn)
