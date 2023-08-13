@@ -5,7 +5,7 @@
     </p>
   </div>
   <div id="addfoodslider">
-    <div id="page1">
+    <div id="page1" class="active addfoodslides">
       <h4>Food Type</h4>
       <div id="imageOptions">
         <label>
@@ -18,9 +18,65 @@
         </label>
       </div>
     </div>
+    <div id="page2" class="addfoodslides">
+      <h4>Food Type2</h4>
+      <div id="imageOptions">
+        <label>
+          <input type="radio" name="option" value="excess">
+          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
+        </label>
+        <label>
+          <input type="radio" name="option" value="left-over">
+          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
+        </label>
+      </div>
+    </div>
+    <div id="page3" class="addfoodslides">
+      <h4>Food Type3</h4>
+      <div id="imageOptions">
+        <label>
+          <input type="radio" name="option" value="excess">
+          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
+        </label>
+        <label>
+          <input type="radio" name="option" value="left-over">
+          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
+        </label>
+      </div>
+    </div>
+    <div id="page4" class="addfoodslides">
+      <h4>Food Type4</h4>
+      <div id="imageOptions">
+        <label>
+          <input type="radio" name="option" value="excess">
+          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
+        </label>
+        <label>
+          <input type="radio" name="option" value="left-over">
+          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
+        </label>
+      </div>
+    </div>
     <div id="slidenavigator">
-      <button>Back</button>
-      <button>Next</button>
+      <button id="back">Back</button>
+      <button id="next">Next</button>
     </div>
   </div>      
 </div>
+<script>
+  var start = 0;
+  var elements = document.getElementsByClassName("addfoodslides");
+  document.getElementById("next").addEventListener("click",()=>{
+    elements[start].classList.remove("active");
+    start++;
+    start = start%4;
+    elements[start].classList.add("active");
+  });
+  document.getElementById("back").addEventListener("click",()=>{
+    elements[start].classList.remove("active");
+    start = start+4;
+    start--;
+    start = start%4;
+    elements[start].classList.add("active");
+  });
+</script>

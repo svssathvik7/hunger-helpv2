@@ -488,6 +488,21 @@ footer{
     flex-direction: column;
     height: 20dvh;
 }
+#page1,#page2,#page3,#page4{
+    display: none;
+}
+#page1.active{
+    display: flex;
+}
+#page2.active{
+    display: flex;
+}
+#page3.active{
+    display: flex;
+}
+#page4.active{
+    display: flex;
+}
 #slidenavigator{
     display: flex;
     margin-top: 4%;
