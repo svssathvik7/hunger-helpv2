@@ -431,7 +431,7 @@ footer{
     position: absolute;
     top: 0;bottom: 0;left: 0;right: 0;margin: auto;
     width: 80dvw;
-    height: 60dvh;
+    height: 40dvh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -447,14 +447,15 @@ footer{
     width: 40dvw;
 }
 #addfoodslider{
-    width: 30dvw;
+    width: 25dvw;
     height: 50dvh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    box-shadow: 1px 1px 4px #000;
+    background-color: #EDEADE;
+    box-shadow: 2px 2px 8px #000;
     border-radius: 1rem;
 }
 .slide1img{
@@ -465,6 +466,7 @@ footer{
     padding: 0.9dvw;
     box-shadow: 2px 2px 4px #000;
     border-radius: 1rem;
+    background-color: white!important;
 }
 #imageOptions input[type="radio"]{
     display: none;
@@ -481,12 +483,81 @@ footer{
     justify-content: space-around;
     width: 20dvw;
 }
+#imageOptions label{
+    background-color: #fff;
+    border-radius: 1rem;
+}
 #page1{
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
     height: 20dvh;
+}
+#page2{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#imageOptions input[type="radio"]:checked + #vegfoodopt{
+    box-shadow: 2px 2px 8px #86dc3d;
+}
+#imageOptions input[type="radio"]:checked + #nonvegfoodopt{
+    box-shadow: 2px 2px 8px red;
+}
+#quantity{
+    border: none;
+    outline: none;
+    margin-top: 2%;
+    border-bottom: thin solid #86dc3d;
+}
+#quantity::placeholder{
+    opacity: 0.6;
+}
+#page3{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#page3 input{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    background-color: #EDEADE;
+}
+#page4{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#page4 input{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    width: 50%;
+    background-color: #EDEADE;
+}
+#page4 textarea{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    width: 50%;
+    background-color: #EDEADE;
+}
+#addfoodsubmit{
+    display: none;
+}
+#addfoodslider.active #addfoodsubmit{
+    display: flex;
+}
+#addfoodslider.active #next{
+    display: none;
 }
 #page1,#page2,#page3,#page4{
     display: none;
@@ -514,6 +585,23 @@ footer{
     background-color: #86dc3d;
     padding: 2%;
     border-radius: 1rem;
+}
+#progressbar{
+    width: 5dvw;
+    height: 2dvw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.pgbardots{
+    background-color: #87dc3d62;
+    width: 0.8dvw;
+    height: 0.8dvw;
+    border-radius: 100%;
+}
+.pgbardots.active{
+    background-color: #72d51b;
+    opacity: 100%;
 }
 /* request food */
 #vegetarian{

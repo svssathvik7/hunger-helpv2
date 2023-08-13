@@ -5,78 +5,92 @@
     </p>
   </div>
   <div id="addfoodslider">
-    <div id="page1" class="active addfoodslides">
-      <h4>Food Type</h4>
-      <div id="imageOptions">
-        <label>
-          <input type="radio" name="option" value="excess">
-          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
-        </label>
-        <label>
-          <input type="radio" name="option" value="left-over">
-          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
-        </label>
+    <form action="/addFood" method="POST">
+      <div id="page1" class="active addfoodslides">
+        <h4>Food Type</h4>
+        <div id="imageOptions">
+          <label>
+            <input type="radio" name="quality" value="excess">
+            <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
+          </label>
+          <label>
+            <input type="radio" name="quality" value="left-over">
+            <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
+          </label>
+        </div>
+      </div>
+      <div id="page2" class="addfoodslides">
+        <h4>Veg or Non Veg</h4>
+        <div id="imageOptions">
+          <label>
+            <input type="radio" name="foodtype" value="vegetarian">
+            <img class="slide1img" id="vegfoodopt" src="/vegetarian.svg" alt="veg">
+          </label>
+          <label>
+            <input type="radio" name="foodtype" value="non-vegetarian">
+            <img class="slide1img" id="nonvegfoodopt" src="/nonveg.svg" alt="non-veg">
+          </label>
+        </div>
+        <input type="number" id="quantity" name="quantity" step="0.125" min="0" required placeholder="Quantity in Kgs">
+      </div>
+      <div id="page3" class="addfoodslides">
+        <h4>Contact Info</h4>
+        <input name="contactnumber" type="tel" required="true" placeholder="Contact number" pattern="[1-9][0-9]{9}">
+        <input name="organisation" type="text" required="true" placeholder="Organisation">
+      </div>
+      <div id="page4" class="addfoodslides">
+        <h4>Extra Info</h4>
+        <input type="number" placeholder="Expires in (minutes)" name="expiry" required="true">
+        <textarea id="custommessage" name="custommessage" rows="2" placeholder="Enter your custom message"></textarea>
+      </div>
+      <div id="slidenavigator">
+        <button id="back">Back</button>
+        <button id="next">Next</button>
+        <button type="submit" id="addfoodsubmit">Submit</button>
+      </div>
+    </form> 
+      <div id="progressbar">
+        <div id="pgbar1" class="pgbardots active"></div>
+        <div id="pgbar2" class="pgbardots"></div>
+        <div id="pgbar3" class="pgbardots"></div>
+        <div id="pgbar4" class="pgbardots"></div>
       </div>
     </div>
-    <div id="page2" class="addfoodslides">
-      <h4>Food Type2</h4>
-      <div id="imageOptions">
-        <label>
-          <input type="radio" name="option" value="excess">
-          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
-        </label>
-        <label>
-          <input type="radio" name="option" value="left-over">
-          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
-        </label>
-      </div>
-    </div>
-    <div id="page3" class="addfoodslides">
-      <h4>Food Type3</h4>
-      <div id="imageOptions">
-        <label>
-          <input type="radio" name="option" value="excess">
-          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
-        </label>
-        <label>
-          <input type="radio" name="option" value="left-over">
-          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
-        </label>
-      </div>
-    </div>
-    <div id="page4" class="addfoodslides">
-      <h4>Food Type4</h4>
-      <div id="imageOptions">
-        <label>
-          <input type="radio" name="option" value="excess">
-          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
-        </label>
-        <label>
-          <input type="radio" name="option" value="left-over">
-          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
-        </label>
-      </div>
-    </div>
-    <div id="slidenavigator">
-      <button id="back">Back</button>
-      <button id="next">Next</button>
-    </div>
-  </div>      
-</div>
+  </div>
 <script>
   var start = 0;
   var elements = document.getElementsByClassName("addfoodslides");
   document.getElementById("next").addEventListener("click",()=>{
     elements[start].classList.remove("active");
+    var temp = "pgbar"+String(start+1);
+    document.getElementById(temp).classList.remove("active");
     start++;
     start = start%4;
+    var temp = "pgbar"+String(start+1);
+    document.getElementById(temp).classList.add("active");
+    if(start==3){
+      document.getElementById("addfoodslider").classList.add("active");
+    }
+    else{
+      document.getElementById("addfoodslider").classList.remove("active");
+    }
     elements[start].classList.add("active");
   });
   document.getElementById("back").addEventListener("click",()=>{
     elements[start].classList.remove("active");
+    var temp = "pgbar"+String(start+1);
+    document.getElementById(temp).classList.remove("active");
     start = start+4;
     start--;
     start = start%4;
+    var temp = "pgbar"+String(start+1);
+    document.getElementById(temp).classList.add("active");
+    if(start==3){
+      document.getElementById("addfoodslider").classList.add("active");
+    }
+    else{
+      document.getElementById("addfoodslider").classList.remove("active");
+    }
     elements[start].classList.add("active");
   });
 </script>
