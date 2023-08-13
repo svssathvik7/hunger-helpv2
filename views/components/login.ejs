@@ -1,9 +1,18 @@
 <div id="logindiv">
     <form id="loginform" method="post" action="/login">
-        <h1>Login</h1>
-        <input name="email" autocomplete="email" type="text" placeholder="Email address" required="true">
-        <input name="password" autocomplete="off" type="password" placeholder="Password" required="true">
-        <p id="errortxt"><%= errortxt %></p>
-        <button id="loginsubmit" type="submit">Submit</button>
+        <h3>Welcome back!</h3>
+        <div id="loginmaindiv">
+            <input name="email" autocomplete="email" type="text" placeholder="Email address" required="true">
+            <input name="password" autocomplete="off" type="password" placeholder="Password" required="true">
+            <p id="errortxt"><%= errortxt %></p>
+            <button id="loginsubmit" type="submit">Submit</button>
+        </div>
     </form>
+    <div id="vline">
+    </div>
+    <div id="sociallogins">
+        <a href="#" class="slogin" id="glogin"><img class="sloginpic" alt="google" src="/google.svg">Signin with Google</a>
+        <a href="#" class="slogin" id="linkedinlogin"><img class="sloginpic" alt="google" src="/linkedin.svg">Signin with Linkedin</a>
+        <a href="#" class="slogin" id="facebooklogin"><img class="sloginpic" alt="google" src="/facebook.svg">Signin with FaceBook</a>
+    </div>
 </div>

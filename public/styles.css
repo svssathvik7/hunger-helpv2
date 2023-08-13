@@ -328,52 +328,102 @@ footer{
 }
 #logindiv{
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: 0;left: 0;bottom: 0;right: 0;
+    margin: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 50dvw;
-    height: 40dvw;
-    /* backdrop-filter: blur(2px);  */
-    animation: show 0.8s ease;
-    margin: auto;
+    justify-content: space-around;
+    width: 75dvw;
+    height: 60dvh;
 }
 #loginform{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 35dvh;
-    width: 30dvw;
-    padding: 6%;
-    background-color: transparent;
+    justify-content: space-around;
+    height: 40dvh;
 }
-#loginform h1{
-    text-decoration: underline;
-    padding-bottom: 1%;
+#loginmaindiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
-#loginform input{
-    padding: 4%;
-    width: 25dvw;
-    font-size: 1em;
-    border: none;
-    border-bottom: thin solid #86dc3d;
-    background-color: transparent;
+#loginmaindiv input,button{
+    margin: 4%;
 }
 #loginsubmit{
-    font-size: 1em;
-    padding: 2%;
-    animation: show 0.3s ease;
+    padding: 0;margin: 0;
     background-color: #86dc3d;
     border-radius: 2rem;
-    transform-style: preserve-3d;
-    transition: all 0.5s ease;
+    padding: 2%;
+    transition: all 0.3s ease;
 }
 #loginsubmit:hover{
     box-shadow: 2px 2px #000;
+}
+#loginmaindiv input{
+    border: none;
+    width: 30dvw;
+    outline: none;
+    padding-bottom: 0;
+    transition: padding-bottom 0.3s ease;
+}
+#loginmaindiv input:focus{
+    border-bottom: thin solid #86dc3d!important;
+    padding-bottom: 2%;
+}
+#loginmaindiv input:valid{
+    border-bottom: thin solid #86dc3d!important;
+    padding-bottom: 2%;
+}
+#loginmaindiv input:hover{
+    border-bottom: thin solid #86dc3d;
+    padding-bottom: 2%;
+}
+#vline{
+    width: 0.5dvw;
+    height: 25dvh;
+    background-color: darkgray;
+    border-radius: 2rem;
+}
+#sociallogins{
+    height: 30dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.slogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25dvw;
+    height: 6dvh;
+    border: thin solid #000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
+}
+.sloginpic{
+    width: 2dvw;
+    margin: 2%;
+    display: inline;
+    z-index: 2;
+}
+.slogin:hover{
+    border-radius: 2rem;
+    color: #000;
+    text-decoration: none;
+}
+#glogin:hover{
+    background-color: orangered;
+}
+#linkedinlogin:hover{
+    background-color: #00a1dc97;
+}
+#facebooklogin:hover{
+    background-color: #3b5998;
 }
 #errortxt{
     color: red;

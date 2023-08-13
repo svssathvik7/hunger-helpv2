@@ -64,7 +64,7 @@ const DonateSchema = new mongoose.Schema({
         type : String
     },
     expiry : {
-        type : String,
+        type : Date,
         required : true
     },
     message : {
@@ -249,7 +249,7 @@ app.post("/login",async(req,res)=>{
 app.post("/addFood",(req,res)=>{
     var expirationTimestamp = new Date();
     expirationTimestamp.setTime(new Date().getTime() + req.body.expiry * 60 * 1000);
-    var expirationTime = expirationTimestamp.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    var expirationTime = new Date(expirationTimestamp.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
     var data = new Fooddb({
         ftype : req.body.foodtype,
         quality : req.body.quality,
