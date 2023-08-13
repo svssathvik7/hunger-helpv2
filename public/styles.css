@@ -558,8 +558,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: fit-content;
-    max-width: 85vw;
+    width: 85vw;
     height: fit-content;
     max-height: 72dvh;
     flex-wrap: wrap;
