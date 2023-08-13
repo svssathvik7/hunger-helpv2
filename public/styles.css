@@ -426,96 +426,80 @@ footer{
 #errortxt{
     color: red;
 }
-#addfoodimg{
-    width: 15dvw;
-}
-#addfoodchild{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 55dvh;
-}
 /* add food */
 #addfoodcont{
     position: absolute;
-    top: 0;left: 0;right: 0;bottom: 0;
-    margin: auto;
-    width: 70dvw;
-    height: 35dvh;
+    top: 0;bottom: 0;left: 0;right: 0;margin: auto;
+    width: 80dvw;
+    height: 60dvh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    z-index: 0;
-    animation: slider 0.3s ease;
+    justify-content: space-around;
 }
-#addfooddisclaimer{
-    margin: 2%;
+#addfoodimg{
+    width: 12dvw;
 }
-#addfoodform{
+#addfoodchild{
     display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: column;
+    width: 40dvw;
+}
+#addfoodslider{
+    width: 30dvw;
+    height: 50dvh;
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-    backdrop-filter: blur(2px);
-    margin-top: 2%;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 1px 1px 4px #000;
+    border-radius: 1rem;
 }
-#addfoodform input{
-    display: block;
-    text-align: left;
-    padding: 2%;
-    width: 25dvw;
-    line-height: 1;
-    border: none;
-    border-bottom: thin solid #86dc3d;
-    color: #0000009e;
+.slide1img{
+    aspect-ratio: 2/2;
+    object-fit: contain;
+    mix-blend-mode: darken;
+    width: 5dvw;
+    padding: 0.9dvw;
+    box-shadow: 2px 2px 4px #000;
+    border-radius: 1rem;
 }
-.adddrop-container {
-    width: 25dvw;
-    padding: 2%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: thin solid #4caf50; /* Green line at the bottom */
-    display: inline-block;
-    margin-bottom: 10px; /* Adjust as needed */
-    text-align: left;
-  }
-  
-.adddropdown {
-    width: 100%;
-    border: none; /* Remove the default dropdown border */
-    outline: none; /* Remove the default outline */
-    background-color: transparent; /* Make the dropdown background transparent */
+#imageOptions input[type="radio"]{
+    display: none;
 }
-.adddrop-container select{
-    color: #0000009e;
+#imageOptions input[type="radio"]:checked + #excessfoodopt{
+    box-shadow: 2px 2px 8px #86dc3d;
 }
-#addsubmit{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 7%;
-    padding-right: 7%;
-    transform-style: preserve-3d;
-    transition: all 0.5s ease;
+#imageOptions input[type="radio"]:checked + #leftoverfoodopt{
+    box-shadow: 2px 2px 8px #B8860B;
+}
+#imageOptions{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 20dvw;
+}
+#page1{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#slidenavigator{
+    display: flex;
+    margin-top: 4%;
+    align-items: center;
+    justify-content: space-around;
+    width: 30dvw;
+}
+#slidenavigator button{
     background-color: #86dc3d;
-    border-radius: 2rem;
-}
-#addsubmit:hover{
-    box-shadow: 2px 2px #000;
-}
-#custommessage{
-    width: 25dvw;
     padding: 2%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: thin solid #4caf50; /* Green line at the bottom */
-    display: inline-block;
-    color: #0000009e;
+    border-radius: 1rem;
 }
-
 /* request food */
 #vegetarian{
     width: 20px;

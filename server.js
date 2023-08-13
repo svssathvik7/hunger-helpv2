@@ -93,7 +93,7 @@ async function getMembersCounts(){
     return [volunteercnt,membercnt];
 }
 async function getDonationCount(){
-    var numdonations = Fooddb.countDocuments({quantity:3});
+    var numdonations = Fooddb.countDocuments({});
     return numdonations;
 }
 var statBoxData = [

@@ -4,50 +4,23 @@
     <p id="addfooddisclaimer">"Please ensure that the food you donate is fresh and safe. Both hunger and consuming bad food can have serious consequences. Let's work together to provide nourishment and prevent harm."
     </p>
   </div>
-  <form id="addfoodform" action="/addFood" method="post">
-    <div id="slider">
-      
+  <div id="addfoodslider">
+    <div id="page1">
+      <h4>Food Type</h4>
+      <div id="imageOptions">
+        <label>
+          <input type="radio" name="option" value="excess">
+          <img class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
+        </label>
+        <label>
+          <input type="radio" name="option" value="left-over">
+          <img class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
+        </label>
+      </div>
     </div>
-  </form>
-  <form id="addfoodform" action="/addFood" method="post">
-      <div>
-        <label for="food-type">Food Type:</label>
-        <div class="adddrop-container">
-            <select class="adddropdown" id="foodtype" name="foodtype">
-              <option value="vegetarian">Vegetarian</option>
-              <option value="non-vegetarian">Non-Vegetarian</option>
-            </select>
-        </div>
-      </div>
-      <div>
-        <label for="quality">Quality:</label>
-        <div class="adddrop-container">
-            <select class="adddropdown" id="quality" name="quality">
-              <option value="excess">Excess</option>
-              <option value="left-over">Left-over</option>
-            </select>
-        </div>
-      </div>
-      <div>
-        <label for="quantity">Quantity (in kgs):</label>
-        <input type="number" id="quantity" name="quantity" step="0.125" min="0" required placeholder="00.00">
-      </div>
-      <div>
-        <label for="contact-number">Contact Number:</label>
-        <input type="number" id="contactnumber" name="contactnumber"pattern="[0-9]{10}"  required placeholder="XXXXXXXXXX">
-      </div>
-      <div>
-        <label for="organisation">Organization:</label>
-        <input type="text" id="organisation" name="organisation" required placeholder="XYZ">
-      </div>
-      <div>
-        <label for="expiry">Expected Expiry:</label>
-        <input type="text" id="expiry" name="expiry" placeholder="00(min)">
-      </div>
-      <div>
-        <label for="custom-message">Custom Message:</label>
-        <textarea id="custommessage" name="custommessage" rows="1"></textarea>
-      </div>
-      <button type="submit" id="addsubmit">Add</button>
-    </form>      
+    <div id="slidenavigator">
+      <button>Back</button>
+      <button>Next</button>
+    </div>
+  </div>      
 </div>
