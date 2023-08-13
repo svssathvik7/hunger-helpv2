@@ -898,6 +898,7 @@ footer{
     }
     #agendalist li{
         margin: 1%;
+        list-style:disc;
     }
     #statbar{
         display: flex;
@@ -980,6 +981,12 @@ footer{
     }
     .availcard{
         width: 65dvw;
+    }
+    #vline{
+        display: none;
+    }
+    #sociallogins{
+        display: none;
     }
     #underconstruction{
         position: absolute;
