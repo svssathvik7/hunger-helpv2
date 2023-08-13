@@ -122,7 +122,7 @@ footer{
     justify-content: center;
     animation: try 0.3s ease;
     box-shadow: 2px 2px 8px #013220;
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 #feedback-block img{
     width: 4dvw;
@@ -284,9 +284,7 @@ footer{
   }
   #close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
+    right: 2%;
     background: transparent;
     border: none;
     font-size: 18px;

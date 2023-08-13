@@ -22,8 +22,8 @@
 <script>
   function updateCountdownTimer(expiryTime, itemId) {
     var spanElement = document.querySelector(`[data-item-id="${itemId}"]`);
-    var expiryDate = new Date(expiryTime);
-    var now = new Date(new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+    var expiryDate = expiryTime;
+    var now = new Date().getTime();
     var timeDiff = expiryDate - now;
     
     if (timeDiff <= 0) {
