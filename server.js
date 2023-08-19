@@ -93,7 +93,7 @@ async function getMembersCounts(){
     return [volunteercnt,membercnt];
 }
 async function getDonationCount(){
-    var numdonations = Fooddb.countDocuments({});
+    var numdonations = await Fooddb.countDocuments({expiry : {$gt:new Date().getTime()}});
     return numdonations;
 }
 var statBoxData = [
@@ -145,10 +145,10 @@ app.get("/",function(req,res)
     var isMobile = browser(req.headers['user-agent']).mobile;
     if(!isMobile)
     {
-        res.render("desktop/pagedevnotice",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+        res.render("desktop/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
     }
     else{
-        res.render("mobile/pagedevnotice",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+        res.render("mobile/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
     }
 });
 
