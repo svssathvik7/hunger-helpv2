@@ -674,6 +674,26 @@ footer{
 .availcard p{
     line-height: 1;
 }
+#reqbtn{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2%;
+    color: white;
+    position: relative;
+    bottom: 3dvh;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+}
+#reqbtn:hover{
+    transform: translateY(5px);
+}
+#reqbtn.vegetarian{
+    background-color: #72d51b;
+}
+#reqbtn.non-vegetarian{
+    background-color: red;
+}
 @keyframes fadepop {
     from{
         transform: scale(0.8);
