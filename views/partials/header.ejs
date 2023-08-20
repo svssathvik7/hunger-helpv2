@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <h1>Hunger Help</h1>
+        <h1 id="togglemode">Hunger Help</h1>
         <div id="buttons">
             <a href="/">Home</a>
             <a href="/donate-food">Donate Food</a>
@@ -30,4 +30,7 @@
 </body>
 </html>
 <script>
+    document.getElementById("togglemode").addEventListener("click",()=>{
+        document.body.classList.toggle("dark");
+    });
 </script>
