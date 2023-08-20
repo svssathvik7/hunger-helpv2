@@ -72,11 +72,44 @@ const DonateSchema = new mongoose.Schema({
     }
 });
 
-
+const BiogasSchema = new mongoose.Schema({
+    quantity : {
+        type : Number,
+        required : true
+    },
+    organisation : {
+        type : String,
+        required : true
+    }
+});
 
 
 var Memberdb = new mongoose.model("members",MemberSchema);
 var Fooddb = new mongoose.model("food",DonateSchema);
+var Biogasdb = new mongoose.model("biogas",BiogasSchema);
+
+// I am removing expired items and adding to biogas
+
+const currentTime = new Date().getTime();
+
+Fooddb.find({ expiry: { $lte: currentTime } })
+  .then(expiredFoodItems => {
+    // Move expired food items to Biogasdb
+    return Biogasdb.insertMany(expiredFoodItems)
+      .then(insertedItems => {
+        console.log(`${insertedItems.length} items added to Biogasdb.`);
+
+        // Remove expired food items from Fooddb
+        return Fooddb.deleteMany({ _id: { $in: expiredFoodItems.map(item => item._id) } })
+          .then(deleteResult => {
+            console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
+          });
+      });
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
 // Home page code
 
 const title_txt = "Welcome to HungerHelp!";
