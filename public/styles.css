@@ -1103,6 +1103,44 @@ footer{
         width: fit-content;
         height: fit-content;
     }
+    #addfoodimg{
+        display: none;
+    }
+    #addfoodcont{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column-reverse;
+        height: 65dvh;
+        width: fit-content;
+        position: absolute;
+        top: 0;left: 0;bottom: 0;right: 0;
+        margin: auto;
+    }
+    #addfoodslider{
+        width: 60dvw;
+        height: 30dvh;
+    }
+    #addfoodchild{
+        height: 5dvh;
+    }
+    #addfooddisclaimer{
+        height: 10dvh;
+        width: 85dvw;
+    }
+    .slide1img{
+        width: 15dvw;
+    }
+    #imageOptions{
+        width: 50dvw;
+    }
+    #slidenavigator{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        align-self: center;
+        width: 40dvw;
+    }
 }
 @keyframes dropdown {
     from{

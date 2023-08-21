@@ -8,7 +8,7 @@ const browser = require('browser-detect');
 const md5 = require("md5");
 var isLoggedIn = false;
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-var devtxt = months[new Date().getMonth()]+" "+new Date().getUTCDate()+" - Mobile version updated :)\nWorking on security ";
+var devtxt = "Aug 21 - Counters updated!";
 var errmsg = "";
 const mongoose = require("mongoose");
 const { isErrored } = require("stream");
@@ -129,14 +129,27 @@ async function getDonationCount(){
     var numdonations = await Fooddb.countDocuments({expiry : {$gt:new Date().getTime()}});
     return numdonations;
 }
+async function getBiogasCount(){
+    var numbio = await Biogasdb.countDocuments({});
+    return numbio;
+}
 var statBoxData = [
     {
         key : 1,
-        alt : "donations",
-        src : "/donatepic.svg",
-        desc : "Donations",
-        count : getDonationCount().then((donationCount)=>{
-            statBoxData[0].count = donationCount;
+        alt : "biogas",
+        src : "/bio-gas.svg",
+        desc : "Biogas",
+        count : Biogasdb.aggregate([
+            {
+                $group : {
+                    _id : null,
+                    totalQuantity: { $sum: '$quantity' }
+                }
+            }
+        ]).then((result)=>{
+            var biocount = result[0].totalQuantity;
+            biocount = biocount*0.03;
+            statBoxData[0].count = biocount.toPrecision(2)+"m³";
         })
     },
     {
@@ -161,7 +174,19 @@ var statBoxData = [
         alt : "love image",
         src : "/heart.svg",
         desc : "Fed",
-        count : 300
+        count : 0
+    },
+    {
+        key : 5,
+        alt : "donations",
+        src : "/donatepic.svg",
+        desc : "Donations",
+        count : getDonationCount().then((donationCount)=>{
+            statBoxData[4].count = donationCount;
+            getBiogasCount().then((biocount)=>{
+                statBoxData[4].count += biocount;
+            });
+        })
     }
 ];
 const aside_img = [
@@ -293,7 +318,7 @@ app.post("/addFood",(req,res)=>{
     });
     try{
         data.save();
-        statBoxData[0].count = statBoxData[0].count+1;
+        statBoxData[4].count = statBoxData[4].count+1;
     }
     catch(error)
     {
