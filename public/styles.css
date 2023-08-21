@@ -808,13 +808,13 @@ footer{
 .btn-link{
     color: #4caf50;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 200;
 }
 .card{
     border: none;
 }
 .btn-link:hover{
-    font-weight: 500;
+    font-weight: 300;
     color: #4caf50;
 }
 .btn-link:focus{
@@ -869,7 +869,6 @@ footer{
     transform: translate(0);
     z-index: 5;
 }
-
 /* Stats */
 #statcont{
     display: flex;
@@ -1113,30 +1112,13 @@ footer{
 
 
 
-/* Hide the vertical scrollbar */
-body {
-overflow-y: hidden;
+/* scrollbar in windows */
+.availcard::-webkit-scrollbar{
+    display: none;
 }
-
-/* For Internet Explorer */
-body::-webkit-scrollbar {
-width: 0.1em;
+#available::-webkit-scrollbar{
+    display: none;
 }
-
-body::-webkit-scrollbar-track {
-background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-background: none;
-}
-
-/* For Firefox */
-body {
-scrollbar-width: none;
-}
-
-/* For Microsoft Edge (Chromium-based) */
-body {
--ms-overflow-style: none;
+#reqfood_body::-webkit-scrollbar{
+    display: none;
 }

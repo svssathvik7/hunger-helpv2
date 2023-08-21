@@ -100,10 +100,10 @@ Fooddb.find({ expiry: { $lte: currentTime } })
         console.log(`${insertedItems.length} items added to Biogasdb.`);
 
         // Remove expired food items from Fooddb
-        return Fooddb.deleteMany({ _id: { $in: expiredFoodItems.map(item => item._id) } })
-          .then(deleteResult => {
-            console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
-          });
+    return Fooddb.deleteMany({ _id: { $in: expiredFoodItems.map(item => item._id) } })
+        .then(deleteResult => {
+        console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
+        });
       });
   })
   .catch(err => {
