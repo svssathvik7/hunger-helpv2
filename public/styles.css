@@ -1013,10 +1013,12 @@ footer{
         align-items: center;
         justify-content: space-around;
         flex-wrap: wrap;
-        width: 70dvw;
+        width: 65dvw;
         height: 20dvh;
         position: absolute;
         bottom: 10dvh;
+        flex-direction: row-reverse;
+        gap: 20px;
     }
     #simg{
         width: 10dvw;

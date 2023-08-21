@@ -149,7 +149,7 @@ var statBoxData = [
         ]).then((result)=>{
             var biocount = result[0].totalQuantity;
             biocount = biocount*0.03;
-            statBoxData[0].count = biocount.toPrecision(2)+"m³";
+            statBoxData[0].count = biocount.toPrecision(3)+"m³";
         })
     },
     {
