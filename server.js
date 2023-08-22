@@ -88,27 +88,7 @@ var Memberdb = new mongoose.model("members",MemberSchema);
 var Fooddb = new mongoose.model("food",DonateSchema);
 var Biogasdb = new mongoose.model("biogas",BiogasSchema);
 
-// I am removing expired items and adding to biogas
-
 const currentTime = new Date().getTime();
-
-Fooddb.find({ expiry: { $lte: currentTime } })
-  .then(expiredFoodItems => {
-    // Move expired food items to Biogasdb
-    return Biogasdb.insertMany(expiredFoodItems)
-      .then(insertedItems => {
-        console.log(`${insertedItems.length} items added to Biogasdb.`);
-
-        // Remove expired food items from Fooddb
-    return Fooddb.deleteMany({ _id: { $in: expiredFoodItems.map(item => item._id) } })
-        .then(deleteResult => {
-        console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
-        });
-      });
-  })
-  .catch(err => {
-    console.error(err);
-  });
 
 // Home page code
 
@@ -121,8 +101,6 @@ var membercnt=0;
 async function getMembersCounts(){
     volunteercnt = await Memberdb.countDocuments({role:"volunteer"});
     membercnt = await Memberdb.countDocuments({role:"member"});
-    console.log(volunteercnt);
-    console.log(membercnt);
     return [volunteercnt,membercnt];
 }
 async function getDonationCount(){
@@ -196,8 +174,37 @@ const aside_img = [
     "https://cdn1.i-scmp.com/sites/default/files/styles/1200x800/public/2013/10/16/4541f88991b90cae31fe995a28027086.jpg?itok=w_-PQMW2",
     "https://static.vecteezy.com/system/resources/previews/013/926/882/original/biofuel-life-cycle-of-natural-materials-and-plants-with-green-barrels-or-biogas-production-energy-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg"
 ];
-app.get("/",function(req,res)
+app.get("/",async(req,res)=>
 {
+    Fooddb.find({ expiry: { $lte: currentTime } })
+  .then(expiredFoodItems => {
+    // Move expired food items to Biogasdb
+    return Biogasdb.insertMany(expiredFoodItems)
+      .then(insertedItems => {
+        console.log(`${insertedItems.length} items added to Biogasdb.`);
+
+        // Remove expired food items from Fooddb
+    return Fooddb.deleteMany({ _id: { $in: expiredFoodItems.map(item => item._id) } })
+        .then(deleteResult => {
+        console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
+        });
+      });
+  })
+  .catch(err => {
+    console.error(err);
+  });
+    await Biogasdb.aggregate([
+        {
+            $group : {
+                _id : null,
+                totalQuantity: { $sum: '$quantity' }
+            }
+        }
+    ]).then((result)=>{
+        var biocount = result[0].totalQuantity;
+        biocount = biocount*0.03;
+        statBoxData[0].count = biocount.toPrecision(3)+"m³";
+    });
     isLoggedIn = false;
     errmsg = "";
     var isMobile = browser(req.headers['user-agent']).mobile;
@@ -304,28 +311,30 @@ app.post("/login",async(req,res)=>{
         console.log("error logging in");
     }
 });
-app.post("/addFood",(req,res)=>{
+app.post("/addFood", async (req, res) => {
     var expirationTimestamp = new Date().getTime();
-    var expirationTime = expirationTimestamp + (req.body.expiry)*1000*60;
+    var expirationTime = expirationTimestamp + req.body.expiry * 1000 * 60;
+
     var data = new Fooddb({
-        ftype : req.body.foodtype,
-        quality : req.body.quality,
-        quantity : parseInt(req.body.quantity),
-        contact : req.body.contactnumber,
-        organisation : req.body.organisation,
-        expiry : expirationTime,
-        message : req.body.custommessage
+        ftype: req.body.foodtype,
+        quality: req.body.quality,
+        quantity: parseInt(req.body.quantity),
+        contact: req.body.contactnumber,
+        organisation: req.body.organisation,
+        expiry: expirationTime,
+        message: req.body.custommessage,
     });
-    try{
-        data.save();
-        statBoxData[4].count = statBoxData[4].count+1;
-    }
-    catch(error)
-    {
+
+    try {
+        await data.save();
+        statBoxData[4].count = statBoxData[4].count + 1;
+        res.redirect("/donate-food");
+    } catch (error) {
         console.log(error);
+        res.status(500).send("An error occurred while adding food entry.");
     }
-    res.redirect("/donate-food");
 });
+
 
 
 // Request food
