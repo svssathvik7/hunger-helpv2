@@ -732,57 +732,72 @@ footer{
     z-index: -1;
     overflow: hidden;
 }
-.circles{
-    border-radius: 100%;
-    background-color: #86dc3d;
-    position: relative;
-}
-@keyframes try {
-    from{
-        transform: translate(-20%);
-    }
-}
-@keyframes try2 {
-    from{
-        transform: translate(20%);
-    }
-}
 #left-small{
-    width: 12dvw;
+    width: 15dvw;
     animation: try 0.8s ease;
-    height: 12dvw;
+    height: 15dvw;
+    position: absolute;
     left: 10%;
-    bottom: 8dvh;
+    top: 5dvh;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
 #left-mini{
-    width: 20px;
-    height: 20px;
-    left: 35%;
+    width:2dvw;
+    height: 2dvw;
+    position: absolute;
+    left: 40dvw;
     bottom: 8%;
-    animation: try 0.8s ease;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
 #right-big{
     width: 35dvw;
     height: 35dvw;
+    position: absolute;
     bottom: 65%;
     left: 50%;
-    animation: try2 0.8s ease;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
 #right-mini{
     width: 15px;
     height: 15px;
+    position: absolute;
     left: 90%;
     bottom: 80%;
-    animation: try2 0.8s ease;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
 #rbottom-small{
     width: 175px;
     height: 175px;
     left: 90%;
+    position: absolute;
     bottom: 16dvh;
-    animation: try2 0.8s ease;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
 }
-
+/* Define the animation keyframes */
+@keyframes blobAnimation {
+    0% {
+      d: path("M418.5,345Q402,440,302.5,449Q203,458,122,404.5Q41,351,53.5,256Q66,161,133.5,98Q201,35,286,66.5Q371,98,403,174Q435,250,418.5,345Z");
+    }
+    50% {
+      d: path("M428.5,336Q422,422,336,442.5Q250,463,168,438.5Q86,414,66,332Q46,250,70,172Q94,94,172,75Q250,56,311.5,91.5Q373,127,404,188.5Q435,250,428.5,336Z");
+    }
+    100% {
+      d: path("M403.5,355.5Q372,461,257.5,448Q143,435,80.5,342.5Q18,250,83,161.5Q148,73,254,66Q360,59,397.5,154.5Q435,250,403.5,355.5Z");
+    }
+  }
+  
+  /* Apply the animation to the #blob element */
+  #blob {
+    animation: blobAnimation 5s infinite; /* Adjust the animation duration and iteration count as needed */
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
+  }
+  
 
 /* BOOTSTRAP */
 .card-header{
