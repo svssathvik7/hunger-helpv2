@@ -785,6 +785,9 @@ footer{
 
 
 /* BOOTSTRAP */
+.card-header{
+    padding: 0;margin: 0;
+}
 #about_page{
     display: flex;
     align-items: center;
