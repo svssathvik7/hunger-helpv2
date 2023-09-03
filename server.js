@@ -93,7 +93,13 @@ const currentTime = new Date().getTime();
 // Home page code
 
 const title_txt = "Welcome to HungerHelp!";
-const desc_txt = "Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.";
+const desc_txt = [
+    "Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.",
+    "Together, we are joining forces to combat hunger and make a positive impact in our community. At HungerHelp, we foster connections between local food establishments, food banks, shelters, and individuals in need, offering a seamless platform to reduce food waste and address food insecurity. With our user-friendly web application, you can effortlessly donate surplus food, volunteer your time, and help ensure that no one goes hungry. Join us in this meaningful mission to improve the lives of others.",
+    "Working together, we are addressing hunger and creating change in our community. At HungerHelp, we bring together local food establishments, food banks, shelters, and those in need, establishing an efficient platform to combat food waste and tackle food insecurity. Using our intuitive web application, you can easily contribute surplus food, volunteer your time, and play a vital role in ensuring that everyone has enough to eat. Join us in this important endeavor to make a positive difference in the lives of many.",
+    "Collaboratively, we are taking on the challenge of hunger and making a significant impact in our community. HungerHelp connects local food establishments, food banks, shelters, and individuals in need, providing a streamlined platform to minimize food waste and address food insecurity. Through our accessible web application, you can conveniently donate surplus food, volunteer your time, and help ensure that no one experiences hunger. Join us in this meaningful cause to positively transform lives.",
+    "In unity, we are combatting hunger and bringing about positive change in our community. HungerHelp facilitates connections between local food establishments, food banks, shelters, and those in need, creating an integrated platform to reduce food waste and combat food insecurity. Utilize our user-friendly web application to easily contribute surplus food, offer your time as a volunteer, and contribute to the cause of ensuring that no one goes without food. Join us in this purposeful mission to impact lives for the better."
+];
 const emphasis_txt = "Together, we can fight hunger, one meal at a time.";
 const curFeedbackState = true;
 var volunteercnt=0;
@@ -210,10 +216,10 @@ app.get("/",async(req,res)=>
     var isMobile = browser(req.headers['user-agent']).mobile;
     if(!isMobile)
     {
-        res.render("desktop/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+        res.render("desktop/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt[[Math.floor(Math.random()*(desc_txt.length))]],emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
     }
     else{
-        res.render("mobile/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt,emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
+        res.render("mobile/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt[[Math.floor(Math.random()*(desc_txt.length))]],emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
     }
 });
 

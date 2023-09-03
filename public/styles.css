@@ -12,6 +12,7 @@
 }
 img{
     user-select: none;
+    z-index: 2;
 }
 #hamburger{
     display: none;
@@ -178,6 +179,7 @@ footer{
     flex-direction: row-reverse;
     backdrop-filter: blue(10px);
     background: transparent;
+    mix-blend-mode: darken;
 }
 #signupbox{
     width: fit-content;
@@ -449,13 +451,15 @@ footer{
 }
 #addfoodimg{
     width: 12dvw;
+    mix-blend-mode: darken;
 }
 #addfoodchild{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: column;
     width: 40dvw;
+    height: 40dvh;
 }
 #addfoodslider{
     width: 25dvw;
