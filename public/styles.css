@@ -157,6 +157,14 @@ footer{
 }
 
 /* Join page */
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    mix-blend-mode:darken;
+    padding: 25px;
+}
 #signuppage{
     display: flex;
     align-items: center;
@@ -778,8 +786,46 @@ footer{
     transition: all 0.8s ease;
     transform-style: preserve-3d;
 }
-    
-
+.bg-dotsl{
+    animation: slowshowl 0.3s ease;
+}
+.bg-dotsr{
+    animation: slowshowr 0.3s ease;
+}
+@keyframes slowshowl {
+    0%{
+        transform: translateX(-10px)
+    }
+    25%{
+        transform: translateX(-6px)
+    }
+    50%{
+        transform: translateX(-4px);
+    }
+    75%{
+        transform: translateX(-2px)
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+@keyframes slowshowr {
+    0%{
+        transform: translateX(10px)
+    }
+    25%{
+        transform: translateX(6px)
+    }
+    50%{
+        transform: translateX(4px);
+    }
+    75%{
+        transform: translateX(2px)
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
 /* BOOTSTRAP */
 .card-header{
     padding: 0;margin: 0;
