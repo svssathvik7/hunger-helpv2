@@ -1,6 +1,6 @@
 // Program imports
 require("dotenv").config();
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 const es = require("express");
 const app = es();
 const bp = require("body-parser");
