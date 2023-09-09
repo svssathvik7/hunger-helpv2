@@ -365,7 +365,7 @@ app.get("/statistics",(req,res)=>{
         res.render("mobile/stats",{predictionDone:false});
     }
     else{
-        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true});
+        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:false});
     }
 });
 
@@ -399,10 +399,19 @@ app.post("/callbiogasprediction",async(req,res)=>{
             throw new Error('Error from Flask server');
         }
 
-        const data = await response.json();
-
+        var predictedData = await response.json();
+        predictedData = parseFloat(predictedData.estimation);
+        predictedData = predictedData/10;
+        console.log(predictedData);
         // Send the data received from the Flask server as a response
-        res.json(data);
+        var isMobile = browserDetect(req.headers['user-agent']).mobile;
+        if(isMobile)
+        {
+            res.render("mobile/stats",{predictionDone:true});
+        }
+        else{
+            res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true,predicteddata:predictedData});
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });

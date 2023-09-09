@@ -974,6 +974,17 @@ footer{
     border-radius: 1rem;
     cursor: pointer;
 }
+#predictionbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.custompredictimg{
+    width: 8dvw;
+    padding: 2%;
+    margin: 2%;
+}
 
 @media (max-height:649px) {
     #statbar{
