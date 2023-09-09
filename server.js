@@ -1,22 +1,23 @@
 // Program imports
-require("dotenv").config();
-const fetch = require('node-fetch').default;
-const es = require("express");
-const app = es();
-const bp = require("body-parser");
-const fs = require("fs");
-const browser = require('browser-detect');
-const md5 = require("md5");
+import dotenv from "dotenv";
+dotenv.config();
+import fetch from "node-fetch";
+import express from "express";
+const app = express();
+import bodyParser from "body-parser";
+import * as fs from "fs";
+import browserDetect from "browser-detect";
+import md5 from "md5";
 var isLoggedIn = false;
 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 var devtxt = "Aug 21 - Counters updated!";
 var errmsg = "";
-const mongoose = require("mongoose");
-const { isErrored } = require("stream");
+import mongoose from "mongoose";
+import { isErrored } from "stream";
 var availableFood = [];
-app.use(bp.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
-app.use(es.static("public"));
+app.use(express.static("public"));
 
 
 // Database connection
@@ -214,7 +215,7 @@ app.get("/",async(req,res)=>
     });
     isLoggedIn = false;
     errmsg = "";
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(!isMobile)
     {
         res.render("desktop/index",{cdevmsg:devtxt,titleTxt:title_txt,descTxt:desc_txt[[Math.floor(Math.random()*(desc_txt.length))]],emphasis:emphasis_txt,obj:statBoxData,imgsrc:aside_img[[Math.floor(Math.random()*(aside_img.length))]]});
@@ -226,7 +227,7 @@ app.get("/",async(req,res)=>
 
 // Join page
 app.get("/register",function(req,res){
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
         res.render("mobile/register");
@@ -280,7 +281,7 @@ app.post("/newuser",async(req,res)=>{
 
 // Donate food
 app.get("/donate-food",(req,res)=>{
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
         res.render("mobile/donate_food",{loginState:isLoggedIn,errortxt:errmsg});
@@ -348,7 +349,7 @@ app.post("/addFood", async (req, res) => {
 app.get("/request-food",async(req,res)=>{
     var availableFood = [];
     var availableFood = await Fooddb.find({});
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
         res.render("mobile/req_food",{loginState:isLoggedIn,errortxt:errmsg,data:availableFood});
@@ -359,7 +360,7 @@ app.get("/request-food",async(req,res)=>{
 });
 
 app.get("/statistics",(req,res)=>{
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
         res.render("mobile/stats",{predictionDone:false});
@@ -370,7 +371,7 @@ app.get("/statistics",(req,res)=>{
 });
 
 app.get("/about",(req,res)=>{
-    var isMobile = browser(req.headers['user-agent']).mobile;
+    var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
         res.render("mobile/about");
