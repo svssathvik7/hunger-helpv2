@@ -361,10 +361,10 @@ app.get("/statistics",(req,res)=>{
     var isMobile = browser(req.headers['user-agent']).mobile;
     if(isMobile)
     {
-        res.render("mobile/stats");
-    }    
+        res.render("mobile/stats",{predictionDone:false});
+    }
     else{
-        res.render("desktop/stats",{cdevmsg:devtxt});
+        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true});
     }
 });
 
@@ -377,6 +377,24 @@ app.get("/about",(req,res)=>{
     else{
         res.render("desktop/about",{cdevmsg:devtxt});
     }
+});
+
+app.post("/callbiogasprediction",(req,res)=>{
+    console.log("Predict button clicked!");
+    var biogasqty = req.body.biogasqty;
+    var url = "http://127.0.0.1:5000/getprediction";
+    fetch(url,{
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({food_waste: parseFloat(biogasqty)})
+    },
+    (data,status)=>{
+        console.log(data);
+        console.log(status);
+    }
+    );
 });
 
 app.listen(3000,()=>{

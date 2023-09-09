@@ -1,8 +1,22 @@
 <%- include("../partials/header"); -%>
 <%- include("../components/feedback"); -%>
 <%- include("../components/devmsg"); -%>
-<div id="statcont">
-    Page under development
+<div id="predictionbots">
+    <div id="biogasbot">
+        <% if(predictionDone){ %>
+            <div id="displaybiogasbot">
+                <h4>BioGas Predictor</h4>
+                <form id="biogasform" method="post" action="/callbiogasprediction">
+                    <input placeholder="Estimated waste(kgs)" type="number" name="biogasqty" id="biogasqty">
+                    <button type="submit" id="predictbtn">Predict</button>
+                </form>
+            </div>
+        <%} else{%>
+            <div>
+                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, possimus?</h1>
+            </div>
+        <%}%>
+    </div>
 </div>
 <%- include("../partials/footer"); -%>
 <%- include("../partials/bg"); -%>
