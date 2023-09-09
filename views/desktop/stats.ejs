@@ -16,12 +16,12 @@
             <div id="predictionbox">
                 <% if(predicteddata == 0){ %>
                     <h5>You need mass to produce energy :)</h5>
-                <%}else if(predicteddata < 0.5 && predicteddata > 0){ %>
+                <%}else if(predicteddata <= 0.5 && predicteddata > 0){ %>
                     <img src="/ricksaw.svg" alt="genimg" class="custompredictimg">
                     <h5>That amount of food could produce <%= predicteddata %>m³ of Methane</h5>
-                <% }else{ %>
-                    <img src="/bio-gas.svg" alt="genimg" class="custompredictimg">
-                    <h5>That amount of food could produce <%= predicteddata %></h5>
+                <% }else if(predicteddata > 0.5 && predicteddata <= 1.5){ %>
+                    <img style="width: 15dvw;" src="/indian-mother-making-sweets.svg" alt="genimg" class="custompredictimg">
+                    <h5>That amount of food could produce <%= predicteddata %>m³ of Methane</h5>
                 <%}%>
             </div>
         <%}%>
