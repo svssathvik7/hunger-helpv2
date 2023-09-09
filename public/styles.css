@@ -938,7 +938,7 @@ footer{
     border-radius: 100%;
 }
 #biogasbot{
-    width: 25dvw;
+    width: 20dvw;
     height: fit-content;
     background-color: #0f062a;
     color: white;
@@ -984,6 +984,11 @@ footer{
     width: 8dvw;
     padding: 2%;
     margin: 2%;
+}
+.features{
+    opacity: 30%;
+    background-color: #000;
+    text-align: center;
 }
 
 @media (max-height:649px) {
