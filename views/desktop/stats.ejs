@@ -7,7 +7,7 @@
             <div id="displaybiogasbot">
                 <h4>BioGas Predictor</h4>
                 <form id="biogasform" method="post" action="/callbiogasprediction">
-                    <input placeholder="Estimated waste(kgs)" type="number" name="biogasqty" id="biogasqty">
+                    <input placeholder="Estimated waste(kgs)" type="number" name="biogasqty" min="0" id="biogasqty">
                     <button type="submit" id="predictbtn">Predict</button>
                 </form>
             </div>

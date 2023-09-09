@@ -382,7 +382,7 @@ app.get("/about",(req,res)=>{
 app.post("/callbiogasprediction",(req,res)=>{
     console.log("Predict button clicked!");
     var biogasqty = req.body.biogasqty;
-    var url = "http://127.0.0.1:5000/getprediction";
+    var url = "https://sathvik-biogas-predictor.onrender.com/getprediction";
     fetch(url,{
         method : 'POST',
         headers: {
