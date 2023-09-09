@@ -379,22 +379,32 @@ app.get("/about",(req,res)=>{
     }
 });
 
-app.post("/callbiogasprediction",(req,res)=>{
+app.post("/callbiogasprediction",async(req,res)=>{
     console.log("Predict button clicked!");
     var biogasqty = req.body.biogasqty;
     var url = "https://sathvik-biogas-predictor.onrender.com/getprediction";
-    fetch(url,{
-        method : 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({food_waste: parseFloat(biogasqty)})
-    },
-    (data,status)=>{
-        console.log(data);
-        console.log(status);
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ food_waste: parseFloat(biogasqty) })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error from Flask server');
+        }
+
+        const data = await response.json();
+
+        // Send the data received from the Flask server as a response
+        res.json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-    );
+
 });
 
 app.listen(3000,()=>{
