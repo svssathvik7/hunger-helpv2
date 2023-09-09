@@ -1,5 +1,6 @@
 // Program imports
 require("dotenv").config();
+const fetch = require('node-fetch');
 const es = require("express");
 const app = es();
 const bp = require("body-parser");
@@ -378,6 +379,8 @@ app.get("/about",(req,res)=>{
         res.render("desktop/about",{cdevmsg:devtxt});
     }
 });
+
+
 
 app.post("/callbiogasprediction",async(req,res)=>{
     console.log("Predict button clicked!");

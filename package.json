@@ -20,6 +20,7 @@
     "md5": "^2.3.0",
     "mongoose": "^7.3.4",
     "mongoose-encryption": "^2.1.2",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.3",
     "openai": "^4.0.1",
     "passport": "^0.6.0",

@@ -3,8 +3,8 @@
 <%- include("../components/devmsg"); -%>
 <div id="predictionbots">
     <div id="biogasbot">
-        <img alt="biogaspic" id="biogasbotpic" src="/biogas.svg">
         <% if(predictionDone){ %>
+            <img alt="biogaspic" id="biogasbotpic" src="/biogas.svg">
             <div id="displaybiogasbot">
                 <h4>BioGas Predictor</h4>
                 <form id="biogasform" method="post" action="/callbiogasprediction">
