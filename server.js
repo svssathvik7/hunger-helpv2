@@ -365,7 +365,7 @@ app.get("/statistics",(req,res)=>{
         res.render("mobile/stats",{predictionDone:false});
     }
     else{
-        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:false});
+        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:false,predictionDone1:false,predictionDone2:false});
     }
 });
 
@@ -402,6 +402,7 @@ app.post("/callbiogasprediction",async(req,res)=>{
         var predictedData = await response.json();
         predictedData = parseFloat(predictedData.estimation);
         predictedData = predictedData/10;
+        predictedData = predictedData.toFixed(2);
         console.log(predictedData);
         // Send the data received from the Flask server as a response
         var isMobile = browserDetect(req.headers['user-agent']).mobile;
@@ -410,7 +411,7 @@ app.post("/callbiogasprediction",async(req,res)=>{
             res.render("mobile/stats",{predictionDone:true});
         }
         else{
-            res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true,predicteddata:predictedData});
+            res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true,predicteddata:predictedData,biomass:biogasqty,predictionDone1:false,predictionDone2:false});
         }
     } catch (error) {
         console.error(error);
