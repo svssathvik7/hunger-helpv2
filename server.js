@@ -19,6 +19,8 @@ app.set("view engine","ejs");
 app.use(express.static("public"));
 
 
+var curryear = new Date().getFullYear();
+
 // Database connection
 mongoose.connect(("mongodb+srv://sathvikcodes:sathvikcodes@cluster0.hyujunf.mongodb.net/?retryWrites=true&w=majority"));
 var db = mongoose.connection;
@@ -362,10 +364,10 @@ app.get("/statistics",(req,res)=>{
     var isMobile = browserDetect(req.headers['user-agent']).mobile;
     if(isMobile)
     {
-        res.render("mobile/stats",{predictionDone:false});
+        res.render("mobile/stats",{predictionDone:false,loginState:isLoggedIn,errortxt:errmsg});
     }
     else{
-        res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:false,predictionDone1:false,predictionDone2:false});
+        res.render("desktop/stats",{loginState:isLoggedIn,errortxt:errmsg,cdevmsg:devtxt,predictionDone:false,predictionDone1:false,predictionDone2:false,year:curryear});
     }
 });
 
@@ -408,16 +410,27 @@ app.post("/callbiogasprediction",async(req,res)=>{
         var isMobile = browserDetect(req.headers['user-agent']).mobile;
         if(isMobile)
         {
-            res.render("mobile/stats",{predictionDone:true});
+            res.render("mobile/stats",{loginState:isLoggedIn,errortxt:errmsg,predictionDone:true});
         }
         else{
-            res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true,predicteddata:predictedData,biomass:biogasqty,predictionDone1:false,predictionDone2:false});
+            res.render("desktop/stats",{cdevmsg:devtxt,predictionDone:true,predicteddata:predictedData,biomass:biogasqty,predictionDone1:false,predictionDone2:false,year:curryear,loginState:isLoggedIn,errortxt:errmsg});
         }
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
+});
 
+
+app.post("/gethungerstatsprediction",(req,res)=>{
+    var optselecteddata = req.body.dateRange;
+    const currstatdata = {
+        "2023" : "<iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>",
+        "thisMonth" : "<iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>",
+        "thisWeek" : "<iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>",
+        "today" : "<iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>"
+    }
+    res.send(currstatdata[optselecteddata]);
 });
 
 app.listen(3000,()=>{
