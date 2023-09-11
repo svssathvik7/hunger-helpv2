@@ -2,21 +2,21 @@
   <h2>Available :</h2>
   <div id="available">
     <% data.forEach((item) => { %>
-      <div class="availcard">
-        <h4>Quality : <%= item.quality %></h4>
-        <p>Available(kg) : <%= item.quantity %></p>
-        <p>Offered by <%= item.organisation %></p>
-        <p>Contact : <%= item.contact %></p>
-        <p>
-          <span id="innerspan" class="expiryTime" data-item-id="<%= item._id %>" data-expiry="<%= item.expiry %>">
-            
-          </span>
-        </p>
-        <button class="<%= item.ftype %>" id="reqbtn">Request</button>
-        <!-- <div id="<%= item.ftype %>">
-          <div class="vnv"></div>
-        </div> -->
-      </div>
+      <form id="dummyform" method="post" action="/foodrequest">
+        <div class="availcard">
+          <input class="cardidvalue" name="cardid" value=<%= item.id %>>
+          <h4>Quality : <%= item.quality %></h4>
+          <p>Available(kg) : <%= item.quantity %></p>
+          <p>Offered by <%= item.organisation %></p>
+          <p>Contact : <%= item.contact %></p>
+          <p>
+            <span id="innerspan" class="expiryTime" data-item-id="<%= item._id %>" data-expiry="<%= item.expiry %>">
+              
+            </span>
+          </p>
+          <button type="submit" class="<%= item.ftype %>" id="reqbtn">Request</button>
+        </div>
+      </form>
     <% }) %>
   </div>
 </div>

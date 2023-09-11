@@ -711,6 +711,12 @@ footer{
 #reqbtn.non-vegetarian{
     background-color: red;
 }
+#dummyform{
+    height: fit-content;
+}
+.cardidvalue{
+    display: none;
+}
 @keyframes fadepop {
     from{
         transform: scale(0.8);

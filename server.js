@@ -27,6 +27,7 @@ var db = mongoose.connection;
 db.on("error",()=>console.log("Error in connection to Database"))
 db.once("open",()=>console.log("Connected to Database Successfully"));
 
+
 const MemberSchema = new mongoose.Schema({
     name : {
         type : String,
@@ -51,6 +52,10 @@ const MemberSchema = new mongoose.Schema({
 });
 
 const DonateSchema = new mongoose.Schema({
+    id : {
+        type : String,
+        unique : true
+    },
     ftype : {
         type : String
     },
@@ -90,7 +95,6 @@ const BiogasSchema = new mongoose.Schema({
 var Memberdb = new mongoose.model("members",MemberSchema);
 var Fooddb = new mongoose.model("food",DonateSchema);
 var Biogasdb = new mongoose.model("biogas",BiogasSchema);
-
 const currentTime = new Date().getTime();
 
 // Home page code
@@ -161,7 +165,7 @@ var statBoxData = [
         alt : "love image",
         src : "/heart.svg",
         desc : "Fed",
-        count : 0
+        count : process.env.NUM_FED
     },
     {
         key : 5,
@@ -239,19 +243,6 @@ app.get("/register",function(req,res){
 });
 
 app.post("/submitform",(req,res)=>{
-    var uname = req.body.username;
-    var umail = req.body.usermail;
-    var ufeedback = req.body.userfeedback;
-    const formData = `Username: ${uname}\nUsermail: ${umail}\nUserfeedback: ${ufeedback}\n\n`;
-    
-    // Append the form data to a file
-    fs.appendFile(__dirname+"/views/data.txt", formData, (error) => {
-        if (error) {
-            console.log("Error occurred while writing to file:", error.message);
-            res.redirect("/"); // Redirect to home page or handle the error accordingly
-        }
-        console.log("Form data written to file successfully"); // Redirect to home page or a success page
-    });
     res.redirect("/");
 });
 
@@ -323,8 +314,10 @@ app.post("/login",async(req,res)=>{
 app.post("/addFood", async (req, res) => {
     var expirationTimestamp = new Date().getTime();
     var expirationTime = expirationTimestamp + req.body.expiry * 1000 * 60;
+    var foodid = req.body.organisation + expirationTime;
 
     var data = new Fooddb({
+        id : foodid,
         ftype: req.body.foodtype,
         quality: req.body.quality,
         quantity: parseInt(req.body.quantity),
@@ -431,6 +424,12 @@ app.post("/gethungerstatsprediction",(req,res)=>{
         "today" : "<iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>"
     }
     res.send(currstatdata[optselecteddata]);
+});
+
+app.post("/foodrequest",async(req,res)=>{
+    var qtyfood = await Fooddb.findOne({id:req.body.cardid});
+    res.redirect(req.get('referer'));
+    console.log("Food purchased");
 });
 
 app.listen(3000,()=>{
