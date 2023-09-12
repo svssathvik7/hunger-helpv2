@@ -681,7 +681,6 @@ footer{
     background-color: #EDEADE;
     padding: 4%;
     border-radius: 2rem;
-    animation: fadepop 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -712,7 +711,27 @@ footer{
     background-color: red;
 }
 #dummyform{
+    width: 20dvw; 
     height: fit-content;
+    max-height: 45dvh;
+    margin: 2%;
+    text-align: center;
+    line-height: 1.5;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+    background-color: #EDEADE;
+    padding: 4%;
+    border-radius: 2rem;
+    animation: fadepop 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+#dummyform:hover{
+    transform: scale(0.95);
 }
 .cardidvalue{
     display: none;
