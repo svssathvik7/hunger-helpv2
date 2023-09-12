@@ -686,9 +686,6 @@ footer{
     justify-content: space-around;
     flex-direction: column;
 }
-.availcard:hover{
-    transform: scale(0.95);
-}
 .availcard p{
     line-height: 1;
 }
