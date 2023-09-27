@@ -1314,3 +1314,49 @@ footer{
 #reqfood_body::-webkit-scrollbar{
     display: none;
 }
+
+
+#preloader{
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;
+    margin: auto;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+.preloader-ball{
+    width: 5dvw;
+    height: 5dvw;
+    background-color: red;
+    border-radius: 100%;
+    animation: load 2s ease infinite;
+    box-shadow: inset 4px 4px 8px #000;
+    margin: 1rem;
+}
+#pre1{
+    background-color: rgb(241, 77, 32);
+    animation-delay: -1.5s;
+}
+#pre2{
+    background-color: red;
+    animation-delay: -1s;
+}
+#pre3{
+    background-color: #72d51b;
+    animation-delay: -0.5s;
+}
+@keyframes load {
+    0%,100%,50%{
+        transform: translateY(0);
+    }
+    25%{
+        transform: translateY(15%);
+    }
+    75%{
+        transform: translateY(-15%);
+    }
+}
