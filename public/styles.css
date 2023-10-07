@@ -52,6 +52,9 @@ header{
     animation: none;
     transform: translateY(-2.4dvw);
 }
+header.active{
+    transform: translateY(2.4dvw);
+}
 #buttons{
     display: flex;
     flex-direction: row;
@@ -70,8 +73,43 @@ header{
     border-radius: 2rem;
     transition: all 0.3s ease;/* Smooth transition */
 }
-.nav-link-1:hover, .nav-link-2:hover, .nav-link-3:hover, .nav-link-4:hover, .nav-link-5:hover, .nav-link-6:hover{
+.nav-link-1.active:hover, .nav-link-2.active:hover, .nav-link-3.active:hover, .nav-link-4.active:hover, .nav-link-5.active:hover, .nav-link-6.active:hover{
     transform: translateY(2.5dvw);
+}
+#shutter{
+    position: absolute;
+    right: 0;
+    top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+#shutter-circle{
+    width: 3dvw;
+    height: 3dvw;
+    border-radius: 100%;
+    background-color: rgba(246,211,52,1);
+    position: absolute;
+}
+#shutter-rod{
+    width: 4dvw;
+    height: 1.5dvh;
+    background-color: rgba(246,211,52,1);
+    border-radius: 1rem;
+    position: absolute;
+    transform-origin: bottom;
+    transform: translateX(-1dvw) rotate(20deg);
+    border: thick solid #000;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+#shutter-rod.active{
+    transform: translateX(-1dvw) rotate(-20deg);
+}
+#shutter-rod:hover{
+    transform: translateX(-1.5dvw);
+    cursor: pointer;
 }
 footer{
     position: absolute;

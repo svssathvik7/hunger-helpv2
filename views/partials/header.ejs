@@ -20,18 +20,27 @@
     <header>
         <!-- <h1 id="togglemode">Hunger Help</h1> -->
         <div id="buttons">
-            <a class="nav-link-1" href="/">Home</a>
-            <a class="nav-link-2" href="/donate-food">Donate Food</a>
-            <a class="nav-link-3" href="/request-food">Request Food</a>
-            <a class="nav-link-4" href="/statistics">Technologies</a>
-            <a class="nav-link-5" href="/register">Join</a>
-            <a class="nav-link-6" href="/about">About</a>
+            <a class="nav-link-1 active nav-link-btns" href="/">Home</a>
+            <a class="nav-link-2 active nav-link-btns" href="/donate-food">Donate Food</a>
+            <a class="nav-link-3 active nav-link-btns" href="/request-food">Request Food</a>
+            <a class="nav-link-4 active nav-link-btns" href="/statistics">β-Bots</a>
+            <a class="nav-link-5 active nav-link-btns" href="/register">Join</a>
+            <a class="nav-link-6 active nav-link-btns" href="/about">About</a>
         </div>
     </header>
+    <div id="shutter">
+        <div id="shutter-circle"></div>
+        <div id="shutter-rod"></div>
+    </div>
 </body>
 </html>
 <script>
-    document.getElementById("togglemode").addEventListener("click",()=>{
-        document.body.classList.toggle("dark");
+    document.getElementById("shutter-rod").addEventListener("click",()=>{
+        document.querySelector("header").classList.toggle("active");
+        document.getElementById("shutter-rod").classList.toggle("active");
+        var nav_links = document.getElementsByClassName("nav-link-btns");
+        for(var i=0;i<nav_links.length;i++){
+            nav_links[i].classList.toggle("active");
+        }
     });
 </script>
