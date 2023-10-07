@@ -23,7 +23,7 @@
                     <%}else if(predicteddata <= 0.5 && predicteddata > 0){ %>
                         <img src="/ricksaw.svg" alt="genimg" class="custompredictimg">
                         <h5><%= biomass %>Kg of food could produce <%= predicteddata %>m³ of Methane</h5>
-                    <% }else if(predicteddata > 0.5 && predicteddata <= 1.5){ %>
+                    <% }else{%>
                         <img style="width: 15dvw;" src="/indian-mother-making-sweets.svg" alt="genimg" class="custompredictimg">
                         <h5><%= biomass %>Kg of food could produce <%= predicteddata %>m³ of Methane</h5>
                     <%}%>
