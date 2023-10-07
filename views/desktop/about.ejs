@@ -1,6 +1,24 @@
 <%- include("../partials/header"); -%>
 <%- include("../partials/bg"); -%>
 <%- include("../components/devmsg"); -%>
-
+<div id="FAQ">
+    <% faq_obj.forEach((props)=>{ %>
+        <div class="faq-card">
+            <h6 class="faq-ques"><%= props.question %></h6>
+            <p class="faq-ans"><%= props.answer %></p>
+        </div>
+    <%})%>
+</div>
 <%- include("../components/feedback"); -%>
 <%- include("../partials/footer"); -%>
+<script>
+    const questions = document.getElementsByClassName("faq-ques");
+    const answers = document.getElementsByClassName("faq-ans");
+    Array.from(questions).forEach((question)=>{
+        question.addEventListener("click",()=>{
+            question.classList.toggle("active");
+            const answer = question.nextElementSibling;
+            answer.classList.toggle("active");
+        })
+    })
+</script>
