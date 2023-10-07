@@ -79,13 +79,18 @@
         </svg>
     </div>
 </div>
-<div id="preloader">
-    <div id="pre1" class="preloader-ball"></div>
-    <div id="pre2" class="preloader-ball"></div>
-    <div id="pre3" class="preloader-ball"></div>
+<div id="loader_div">
+    <div id="load">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 <script>
-    window.addEventListener("load",()=>{
-        document.getElementById("preloader").style.display = "none";
+    var loader = document.getElementById("loader_div");
+    window.addEventListener("load", function ()
+    {
+        console.log("closing the loader");
+        loader.style.display = "none";
     });
 </script>
