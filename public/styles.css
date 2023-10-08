@@ -7,6 +7,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif!important;
 }
+body{
+    user-select: none;
+}
 ::selection{
     background-color: #86dc3d;
 }

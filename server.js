@@ -23,7 +23,7 @@ const months = [
   "Nov",
   "Dec",
 ];
-var devtxt = "Aug 21 - Counters updated!";
+var devtxt = "ML, Responsiveness added!";
 var errmsg = "";
 import mongoose from "mongoose";
 var availableFood = [];
