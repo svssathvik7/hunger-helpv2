@@ -894,68 +894,38 @@ footer{
 }
 /* about */
 #FAQ{
-    display: flex;
     position: absolute;
     top: 0;bottom: 0;left: 0;right: 0;
     margin: auto;
     width: 70dvw;
     height: 50dvh;
-    flex-direction: column;
+    padding: 2%;
     overflow: scroll;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    align-content: center;
-}
-.faq-card{
-    background: white;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    width: 100%;
-    height: fit-content;
-    color: #000;
-    text-align: left;
-    overflow: auto;
 }
 .faq-ques{
-    position: absolute;
-    z-index: 4;
-    background-color: white;
-    min-height: 5dvh;
-    max-height: 10dvh;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
     background-color: rgba(246,211,52,1);
     padding: 2%;
-    border-radius: 0.5rem;
-    margin: 0;
+    border-radius: 1rem;
+    cursor: pointer;
+    z-index: 3;
 }
 .faq-ans{
-    position: absolute;
-    z-index: 3;
-    box-shadow: 4px 4px 16px #EDEADE;
-    padding: 1%;
-    width: 100%;
+    padding: 2%;
+    background-color: rgba(255,255,0,0.3);
+    height: 0;
     opacity: 0;
-    max-height: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
     overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease; /
 }
 .faq-ans.active{
-    min-height: 5dvh;
-    position: relative;
-    transition: all 1s ease;
-    max-height: 15dvh;
+    max-height: 30dvh;
     opacity: 1;
-    overflow: auto;
+    height: fit-content;
 }
-.faq-ques.active{
-    position: relative;
-}
+
 /* DevMsg */
 #devmsg{
     width: fit-content;
