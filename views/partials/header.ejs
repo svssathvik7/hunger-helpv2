@@ -35,12 +35,40 @@
 </body>
 </html>
 <script>
-    document.getElementById("shutter-rod").addEventListener("click",()=>{
-        document.querySelector("header").classList.toggle("active");
-        document.getElementById("shutter-rod").classList.toggle("active");
-        var nav_links = document.getElementsByClassName("nav-link-btns");
-        for(var i=0;i<nav_links.length;i++){
-            nav_links[i].classList.toggle("active");
+    // When the page loads, retrieve the state from local storage and apply it to your elements.
+window.addEventListener("load", () => {
+    const header = document.querySelector("header");
+    const shutterRod = document.getElementById("shutter-rod");
+    const navLinks = document.getElementsByClassName("nav-link-btns");
+
+    // Retrieve the state from local storage
+    const isHeaderActive = localStorage.getItem("isHeaderActive") === "true";
+
+    // Apply the state to your elements
+    if (isHeaderActive) {
+        header.classList.add("active");
+        shutterRod.classList.add("active");
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.remove("active");
         }
+    }
+    else{
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.add("active");
+        }
+    }
+
+    // Add an event listener to your button to toggle the state and store it in local storage
+    shutterRod.addEventListener("click", () => {
+        header.classList.toggle("active");
+        shutterRod.classList.toggle("active");
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.toggle("active");
+        }
+
+        // Store the state in local storage
+        const isHeaderActive = header.classList.contains("active");
+        localStorage.setItem("isHeaderActive", isHeaderActive);
     });
+});
 </script>

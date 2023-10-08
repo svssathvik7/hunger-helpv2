@@ -67,9 +67,10 @@ header.active{
     height: fit-content;
 }
 #buttons a{
-    background-color: rgba(246,211,52,1);
+    /* background-color: rgba(246,211,52,1); */
+    background-color: brown;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     transition: all 0.3s ease;/* Smooth transition */
@@ -903,17 +904,21 @@ footer{
     overflow: scroll;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
 }
 .faq-ques{
-    background-color: rgba(246,211,52,1);
+    /* background-color: rgba(246,211,52,1); */
+    background-color: #013220;
     padding: 2%;
     border-radius: 1rem;
     cursor: pointer;
     z-index: 3;
+    margin: 0;
+    color: #fff;
 }
 .faq-ans{
     padding: 2%;
-    background-color: rgba(255,255,0,0.3);
+    background-color: #01322088;
     height: 0;
     opacity: 0;
     transition: all 0.3s ease;
@@ -924,6 +929,10 @@ footer{
     max-height: 30dvh;
     opacity: 1;
     height: fit-content;
+    border-radius: 1rem;
+}
+.faq-ques.active{
+    box-shadow: 2px 2px 16px #000;
 }
 
 /* DevMsg */
