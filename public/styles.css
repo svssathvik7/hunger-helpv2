@@ -9,6 +9,7 @@
 }
 body{
     user-select: none;
+    overflow: hidden;
 }
 ::selection{
     background-color: #86dc3d;
