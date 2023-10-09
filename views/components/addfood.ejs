@@ -10,11 +10,11 @@
         <h4>Food Type</h4>
         <div id="imageOptions">
           <label>
-            <input type="radio" name="quality" value="excess">
+            <input type="radio" name="quality" value="excess" required>
             <img title="Excess Food" class="slide1img" id="excessfoodopt" src="/excessfood.svg" alt="excess">
           </label>
           <label>
-            <input type="radio" name="quality" value="left-over">
+            <input type="radio" name="quality" value="left-over" required>
             <img title="Left Over Food" class="slide1img" id="leftoverfoodopt" src="/domestic-waste.svg" alt="left-over">
           </label>
         </div>
@@ -23,11 +23,11 @@
         <h4>Veg or Non Veg</h4>
         <div id="imageOptions">
           <label>
-            <input type="radio" name="foodtype" value="vegetarian">
+            <input type="radio" name="foodtype" value="vegetarian" required>
             <img title="Vegetarian" class="slide1img" id="vegfoodopt" src="/vegetarian.svg" alt="veg">
           </label>
           <label>
-            <input type="radio" name="foodtype" value="non-vegetarian">
+            <input type="radio" name="foodtype" value="non-vegetarian" required>
             <img title="Non-vegetarian" class="slide1img" id="nonvegfoodopt" src="/nonveg.svg" alt="non-veg">
           </label>
         </div>
@@ -48,7 +48,7 @@
         <button id="next">Next</button>
         <button type="submit" id="addfoodsubmit">Submit</button>
       </div>
-    </form> 
+    </form>
       <div id="progressbar">
         <div id="pgbar1" class="pgbardots active"></div>
         <div id="pgbar2" class="pgbardots"></div>
