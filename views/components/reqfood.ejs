@@ -2,7 +2,6 @@
   <h2>Available :</h2>
   <div id="available">
     <% data.forEach((item) => { %>
-      <form id="dummyform" method="post" action="/foodrequest">
         <div class="availcard">
           <input class="cardidvalue" name="cardid" value=<%= item.id %>>
           <h4>Quality : <%= item.quality %></h4>
@@ -16,7 +15,6 @@
           </p>
           <button type="submit" class="<%= item.ftype %>" id="reqbtn">Request</button>
         </div>
-      </form>
     <% }) %>
   </div>
 </div>

@@ -5,24 +5,9 @@ import fetch from "node-fetch";
 import express from "express";
 const app = express();
 import bodyParser from "body-parser";
-import * as fs from "fs";
 import browserDetect from "browser-detect";
 import md5 from "md5";
 var isLoggedIn = false;
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
 var devtxt = "ML, Responsiveness added!";
 var errmsg = "";
 import mongoose from "mongoose";
@@ -71,18 +56,23 @@ const DonateSchema = new mongoose.Schema({
   },
   ftype: {
     type: String,
+    required: true,
   },
   quality: {
     type: String,
+    required: true,
   },
   quantity: {
     type: Number,
+    required: true,
   },
   contact: {
     type: String,
+    required: true,
   },
   organisation: {
     type: String,
+    required: true,
   },
   expiry: {
     type: BigInt,
@@ -90,6 +80,7 @@ const DonateSchema = new mongoose.Schema({
   },
   message: {
     type: String,
+    required: true,
   },
 });
 

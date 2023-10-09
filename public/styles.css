@@ -752,7 +752,7 @@ footer{
 #reqbtn.non-vegetarian{
     background-color: red;
 }
-#dummyform{
+/* #dummyform{
     width: 20dvw; 
     height: fit-content;
     max-height: 45dvh;
@@ -771,8 +771,8 @@ footer{
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-}
-#dummyform:hover{
+} */
+.availcard:hover{
     transform: scale(0.95);
 }
 .cardidvalue{
