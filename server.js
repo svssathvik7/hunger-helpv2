@@ -193,25 +193,42 @@ const aside_img = [
   "https://static.vecteezy.com/system/resources/previews/013/926/882/original/biofuel-life-cycle-of-natural-materials-and-plants-with-green-barrels-or-biogas-production-energy-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg",
 ];
 app.get("/", async (req, res) => {
-  Fooddb.find({ expiry: { $lte: currentTime } })
-    .then((expiredFoodItems) => {
-      // Move expired food items to Biogasdb
-      return Biogasdb.insertMany(expiredFoodItems).then((insertedItems) => {
-        console.log(`${insertedItems.length} items added to Biogasdb.`);
+  const currentTime = new Date().getTime(); // Get current time in milliseconds
 
-        // Remove expired food items from Fooddb
-        return Fooddb.deleteMany({
-          _id: { $in: expiredFoodItems.map((item) => item._id) },
-        }).then((deleteResult) => {
-          console.log(
-            `${deleteResult.deletedCount} items removed from Fooddb.`
-          );
-        });
+// Find and process expired food items
+Fooddb.find({ expiry: { $lte: currentTime } })
+  .then(async (expiredFoodItems) => {
+    for (const item of expiredFoodItems) {
+      const existingBiogasEntry = await Biogasdb.findOne({
+        organisation: item.organisation,
       });
-    })
-    .catch((err) => {
-      console.error(err);
+
+      if (existingBiogasEntry) {
+        // Update the existing Biogasdb entry by adding the current quantity
+        await Biogasdb.findOneAndUpdate(
+          { organisation: item.organisation },
+          { $set: { quantity: existingBiogasEntry.quantity + item.quantity } }
+        );
+      } else {
+        // Insert a new Biogasdb entry
+        const newBiogasEntry = new Biogasdb({
+          quantity: item.quantity,
+          organisation: item.organisation,
+        });
+        await newBiogasEntry.save();
+      }
+    }
+
+    // Remove expired food items from Fooddb
+    const deleteResult = await Fooddb.deleteMany({
+      _id: { $in: expiredFoodItems.map((item) => item._id) },
     });
+
+    console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
   await Biogasdb.aggregate([
     {
       $group: {
