@@ -309,6 +309,7 @@ app.post("/newuser", async (req, res) => {
     email: req.body.email,
     password: md5(req.body.password),
     role: req.body.role,
+    isAdmin : false
   });
   try {
     await data.save();
@@ -320,7 +321,7 @@ app.post("/newuser", async (req, res) => {
       res.render("desktop/success", { cdevmsg: devtxt,isAdmin:isadminbool });
     }
   } catch (error) {
-    console.log("Error saving");
+    console.log(error);
     res.render("desktop/failentry", { cdevmsg: devtxt,isAdmin:isadminbool });
   }
 });
