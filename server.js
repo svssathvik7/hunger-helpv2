@@ -601,12 +601,13 @@ app.post("/adminChange", async(req, res) => {
 app.post("/getOrgData",async(req,res)=>{
   var selectedOrganisation = await req.body["org-list"];
   var cdata = await Fooddb.find({organisation:selectedOrganisation});
+  const totalQuantity = cdata.reduce((sum, item) => sum + item.quantity, 0);
   var bdata = await Biogasdb.find({organisation:selectedOrganisation});
   var biodata = await Memberdb.find({orgname: selectedOrganisation});
   console.log(cdata);
   console.log(bdata);
   console.log(biodata);
-  res.render("desktop/orgstat",{currdata:cdata,biogasdata:bdata,orgname:selectedOrganisation,info:biodata,isAdmin:isadminbool});
+  res.render("desktop/orgstat",{currdata:totalQuantity,biogasdata:bdata,orgname:selectedOrganisation,info:biodata,isAdmin:isadminbool});
 });
 
 app.listen(3000, () => {

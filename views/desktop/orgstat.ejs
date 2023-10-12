@@ -3,8 +3,8 @@
 <%- include("../partials/footer"); -%>
 <div id="orgdata">
     <h5>Organisation : <%= orgname %></h5>
-    <h5>Representative : <%= info.name %></h5>
-    <h5>Email : <%= info.email %></h5>
+    <h5>Representative : <%= info[0].name %></h5>
+    <h5>Email : <%= info[0].email %></h5>
     <h5>Live donation : <%= currdata.quantity %></h5>
     <h5>Biogas Contribution : <%= biogasdata.quantity %> Kgs</h5>
 </div>
