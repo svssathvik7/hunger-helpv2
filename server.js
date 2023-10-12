@@ -560,8 +560,8 @@ const admindata = [
     desc : "Check the donors who contributed large amounts of services to the society through HungerHelp"
   }
 ]
-const users = await Memberdb.find({});
-app.get("/ad-tools",(req,res)=>{
+app.get("/ad-tools",async(req,res)=>{
+  const users = await Memberdb.find({});
   if(isadminbool)
   {
     res.render("desktop/admintools",{isAdmin:isadminbool,adminCardData:admindata,users:users});
@@ -594,10 +594,8 @@ app.post("/adminChange", async(req, res) => {
       }
   }
 
-  // Continue with your form processing logic
-
   // Send a response to the client
-  res.send('Form submitted successfully');
+  res.redirect(req.get("referer"));
 });
 
 
