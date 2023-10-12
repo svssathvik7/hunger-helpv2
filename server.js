@@ -215,6 +215,7 @@ const aside_img = [
 ];
 app.get("/", async (req, res) => {
   const currentTime = new Date().getTime(); // Get current time in milliseconds
+  isadminbool = false;
 
 // Find and process expired food items
 Fooddb.find({ expiry: { $lte: currentTime } })
