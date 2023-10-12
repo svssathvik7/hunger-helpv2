@@ -607,6 +607,7 @@ app.post("/getOrgData",async(req,res)=>{
   console.log(cdata);
   console.log(bdata);
   console.log(biodata);
+  console.log(totalQuantity);
   res.render("desktop/orgstat",{currdata:totalQuantity,biogasdata:bdata,orgname:selectedOrganisation,info:biodata,isAdmin:isadminbool});
 });
 
