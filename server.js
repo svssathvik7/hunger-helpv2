@@ -592,7 +592,6 @@ app.post("/adminChange", async(req, res) => {
       catch(error){
         console.log(error);
       }
-      res.send("Deleted");
   }
 
   // Continue with your form processing logic

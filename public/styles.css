@@ -1493,6 +1493,7 @@ footer{
     color: #c0c0c0;
     font-size: 0.75rem;
     width: 20dvw;
+    cursor: pointer;
 }
 .usermail-label{
     background-color:#013220;
