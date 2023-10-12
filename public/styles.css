@@ -1502,3 +1502,52 @@ footer{
     margin: 2%;
     border-radius: 1rem;
 }
+#user-org-container{
+    height: 40dvh;
+    display: flex;
+    width: 35dvw;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: center;
+}
+.userorg-label{
+    background-color:#013220;
+    color: #fff;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 1rem;
+}
+.Top-Donors{
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;
+    margin: auto;
+    width: 70dvw;
+    height: 70dvh;
+}
+#don-submit{
+    border-radius: 1rem;
+    background-color: #000;
+    color: #c0c0c0;
+    cursor: pointer;
+}
+.userorgs{
+    margin: 2%;
+}
+#orgdata{
+    width: 35dvw;
+    height: 50dvh;
+    background-color: #013220;
+    color: #fff;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

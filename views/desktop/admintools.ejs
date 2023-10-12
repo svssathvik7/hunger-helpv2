@@ -26,7 +26,14 @@
     </form>
 </div>
 <div class="Top-Donors">
-    <h1>Add admin</h1>
+    <form action="/getOrgData" method="post">
+        <div id="user-org-container">
+            <% users.forEach((user)=>{ %>
+                <label class="userorg-label"><input name="org-list" class="userorgs" type="radio" value="<%= user.orgname %>"><%= user.orgname %></label>
+            <%})%>
+        </div>
+        <button type="submit" id="don-submit">Get Data</button>
+    </form>
 </div>
 <script>
     const admincard = document.getElementById("Add-Admin");

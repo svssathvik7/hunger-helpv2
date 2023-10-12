@@ -598,7 +598,16 @@ app.post("/adminChange", async(req, res) => {
   res.redirect(req.get("referer"));
 });
 
-
+app.post("/getOrgData",async(req,res)=>{
+  var selectedOrganisation = await req.body["org-list"];
+  var cdata = await Fooddb.find({organisation:selectedOrganisation});
+  var bdata = await Biogasdb.find({organisation:selectedOrganisation});
+  var biodata = await Memberdb.find({orgname: selectedOrganisation});
+  console.log(cdata);
+  console.log(bdata);
+  console.log(biodata);
+  res.render("desktop/orgstat",{currdata:cdata,biogasdata:bdata,orgname:selectedOrganisation,info:biodata,isAdmin:isadminbool});
+});
 
 app.listen(3000, () => {
   console.log("Running");
