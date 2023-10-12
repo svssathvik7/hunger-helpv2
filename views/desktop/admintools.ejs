@@ -1,3 +1,47 @@
 <%- include("../partials/header"); -%>
 <%- include("../partials/bg"); -%>
 <%- include("../partials/footer"); -%>
+<div id="admin-workspace">
+    <h3>Welcome back to the workspace!</h3>
+    <div class="flex-admin">
+        <% adminCardData.forEach((item)=>{ %>
+            <div class="admin-cards" id="<%= item.title %>">
+                <h5><%= item.title %></h5>
+                <p><%= item.desc %></p>
+            </div>
+        <%})%>
+    </div>
+</div>
+<div class="Add-Admin">
+    <form id="admin-form" action="/adminChange" method="post">
+        <div id="user-mail-container">
+            <% users.forEach((user)=>{ %>
+                <label class="usermail-label"><input name="emails-list" class="usermails" type="checkbox" value="<%= user.email %>"><%= user.email %></label>
+            <%})%>
+        </div>
+        <div id="btn-admin-cont">
+            <button type="submit" name="admin-submit-btn" value="add" class="admin-submit">Add Admin</button>
+            <button type="submit" name="admin-submit-btn" value="remove" class="admin-submit">Remove Admin</button>
+        </div>
+    </form>
+</div>
+<div class="Top-Donors">
+    <h1>Add admin</h1>
+</div>
+<script>
+    const admincard = document.getElementById("Add-Admin");
+    const statcard = document.getElementById("Top-Donors");
+    const workspace = document.getElementById("admin-workspace");
+    const admintool = document.getElementsByClassName("Add-Admin")[0];
+    const donortool = document.getElementsByClassName("Top-Donors")[0];
+    admincard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "flex";
+        donortool.style.display = "none";
+    });
+    statcard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "none";
+        donortool.style.display = "flex";
+    });
+</script>

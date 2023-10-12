@@ -550,16 +550,56 @@ app.post("/foodrequest", async (req, res) => {
   console.log("Food purchased");
 });
 
+const admindata = [
+  {
+    title : "Add-Admin",
+    desc : "You can add further admins who can monitor the HungerHelp's data of donors and etc!"
+  },
+  {
+    title : "Top-Donors",
+    desc : "Check the donors who contributed large amounts of services to the society through HungerHelp"
+  }
+]
+const users = await Memberdb.find({});
 app.get("/ad-tools",(req,res)=>{
   if(isadminbool)
   {
-    res.render("ad-tools");
+    res.render("desktop/admintools",{isAdmin:isadminbool,adminCardData:admindata,users:users});
   }
   else{
     res.render("desktop/nofilefound",{isAdmin:isadminbool});
   }
 });
 
+app.post("/adminChange", async(req, res) => {
+  const adminAction = await req.body['admin-submit-btn'];
+  const selectedMails = await req.body["emails-list"];
+  // console.log(selectedMails);
+  if (adminAction === 'add') {
+    try{
+      const result = await Memberdb.updateMany({email:{"$in":selectedMails}},
+      {isAdmin:true});
+      console.log(result);
+    }
+    catch(error){
+      console.log(error);
+    }
+  } else if (adminAction === 'remove') {
+      try{
+        const result = await Memberdb.updateMany({email:{"$in":selectedMails}},{isAdmin:false});
+        console.log(result);
+      }
+      catch(error){
+        console.log(error);
+      }
+      res.send("Deleted");
+  }
+
+  // Continue with your form processing logic
+
+  // Send a response to the client
+  res.send('Form submitted successfully');
+});
 
 
 
