@@ -321,7 +321,7 @@ app.post("/newuser", async (req, res) => {
     }
   } catch (error) {
     console.log("Error saving");
-    res.render("desktop/failentry", { cdevmsg: devtxt });
+    res.render("desktop/failentry", { cdevmsg: devtxt,isAdmin:isadminbool });
   }
 });
 
