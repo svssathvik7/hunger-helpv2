@@ -24,7 +24,11 @@
             <a class="nav-link-2 active nav-link-btns" href="/donate-food">Donate Food</a>
             <a class="nav-link-3 active nav-link-btns" href="/request-food">Request Food</a>
             <a class="nav-link-4 active nav-link-btns" href="/statistics">β-Bots</a>
-            <a class="nav-link-5 active nav-link-btns" href="/register">Join</a>
+            <% if(isAdmin){ %>
+                <a class="nav-link-5 active nav-link-btns" href="/ad-tools">Ad-tools</a>
+            <%}else{%>
+                    <a class="nav-link-5 active nav-link-btns" href="/register">Join</a>
+            <%}%>
             <a class="nav-link-6 active nav-link-btns" href="/about">About</a>
         </div>
     </header>
@@ -32,6 +36,7 @@
         <div id="shutter-circle"></div>
         <div id="shutter-rod"></div>
     </div>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
 </body>
 </html>

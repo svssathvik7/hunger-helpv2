@@ -15,7 +15,7 @@ var availableFood = [];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-
+var isadminbool = false;
 var curryear = new Date().getFullYear();
 
 // Database connection
@@ -46,6 +46,11 @@ const MemberSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    required: true
+  },
+  isAdmin:{
+    type: Boolean,
+    required: true,
   },
 });
 
@@ -116,7 +121,6 @@ const DonorSchema = new mongoose.Schema({
   }
 });
 const donorDb = new mongoose.model("donor",DonorSchema);
-
 // Home page code
 
 const title_txt = "Welcome to HungerHelp!";
@@ -269,6 +273,7 @@ Fooddb.find({ expiry: { $lte: currentTime } })
       emphasis: emphasis_txt,
       obj: statBoxData,
       imgsrc: aside_img[[Math.floor(Math.random() * aside_img.length)]],
+      isAdmin : isadminbool
     });
   } else {
     res.render("mobile/index", {
@@ -288,7 +293,7 @@ app.get("/register", function (req, res) {
   if (isMobile) {
     res.render("mobile/register");
   } else {
-    res.render("desktop/register", { cdevmsg: devtxt });
+    res.render("desktop/register", { cdevmsg: devtxt, isAdmin: isadminbool });
   }
 });
 
@@ -308,10 +313,10 @@ app.post("/newuser", async (req, res) => {
     await data.save();
     if (data.role == "volunteer") {
       statBoxData[1].count++;
-      res.render("desktop/success", { cdevmsg: devtxt });
+      res.render("desktop/success", { cdevmsg: devtxt,isAdmin: isadminbool });
     } else {
       statBoxData[2].count++;
-      res.render("desktop/success", { cdevmsg: devtxt });
+      res.render("desktop/success", { cdevmsg: devtxt,isAdmin:isadminbool });
     }
   } catch (error) {
     console.log("Error saving");
@@ -332,6 +337,7 @@ app.get("/donate-food", (req, res) => {
       cdevmsg: devtxt,
       loginState: isLoggedIn,
       errortxt: errmsg,
+      isAdmin: isadminbool
     });
   }
 });
@@ -343,8 +349,16 @@ app.post("/login", async (req, res) => {
     if (userLoggingIn) {
       if (userLoggingIn.password === lpass) {
         isLoggedIn = true;
-        res.redirect(req.get("referer"));
-        console.log("Login detected");
+        if(userLoggingIn.isAdmin)
+        {
+          res.redirect(req.get('referer'));
+          console.log("its admin");
+          isadminbool = true;
+        }
+        else{
+          res.redirect(req.get("referer"));
+          console.log("Login detected");
+        }
       } else {
         errmsg = "Password incorrect";
         isLoggedIn = false;
@@ -356,7 +370,7 @@ app.post("/login", async (req, res) => {
       res.redirect(req.get("referer"));
     }
   } catch (error) {
-    console.log("error logging in");
+    console.log(error);
   }
 });
 app.post("/addFood", async (req, res) => {
@@ -395,6 +409,7 @@ app.get("/request-food", async (req, res) => {
       loginState: isLoggedIn,
       errortxt: errmsg,
       data: availableFood,
+      isAdmin: isadminbool
     });
   } else {
     res.render("desktop/req_food", {
@@ -402,6 +417,7 @@ app.get("/request-food", async (req, res) => {
       loginState: isLoggedIn,
       errortxt: errmsg,
       data: availableFood,
+      isAdmin: isadminbool
     });
   } // Handle the error appropriately, e.g., display an error message
 });
@@ -423,6 +439,7 @@ app.get("/statistics", (req, res) => {
       predictionDone1: false,
       predictionDone2: false,
       year: curryear,
+      isAdmin: isadminbool
     });
   }
 });
@@ -459,7 +476,7 @@ app.get("/about", (req, res) => {
   if (isMobile) {
     res.render("mobile/about");
   } else {
-    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq });
+    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:isadminbool });
   }
 });
 
@@ -504,6 +521,7 @@ app.post("/callbiogasprediction", async (req, res) => {
         year: curryear,
         loginState: isLoggedIn,
         errortxt: errmsg,
+        isAdmin : isadminbool
       });
     }
   } catch (error) {
@@ -532,8 +550,24 @@ app.post("/foodrequest", async (req, res) => {
   console.log("Food purchased");
 });
 
+app.get("/ad-tools",(req,res)=>{
+  if(isadminbool)
+  {
+    res.render("ad-tools");
+  }
+  else{
+    res.render("desktop/nofilefound",{isAdmin:isadminbool});
+  }
+});
+
+
+
+
 app.listen(3000, () => {
   console.log("Running");
 });
 
 
+app.use((req, res, next) => {
+  res.status(404).render("desktop/nofilefound",{isAdmin:isadminbool});
+});
