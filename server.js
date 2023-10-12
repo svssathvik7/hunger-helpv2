@@ -10,7 +10,7 @@ import md5 from "md5";
 var isLoggedIn = false;
 var devtxt = "ML, Responsiveness added!";
 var errmsg = "";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 var availableFood = [];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -95,10 +95,27 @@ const BiogasSchema = new mongoose.Schema({
   },
 });
 
+
 var Memberdb = new mongoose.model("members", MemberSchema);
 var Fooddb = new mongoose.model("food", DonateSchema);
 var Biogasdb = new mongoose.model("biogas", BiogasSchema);
-const currentTime = new Date().getTime();
+const DonorSchema = new mongoose.Schema({
+  email : {
+    ref : "members",
+    required: true,
+    type: Schema.Types.ObjectId,
+  },
+  orgname: {
+    type: String,
+    required: true,
+    ref : "Memberdb",
+  },
+  quantity : {
+    type: Number,
+    required : true,
+  }
+});
+const donorDb = new mongoose.model("donor",DonorSchema);
 
 // Home page code
 
