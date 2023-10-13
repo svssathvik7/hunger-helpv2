@@ -102,14 +102,13 @@ var Fooddb = new mongoose.model("food", DonateSchema);
 var Biogasdb = new mongoose.model("biogas", BiogasSchema);
 const DonorSchema = new mongoose.Schema({
   email : {
-    ref : "members",
+    type : String,
     required: true,
-    type: Schema.Types.ObjectId,
   },
   orgname: {
     type: String,
     required: true,
-    ref : "Memberdb",
+    unique:true,
   },
   quantity : {
     type: Number,
@@ -120,8 +119,34 @@ const donorDb = new mongoose.model("donor",DonorSchema);
 app.use(session({
   secret : process.env.SECRET,
   resave: false,
-  saveUninitialized:true
+  saveUninitialized:true,
+  cookie: {
+    maxAge: 30 * 60 * 1000,
+  }
 }));
+app.use((req, res, next) => {
+  if (req.session.isLoggedIn) {
+    setTimeout(() => {
+      req.session.isLoggedIn = false;
+      console.log('Session timeout: isLoggedIn set to false');
+    }, 180000); 
+  }
+  next();
+});
+const sessionTimeoutMiddleware = (req, res, next) => {
+  if (req.session.isLoggedIn) {
+    // The session is active; do nothing
+    next();
+  } else {
+    // The session has timed out; reset variables
+    req.session.isLoggedIn = false;
+    req.session.isadminbool = false;
+    req.session.errmsg = "";
+    next();
+  }
+};
+
+app.use(sessionTimeoutMiddleware);
 // Home page code
 
 const title_txt = "Welcome to HungerHelp!";
@@ -216,7 +241,6 @@ const aside_img = [
 ];
 app.get("/", async (req, res) => {
   const currentTime = new Date().getTime(); // Get current time in milliseconds
-  req.session.isadminbool = false;
 
 // Find and process expired food items
 Fooddb.find({ expiry: { $lte: currentTime } })
@@ -264,7 +288,7 @@ Fooddb.find({ expiry: { $lte: currentTime } })
     biocount = biocount * 0.03;
     statBoxData[0].count = biocount.toPrecision(3) + "m³";
   });
-  req.session.isLoggedIn = false;
+  // req.session.isLoggedIn = false;
   req.session.errmsg = "";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (!isMobile) {
@@ -275,7 +299,8 @@ Fooddb.find({ expiry: { $lte: currentTime } })
       emphasis: emphasis_txt,
       obj: statBoxData,
       imgsrc: aside_img[[Math.floor(Math.random() * aside_img.length)]],
-      isAdmin : req.session.isadminbool
+      isAdmin : req.session.isadminbool,
+      login : req.session.isLoggedIn
     });
   } else {
     res.render("mobile/index", {
@@ -360,8 +385,8 @@ app.post("/login", async (req, res) => {
           res.redirect(req.get('referer'));
         }
         else{
-          res.redirect(req.get("referer"));
           console.log("Login detected");
+          res.redirect(req.get("referer"));
         }
       } else {
         req.session.errmsg = "Password incorrect";
@@ -481,7 +506,7 @@ app.get("/about", (req, res) => {
   if (isMobile) {
     res.render("mobile/about");
   } else {
-    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool });
+    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
   }
 });
 

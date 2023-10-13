@@ -1551,3 +1551,17 @@ footer{
     flex-direction: column;
     flex-wrap: wrap;
 }
+.log-btn{
+    background-color: red;
+    margin: 0;
+    width: 10dvw;
+    height: 10dvh;
+}
+.log-form{
+    width: fit-content;
+    height: fit-content;
+    transform: rotate(-90deg);
+    position: absolute;
+    bottom: 0;right: 0;
+    margin: 0!important;
+}
