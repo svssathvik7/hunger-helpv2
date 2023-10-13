@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 var curryear = new Date().getFullYear();
-
 // Database connection
 mongoose.connect(
   "mongodb+srv://sathvikcodes:sathvikcodes@cluster0.hyujunf.mongodb.net/?retryWrites=true&w=majority"
@@ -344,6 +343,7 @@ app.get("/donate-food", (req, res) => {
       isAdmin: req.session.isadminbool
     });
   }
+  console.log(req.session);
 });
 app.post("/login", async (req, res) => {
   var lmail = req.body.email;
@@ -355,9 +355,9 @@ app.post("/login", async (req, res) => {
         req.session.isLoggedIn = true;
         if(userLoggingIn.isAdmin)
         {
-          res.redirect(req.get('referer'));
           console.log("its admin");
           req.session.isadminbool = true;
+          res.redirect(req.get('referer'));
         }
         else{
           res.redirect(req.get("referer"));
@@ -376,6 +376,7 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  console.log(req.session);
 });
 app.post("/addFood", async (req, res) => {
   var expirationTimestamp = new Date().getTime();
