@@ -16,7 +16,7 @@ app.use(express.static("public"));
 var curryear = new Date().getFullYear();
 // Database connection
 mongoose.connect(
-  "mongodb+srv://sathvikcodes:sathvikcodes@cluster0.hyujunf.mongodb.net/?retryWrites=true&w=majority"
+  process.env.DB_CODE
 );
 var db = mongoose.connection;
 db.on("error", () => console.log("Error in connection to Database"));
@@ -95,27 +95,26 @@ const BiogasSchema = new mongoose.Schema({
     required: true,
   },
 });
-
+const FeedbackSchema = new mongoose.Schema({
+  email : {
+    required : true,
+    type : String,
+  },
+  username : {
+    required : true,
+    type : String,
+  },
+  feedback : {
+    required : true,
+    type : String,
+  }
+})
 
 var Memberdb = new mongoose.model("members", MemberSchema);
 var Fooddb = new mongoose.model("food", DonateSchema);
 var Biogasdb = new mongoose.model("biogas", BiogasSchema);
-const DonorSchema = new mongoose.Schema({
-  email : {
-    type : String,
-    required: true,
-  },
-  orgname: {
-    type: String,
-    required: true,
-    unique:true,
-  },
-  quantity : {
-    type: Number,
-    required : true,
-  }
-});
-const donorDb = new mongoose.model("donor",DonorSchema);
+var FeedbackDb = new mongoose.model("feedback",FeedbackSchema);
+
 app.use(session({
   secret : process.env.SECRET,
   resave: false,
@@ -682,6 +681,15 @@ app.get("/login",(req,res)=>{
   res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg});
 });
 
+app.post("/feedback",async(req,res)=>{
+    var feeddata = await FeedbackDb({
+      email : req.body.usermail,
+      username : req.body.username,
+      feedback : req.body.userfeedback
+    });
+    feeddata.save();
+    res.redirect(req.get("referer"))
+});
 app.use((req, res, next) => {
   res.status(404).render("desktop/nofilefound",{isAdmin:req.session.isadminbool,login : req.session.isLoggedIn});
 });
