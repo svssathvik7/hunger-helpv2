@@ -65,7 +65,7 @@ header.active{
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 55dvw;
+    width: 60dvw;
     margin: auto;
     border-radius: 1rem;
     height: fit-content;
@@ -79,7 +79,7 @@ header.active{
     border-radius: 2rem;
     transition: all 0.3s ease;/* Smooth transition */
 }
-.nav-link-1.active:hover, .nav-link-2.active:hover, .nav-link-3.active:hover, .nav-link-4.active:hover, .nav-link-5.active:hover, .nav-link-6.active:hover{
+.nav-link-1.active:hover, .nav-link-2.active:hover, .nav-link-3.active:hover, .nav-link-4.active:hover, .nav-link-5.active:hover, .nav-link-6.active:hover, .nav-link-7.active:hover{
     transform: translateY(2.5dvw);
 }
 #shutter{
@@ -1550,18 +1550,4 @@ footer{
     justify-content: space-around;
     flex-direction: column;
     flex-wrap: wrap;
-}
-.log-btn{
-    background-color: red;
-    margin: 0;
-    width: 10dvw;
-    height: 10dvh;
-}
-.log-form{
-    width: fit-content;
-    height: fit-content;
-    transform: rotate(-90deg);
-    position: absolute;
-    bottom: 0;right: 0;
-    margin: 0!important;
 }
