@@ -354,6 +354,7 @@ app.post("/newuser", async (req, res) => {
 
 // Donate food
 app.get("/donate-food", (req, res) => {
+  req.session.redirecturl = "/donate-food";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if(req.session.isLoggedIn)
   {
@@ -391,8 +392,8 @@ app.post("/login", async (req, res) => {
         {
           console.log("its admin");
           req.session.isadminbool = true;
-          res.redirect("/");
         }
+        res.redirect(req.session.redirecturl);
       } else {
         req.session.errmsg = "Password incorrect";
         req.session.isLoggedIn = false;
@@ -436,6 +437,7 @@ app.post("/addFood", async (req, res) => {
 
 // Request food
 app.get("/request-food", async (req, res) => {
+  req.session.redirecturl = "/request-food";
   if(req.session.isLoggedIn)
   {
     var availableFood = [];
@@ -466,6 +468,7 @@ app.get("/request-food", async (req, res) => {
 });
 
 app.get("/statistics", (req, res) => {
+  req.session.redirecturl = "/statistics";
   if(req.session.isLoggedIn)
   {
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
@@ -523,6 +526,7 @@ const faq = [
   }
 ]
 app.get("/about", (req, res) => {
+  req.session.redirecturl = "/about";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (isMobile) {
     res.render("mobile/about");
@@ -613,6 +617,7 @@ const admindata = [
   }
 ]
 app.get("/ad-tools",async(req,res)=>{
+  req.session.redirecturl = "/ad-tools";
   const users = await Memberdb.find({});
   if(req.session.isadminbool)
   {
@@ -670,6 +675,11 @@ app.listen(3000, () => {
 app.get("/logout",(req,res)=>{
   req.session.isLoggedIn = false;
   res.redirect(req.get("referer"));
+});
+
+app.get("/login",(req,res)=>{
+  req.session.redirecturl = req.get("referer");
+  res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg});
 });
 
 app.use((req, res, next) => {
