@@ -120,7 +120,7 @@ app.use(session({
   resave: false,
   saveUninitialized:true,
   cookie: {
-    maxAge: 1 * 60 * 1000,
+    maxAge: 5 * 60 * 1000,
   }
 }));
 app.use((req, res, next) => {
@@ -128,7 +128,7 @@ app.use((req, res, next) => {
     setTimeout(() => {
       req.session.isLoggedIn = false;
       console.log('Session timeout: isLoggedIn set to false');
-    }, 1*60*1000); 
+    }, 5*60*1000); 
   }
   next();
 });
@@ -613,17 +613,22 @@ const admindata = [
   {
     title : "Top-Donors",
     desc : "Check the donors who contributed large amounts of services to the society through HungerHelp"
+  },
+  {
+    title : "Review-Overview",
+    desc : "Check the user's feedbacks based on their own UI/UX experiences!"
   }
 ]
 app.get("/ad-tools",async(req,res)=>{
   req.session.redirecturl = "/ad-tools";
   const users = await Memberdb.find({});
+  const feedbacks = await FeedbackDb.find({});
   if(req.session.isadminbool)
   {
-    res.render("desktop/admintools",{isAdmin:req.session.isadminbool,adminCardData:admindata,users:users,login : req.session.isLoggedIn});
+    res.render("desktop/admintools",{isAdmin:req.session.isadminbool,adminCardData:admindata,users:users,login : req.session.isLoggedIn,feedbacks:feedbacks});
   }
   else{
-    res.render("desktop/nofilefound",{isAdmin:req.session.isadminbool,login : req.session.isLoggedIn});
+    res.render("desktop/nofilefound",{isAdmin:req.session.isadminbool,login : req.session.isLoggedIn,feedbacks:feedbacks});
   }
 });
 

@@ -35,20 +35,41 @@
         <button type="submit" id="don-submit">Get Data</button>
     </form>
 </div>
+<div class="Review-Overview">
+   <% feedbacks.forEach((feedback=>{ %>
+        <div class="feedback-card">
+            <h5>&#10077;<%= feedback.feedback %>&#10078;</h5>
+            <div style="text-align: left;">
+                <p>Email - <%= feedback.email %></p>
+                <p>Name - <%= feedback.username %></p>
+            </div>
+        </div>
+   <%}))%>
+</div>
 <script>
     const admincard = document.getElementById("Add-Admin");
     const statcard = document.getElementById("Top-Donors");
+    const feedbackcard = document.getElementById("Review-Overview");
     const workspace = document.getElementById("admin-workspace");
     const admintool = document.getElementsByClassName("Add-Admin")[0];
     const donortool = document.getElementsByClassName("Top-Donors")[0];
+    const feedbacktool = document.getElementsByClassName("Review-Overview")[0];
     admincard.addEventListener("click",()=>{
         workspace.style.display = "none";
         admintool.style.display = "flex";
         donortool.style.display = "none";
+        feedbacktool.style.display = "none";
     });
     statcard.addEventListener("click",()=>{
         workspace.style.display = "none";
         admintool.style.display = "none";
         donortool.style.display = "flex";
+        feedbacktool.style.display = "none";
     });
+    feedbackcard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "none";
+        donortool.style.display = "none";
+        feedbacktool.style.display = "flex";
+    })
 </script>

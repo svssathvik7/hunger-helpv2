@@ -752,26 +752,6 @@ footer{
 #reqbtn.non-vegetarian{
     background-color: red;
 }
-/* #dummyform{
-    width: 20dvw; 
-    height: fit-content;
-    max-height: 45dvh;
-    margin: 2%;
-    text-align: center;
-    line-height: 1.5;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    backdrop-filter: blur(10px);
-    background-color: #EDEADE;
-    padding: 4%;
-    border-radius: 2rem;
-    animation: fadepop 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-} */
 .availcard:hover{
     transform: scale(0.95);
 }
@@ -1452,7 +1432,7 @@ footer{
 .admin-cards:hover{
     transform: scale(0.95);
 }
-.Add-Admin, .Top-Donors{
+.Add-Admin, .Top-Donors, .Review-Overview{
     display: none;
     align-items: center;
     justify-content: space-around;
@@ -1550,4 +1530,29 @@ footer{
     justify-content: space-around;
     flex-direction: column;
     flex-wrap: wrap;
+}
+.Review-Overview{
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 0;bottom: 0;right: 0;left: 0;
+    margin: auto;
+    width: 70dvw;
+    height: 65dvh;
+}
+.feedback-card{
+    padding: 2%;
+    border-radius: 1rem;
+    background-color: #013220;
+    color: #fff;
+    display: flex;
+    align-items: left;
+    justify-content: space-around;
+    flex-direction: column;
+    max-height: 15dvh;
+    
+}
+.feedback-card p{
+    margin: 0;padding: 0;
 }
