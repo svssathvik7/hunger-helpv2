@@ -1551,8 +1551,12 @@ footer{
     justify-content: space-around;
     flex-direction: column;
     max-height: 15dvh;
-    
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 .feedback-card p{
     margin: 0;padding: 0;
+}
+.feedback-card:hover{
+    transform: scale(0.95);
 }

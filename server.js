@@ -141,6 +141,7 @@ const sessionTimeoutMiddleware = (req, res, next) => {
     req.session.isLoggedIn = false;
     req.session.isadminbool = false;
     req.session.errmsg = "";
+    console.log(req.session);
     next();
   }
 };
@@ -387,6 +388,7 @@ app.post("/login", async (req, res) => {
     if (userLoggingIn) {
       if (userLoggingIn.password === lpass) {
         req.session.isLoggedIn = true;
+        req.session.username = userLoggingIn.email;
         if(userLoggingIn.isAdmin)
         {
           console.log("its admin");
