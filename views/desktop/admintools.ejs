@@ -14,11 +14,26 @@
 </div>
 <div class="Add-Admin">
     <form id="admin-form" action="/adminChange" method="post">
-        <div id="user-mail-container">
+        <table id="user-mail-container">
+            <tr>
+                <th>Email</th>
+                <th>Organisation</th>
+                <th>Admin status</th>
+            </tr>
             <% users.forEach((user)=>{ %>
-                <label class="usermail-label"><input name="emails-list" class="usermails" type="checkbox" value="<%= user.email %>"><%= user.email %></label>
+                <tr>
+                    <td>
+                        <label class="usermail-label"><input name="emails-list" class="usermails" type="checkbox" value="<%= user.email %>"><%= user.email %></label>
+                    </td>
+                    <td>
+                        <%= user.orgname %>
+                    </td>
+                    <td>
+                        <%= user.isAdmin %>
+                    </td>
+                </tr>
             <%})%>
-        </div>
+        </table>
         <div id="btn-admin-cont">
             <button type="submit" name="admin-submit-btn" value="add" class="admin-submit">Add Admin</button>
             <button type="submit" name="admin-submit-btn" value="remove" class="admin-submit">Remove Admin</button>
@@ -27,25 +42,43 @@
 </div>
 <div class="Top-Donors">
     <form action="/getOrgData" method="post">
-        <div id="user-org-container">
+        <table id="user-org-container">
+            <tr>
+                <th>Organisation</th>
+                <th>Email</th>
+            </tr>
             <% users.forEach((user)=>{ %>
-                <label class="userorg-label"><input name="org-list" class="userorgs" type="radio" value="<%= user.orgname %>"><%= user.orgname %></label>
+                <tr>
+                    <td>
+                        <label class="userorg-label"><input name="org-list" class="userorgs" type="radio" value="<%= user.orgname %>"><%= user.orgname %></label>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                </tr>
             <%})%>
-        </div>
+        </table>
         <button type="submit" id="don-submit">Get Data</button>
     </form>
 </div>
-<div class="Review-Overview">
+<table class="Review-Overview">
+    <tr>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Feedback</th>
+    </tr>
    <% feedbacks.forEach((feedback=>{ %>
-        <div class="feedback-card">
-            <h5>&#10077;<%= feedback.feedback %>&#10078;</h5>
-            <div style="text-align: left;">
-                <p>Email - <%= feedback.email %></p>
-                <p>Name - <%= feedback.username %></p>
-            </div>
-        </div>
+        <tr class="feedback-card">
+            <td>
+                <p><%= feedback.email %></p>
+            </td>
+            <td>
+                <p><%= feedback.username %></p>
+            </td>
+            <td>&#10077;<%= feedback.feedback %>&#10078;</h5>
+        </tr>
    <%}))%>
-</div>
+</table>
 <script>
     const admincard = document.getElementById("Add-Admin");
     const statcard = document.getElementById("Top-Donors");

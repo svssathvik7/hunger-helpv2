@@ -324,10 +324,6 @@ app.get("/register", function (req, res) {
   }
 });
 
-app.post("/submitform", (req, res) => {
-  res.redirect("/");
-});
-
 app.post("/newuser", async (req, res) => {
   var data = new Memberdb({
     name: req.body.name,

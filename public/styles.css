@@ -1443,7 +1443,7 @@ footer{
 #admin-form{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 60dvh;
     width: 45dvw;
     position: absolute;
@@ -1451,13 +1451,6 @@ footer{
     margin: auto;
 }
 #user-mail-container{
-    height: 40dvh;
-    display: flex;
-    width: 35dvw;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    overflow-x: hidden;
     overflow-y: scroll;
     text-align: center;
 }
@@ -1483,19 +1476,23 @@ footer{
     border-radius: 1rem;
 }
 #user-org-container{
-    height: 40dvh;
     display: flex;
-    width: 35dvw;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    width: fit-content;
     overflow-x: hidden;
     overflow-y: scroll;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+th, td {
+    border: 1px solid #000;
+    padding: 12px;
+    text-align: left;
 }
 .userorg-label{
-    background-color:#013220;
-    color: #fff;
+    color: #000;
     padding: 2%;
     margin: 2%;
     border-radius: 1rem;
@@ -1540,23 +1537,5 @@ footer{
     margin: auto;
     width: 70dvw;
     height: 65dvh;
-}
-.feedback-card{
-    padding: 2%;
-    border-radius: 1rem;
-    background-color: #013220;
-    color: #fff;
-    display: flex;
-    align-items: left;
-    justify-content: space-around;
-    flex-direction: column;
-    max-height: 15dvh;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.feedback-card p{
-    margin: 0;padding: 0;
-}
-.feedback-card:hover{
-    transform: scale(0.95);
+    overflow-y: scroll;
 }
