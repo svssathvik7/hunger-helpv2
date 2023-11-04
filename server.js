@@ -1,9 +1,11 @@
 // Program imports
 import dotenv from "dotenv";
 dotenv.config();
-import fetch from "node-fetch";
+import cors from "cors";
+import axios from "axios";
 import express from "express";
 const app = express();
+app.use(cors());
 import bodyParser from "body-parser";
 import browserDetect from "browser-detect";
 import md5 from "md5";
@@ -414,19 +416,14 @@ app.post("/callbiogasprediction", async (req, res) => {
   var biogasqty = req.body.biogasqty;
   var url = "https://sathvik-biogas-predictor.onrender.com/getprediction";
   try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ food_waste: parseFloat(biogasqty) }),
+    const response = await axios.post(url,{
+      food_waste : parseFloat(biogasqty)
     });
-
-    if (!response.ok) {
+    if (response.status != 200) {
       throw new Error("Error from Flask server");
     }
 
-    var predictedData = await response.json();
+    var predictedData = await response.data;
     predictedData = parseFloat(predictedData.estimation);
     predictedData = predictedData / 10;
     predictedData = predictedData.toFixed(2);
