@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body{
     overflow: hidden;
     width: 100dvw;
@@ -7,6 +8,7 @@ body{
     padding: 0;margin: 0;
     box-sizing: border-box;
     user-select: none;
+    font-family: 'Poppins', sans-serif!important;
 }
 header{
     width: 100dvw;
@@ -336,4 +338,61 @@ opacity: 0.8;
 }
 #errortxt{
     color: red;
+}
+
+/* biogas bot  */
+#predictionbots{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90dvw;
+    height: 60dvh;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
+}
+#biogasbotpic{
+    width: 5dvw;
+    margin: 2%;
+    padding: 4%;
+    background-color: white;
+    border-radius: 100%;
+}
+#biogasbot{
+    width: 90dvw;
+    height: fit-content;
+    background-color: #0f062a;
+    color: white;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    text-align: center;
+}
+#biogasqty{
+    border: none;
+    border-bottom: thin solid #72d51b;
+    background-color: transparent;
+    color: white;
+}
+#biogasqty::placeholder{
+    color: white;
+}
+#predictbtn{
+    border: none;
+    border-bottom: thin solid #72d51b;
+    background-color: #72d51b;
+    color: #fff;
+    width: 50dvw;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: center;
+    margin: 1rem auto;
+}
+.custompredictimg{
+    width: 50dvw;
+    padding: 2%;
+    margin: 2%;
 }
