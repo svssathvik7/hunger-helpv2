@@ -2,6 +2,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import fs from "fs";
+import path from "path";
 import axios from "axios";
 import express from "express";
 import session from "express-session";
@@ -47,6 +49,27 @@ next();
 };
 
 app.use(sessionChecker);
+
+
+// Modify the sessionChecker to handle writing to userLogs.txt
+app.use((req, res, next) => {
+  if (req.session.username) {
+    const username = req.session.username;
+    const logMessage = `User ${username} logged in at ${new Date().toLocaleString()}\n`;
+
+    // Path to the userLogs.txt file
+    const logFilePath = './Logs/userLogs.txt';
+
+    // Append the log message to the file
+    fs.appendFile(logFilePath, logMessage, (err) => {
+      if (err) {
+        console.error('Error writing to userLogs.txt:', err);
+        // Handle the error, e.g., log it or take appropriate action
+      }
+    });
+  }
+  next();
+});
 // Home page code
 const curFeedbackState = true; //refer
 var volunteercnt = 0;
