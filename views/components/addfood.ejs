@@ -44,8 +44,8 @@
         <textarea id="custommessage" name="custommessage" rows="2" placeholder="Enter your custom message"></textarea>
       </div>
       <div id="slidenavigator">
-        <button id="back">Back</button>
-        <button id="next">Next</button>
+        <button type="button" id="back">Back</button>
+        <button type="button" id="next">Next</button>
         <button type="submit" id="addfoodsubmit">Submit</button>
       </div>
     </form>
@@ -59,38 +59,46 @@
   </div>
 <script>
   var start = 0;
-  var elements = document.getElementsByClassName("addfoodslides");
-  document.getElementById("next").addEventListener("click",()=>{
-    elements[start].classList.remove("active");
-    var temp = "pgbar"+String(start+1);
-    document.getElementById(temp).classList.remove("active");
-    start++;
-    start = start%4;
-    var temp = "pgbar"+String(start+1);
-    document.getElementById(temp).classList.add("active");
-    if(start==3){
-      document.getElementById("addfoodslider").classList.add("active");
+var elements = document.getElementsByClassName("addfoodslides");
+document.getElementById("next").addEventListener("click", () => {
+    navigateForward();
+});
+
+document.getElementById("back").addEventListener("click", () => {
+    navigateBackward();
+});
+
+function navigateForward() {
+    if (start < elements.length - 1) {
+        elements[start].classList.remove("active");
+        var temp = "pgbar" + String(start + 1);
+        document.getElementById(temp).classList.remove("active");
+        start++;
+        var temp = "pgbar" + String(start + 1);
+        document.getElementById(temp).classList.add("active");
+        if (start === elements.length - 1) {
+            document.getElementById("addfoodslider").classList.add("active");
+        } else {
+            document.getElementById("addfoodslider").classList.remove("active");
+        }
+        elements[start].classList.add("active");
     }
-    else{
-      document.getElementById("addfoodslider").classList.remove("active");
+}
+
+function navigateBackward() {
+    if (start > 0) {
+        elements[start].classList.remove("active");
+        var temp = "pgbar" + String(start + 1);
+        document.getElementById(temp).classList.remove("active");
+        start--;
+        var temp = "pgbar" + String(start + 1);
+        document.getElementById(temp).classList.add("active");
+        if (start === elements.length - 1) {
+            document.getElementById("addfoodslider").classList.add("active");
+        } else {
+            document.getElementById("addfoodslider").classList.remove("active");
+        }
+        elements[start].classList.add("active");
     }
-    elements[start].classList.add("active");
-  });
-  document.getElementById("back").addEventListener("click",()=>{
-    elements[start].classList.remove("active");
-    var temp = "pgbar"+String(start+1);
-    document.getElementById(temp).classList.remove("active");
-    start = start+4;
-    start--;
-    start = start%4;
-    var temp = "pgbar"+String(start+1);
-    document.getElementById(temp).classList.add("active");
-    if(start==3){
-      document.getElementById("addfoodslider").classList.add("active");
-    }
-    else{
-      document.getElementById("addfoodslider").classList.remove("active");
-    }
-    elements[start].classList.add("active");
-  });
+}
 </script>

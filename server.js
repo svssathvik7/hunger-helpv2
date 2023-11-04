@@ -314,7 +314,7 @@ app.post("/addFood", async (req, res) => {
   try {
     await data.save();
     statBoxData[4].count = statBoxData[4].count + 1;
-    res.redirect("/donate-food",{login : req.session.isLoggedIn});
+    res.redirect("/donate-food");
   } catch (error) {
     console.log(error);
     res.status(500).send("An error occurred while adding food entry.");
