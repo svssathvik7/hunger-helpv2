@@ -1,0 +1,108 @@
+<%- include("../partials/header"); -%>
+<%- include("../partials/bg"); -%>
+<%- include("../partials/footer"); -%>
+<div id="admin-workspace">
+    <h3>Welcome back to the workspace!</h3>
+    <div class="flex-admin">
+        <% adminCardData.forEach((item)=>{ %>
+            <div class="admin-cards" id="<%= item.title %>">
+                <h5><%= item.title %></h5>
+                <p><%= item.desc %></p>
+            </div>
+        <%})%>
+    </div>
+</div>
+<div class="Add-Admin">
+    <form id="admin-form" action="/adminChange" method="post">
+        <table id="user-mail-container">
+            <tr>
+                <th>Email</th>
+                <th>Organisation</th>
+                <th>Admin status</th>
+            </tr>
+            <% users.forEach((user)=>{ %>
+                <tr>
+                    <td>
+                        <label class="usermail-label"><input name="emails-list" class="usermails" type="checkbox" value="<%= user.email %>"><%= user.email %></label>
+                    </td>
+                    <td>
+                        <%= user.orgname %>
+                    </td>
+                    <td>
+                        <%= user.isAdmin %>
+                    </td>
+                </tr>
+            <%})%>
+        </table>
+        <div id="btn-admin-cont">
+            <button type="submit" name="admin-submit-btn" value="add" class="admin-submit">Add Admin</button>
+            <button type="submit" name="admin-submit-btn" value="remove" class="admin-submit">Remove Admin</button>
+        </div>
+    </form>
+</div>
+<div class="Top-Donors">
+    <form action="/getOrgData" method="post">
+        <table id="user-org-container">
+            <tr>
+                <th>Organisation</th>
+                <th>Email</th>
+            </tr>
+            <% users.forEach((user)=>{ %>
+                <tr>
+                    <td>
+                        <label class="userorg-label"><input name="org-list" class="userorgs" type="radio" value="<%= user.orgname %>"><%= user.orgname %></label>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                </tr>
+            <%})%>
+        </table>
+        <button type="submit" id="don-submit">Get Data</button>
+    </form>
+</div>
+<table class="Review-Overview">
+    <tr>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Feedback</th>
+    </tr>
+   <% feedbacks.forEach((feedback=>{ %>
+        <tr class="feedback-card">
+            <td>
+                <p><%= feedback.email %></p>
+            </td>
+            <td>
+                <p><%= feedback.username %></p>
+            </td>
+            <td>&#10077;<%= feedback.feedback %>&#10078;</h5>
+        </tr>
+   <%}))%>
+</table>
+<script>
+    const admincard = document.getElementById("Add-Admin");
+    const statcard = document.getElementById("Top-Donors");
+    const feedbackcard = document.getElementById("Review-Overview");
+    const workspace = document.getElementById("admin-workspace");
+    const admintool = document.getElementsByClassName("Add-Admin")[0];
+    const donortool = document.getElementsByClassName("Top-Donors")[0];
+    const feedbacktool = document.getElementsByClassName("Review-Overview")[0];
+    admincard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "flex";
+        donortool.style.display = "none";
+        feedbacktool.style.display = "none";
+    });
+    statcard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "none";
+        donortool.style.display = "flex";
+        feedbacktool.style.display = "none";
+    });
+    feedbackcard.addEventListener("click",()=>{
+        workspace.style.display = "none";
+        admintool.style.display = "none";
+        donortool.style.display = "none";
+        feedbacktool.style.display = "flex";
+    })
+</script>

@@ -1,18 +1,12 @@
-<%- include("../mobile_partials/header"); -%>
+<%- include("../partials/header"); -%>
+<%- include("../partials/bg"); -%>
+<%- include("../components/devmsg"); -%>
 <div id="Body">
     <h1 id="Titletxt"><%= titleTxt %></h1>
-    <ul id="agendalist">
-        <li>Dedicated to reduce food waste.
-        </li>
-        <li>Connects food establishments and those in need.</li>
-        <li>
-            Join us in this meaningful mission to ensure no food goes to waste and no one goes hungry. Together, we can make a positive impact on lives and the environment.
-        </li>
-    </ul>
-</div>
-<!-- <%- include("../mobile_partials/bg"); -%>
+    <p id="descTxt"><%= descTxt %></p>
     <p id="emphasis"><%= emphasis %>!</p>
-<img id="poverty-img" src=<%= imgsrc %> alt = "poverty-img"> -->
-<%- include("../components/feedback"); -%>
+</div>
+<img id="poverty-img" src=<%= imgsrc %> alt = "poverty-img">
 <%- include("../components/statbox"); -%>
-<%- include("../mobile_partials/footer"); -%>
+<%- include("../components/feedback"); -%>
+<%- include("../partials/footer"); -%>

@@ -1,4 +1,95 @@
-<%- include("../mobile_partials/header"); -%>
+<%- include("../partials/header"); -%>
 <%- include("../components/feedback"); -%>
-<h1 id="underconstruction">Page under construction</h1>
+<%- include("../components/devmsg"); -%>
+<% if(!loginState){%>
+    <%- include("../components/login"); -%>
+<%}else{%>
+    <div id="predictionbots">
+        <div id="biogasbot">
+            <% if(!predictionDone){ %>
+                <dotlottie-player src="https://lottie.host/f69d192d-2975-4f88-88bc-1de3f9f633e6/Myfg9xORXf.json" background="transparent" speed="0.75" style="width: 150px; height: 150px;" loop autoplay></dotlottie-player>
+                <div id="displaybiogasbot">
+                    <h4>BioGas Predictor</h4>
+                    <form id="biogasform" method="post" action="/callbiogasprediction">
+                        <input placeholder="Estimated waste(kgs)" type="number" name="biogasqty" min="0" id="biogasqty">
+                        <button type="submit" id="predictbtn">Predict</button>
+                    </form>
+                </div>
+            <%} else{%>
+                <div id="predictionbox">
+                    <% if(predicteddata == 0){ %>
+                        <img src="/einstein-formula.svg" alt="genimg" class="custompredictimg">
+                        <h5>You need mass to produce energy :)</h5>
+                    <%}else if(predicteddata <= 0.5 && predicteddata > 0){ %>
+                        <img src="/ricksaw.svg" alt="genimg" class="custompredictimg">
+                        <h5><%= biomass %>Kg of food could produce <%= predicteddata %>m³ of Methane</h5>
+                    <% }else{%>
+                        <img style="width: 15dvw;" src="/indian-mother-making-sweets.svg" alt="genimg" class="custompredictimg">
+                        <h5><%= biomass %>Kg of food could produce <%= predicteddata %>m³ of Methane</h5>
+                    <%}%>
+                    <form id="biogasform" method="post" action="/callbiogasprediction">
+                        <input placeholder="Estimated waste(kgs)" type="number" name="biogasqty" min="0" id="biogasqty">
+                        <button type="submit" id="predictbtn">Predict</button>
+                    </form>
+                </div>
+            <%}%>
+        </div>
+        <div id="hungerdeathbots">
+            <% if(!predictionDone1){ %>
+                <img alt="biogaspic" id="biogasbotpic" src="/question-mark.svg">
+                <div id="displayhungerstatbot">
+                    <h4>HungerDeath stats</h4>
+                    <form id="hungerdeathstats" method="post" action="/gethungerstatsprediction">
+                        <select name="dateRange" id="dateRange" disabled>
+                            <option value="<%= year %>"><%= year %></option>
+                            <option value="thisMonth">This Month</option>
+                            <option value="today">Today</option>
+                            <option value="thisWeek">This Week</option>
+                        </select>
+                        <button disabled type="submit" id="predictbtn">Get Stats</button>
+                    </form>
+                </div>
+            <%} else{%>
+                <div id="hungerstatdisplay">
+                    <img alt="biogaspic" id="biogasbotpic" src="/question-mark.svg">
+                    <iframe title='People who died from hunger' src='https://www.theworldcounts.com/embeds/counters/2?background_color=white&color=black&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=14' style='border: none' height='100' width='300'></iframe>
+                    <form id="hungerdeathstats" method="post" action="/gethungerstatsprediction">
+                        <select id="dateRange">
+                            <option value="2023">2023</option>
+                            <option value="thisMonth">This Month</option>
+                            <option value="today">Today</option>
+                            <option value="thisWeek">This Week</option>
+                        </select>
+                        <button type="submit" id="predictbtn">Get Stats</button>
+                    </form>
+                </div>
+            <%}%>
+        </div>
+        <div id="biogasbot" class="features">
+            <% if(!predictionDone2){ %>
+                <img alt="biogaspic" id="biogasbotpic" src="/question-mark.svg">
+                <div id="displaybiogasbot">
+                    <h3>Upcoming Model-2</h3>
+                    <form id="biogasform" method="post" action="/callbiogasprediction">
+                        <input disabled placeholder="ABCD" type="number" name="biogasqty" min="0" id="biogasqty">
+                        <button disabled type="submit" id="predictbtn">Predict</button>
+                    </form>
+                </div>
+            <%} else{%>
+                <div id="predictionbox">
+                    <% if(predicteddata == 0){ %>
+                        <h5>You need mass to produce energy :)</h5>
+                    <%}else if(predicteddata <= 0.5 && predicteddata > 0){ %>
+                        <img src="/ricksaw.svg" alt="genimg" class="custompredictimg">
+                        <h5>That amount of food could produce <%= predicteddata %>m³ of Methane</h5>
+                    <% }else if(predicteddata > 0.5 && predicteddata <= 1.5){ %>
+                        <img style="width: 15dvw;" src="/indian-mother-making-sweets.svg" alt="genimg" class="custompredictimg">
+                        <h5>That amount of food could produce <%= predicteddata %>m³ of Methane</h5>
+                    <%}%>
+                </div>
+            <%}%>
+        </div>
+    </div>
+<%}%>
 <%- include("../partials/footer"); -%>
+<%- include("../partials/bg"); -%>

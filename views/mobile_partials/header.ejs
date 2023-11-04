@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css?family=McLaren|Montserrat&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="#">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <!-- bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -17,29 +17,69 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <header id="header">
-        <h1>Hunger Help</h1>
-        <div id="menubar">
-            <div class="menuline"></div>
-            <div class="menuline"></div>
-            <div class="menuline"></div>
-        </div>
-        <div id="opennav">
-            <div id="navbuttons">
-                <a href="/">Home</a>
-                <a href="/donate-food">Donate Food</a>
-                <a href="/request-food">Request Food</a>
-                <a href="/statistics">Stats</a>
-                <a href="/register">Join</a>
-                <a href="/about">About</a>
-            </div>
+    <header>
+        <!-- <h1 id="togglemode">Hunger Help</h1> -->
+        <div id="buttons">
+            <a class="nav-link-1 active nav-link-btns" href="/">Home</a>
+            <a class="nav-link-2 active nav-link-btns" href="/donate-food">Donate Food</a>
+            <a class="nav-link-3 active nav-link-btns" href="/request-food">Request Food</a>
+            <a class="nav-link-4 active nav-link-btns" href="/statistics">β-Bots</a>
+            <% if(isAdmin){ %>
+                <a class="nav-link-5 active nav-link-btns" href="/ad-tools">Ad-tools</a>
+            <%}else{%>
+                    <a class="nav-link-5 active nav-link-btns" href="/register">Join</a>
+            <%}%>
+            <a class="nav-link-6 active nav-link-btns" href="/about">About</a>
+            <% if(login){ %>
+                <a href="/logout" class="nav-link-7 active nav-link-btns">Logout</a>
+            <% }else{ %>
+                <a href="/login" class="nav-link-7 active nav-link-btns">Login</a>
+            <% } %>
         </div>
     </header>
+    <div id="shutter">
+        <div id="shutter-circle"></div>
+        <div id="shutter-rod"></div>
+    </div>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
 </body>
 </html>
 <script>
-    document.getElementById("menubar").addEventListener("click",()=>{
-        document.getElementById("header").classList.toggle("active");
-        console.log(document.getElementById("header").classList);
+    // When the page loads, retrieve the state from local storage and apply it to your elements.
+window.addEventListener("load", () => {
+    const header = document.querySelector("header");
+    const shutterRod = document.getElementById("shutter-rod");
+    const navLinks = document.getElementsByClassName("nav-link-btns");
+
+    // Retrieve the state from local storage
+    const isHeaderActive = localStorage.getItem("isHeaderActive") === "true";
+
+    // Apply the state to your elements
+    if (isHeaderActive) {
+        header.classList.add("active");
+        shutterRod.classList.add("active");
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.remove("active");
+        }
+    }
+    else{
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.add("active");
+        }
+    }
+
+    // Add an event listener to your button to toggle the state and store it in local storage
+    shutterRod.addEventListener("click", () => {
+        header.classList.toggle("active");
+        shutterRod.classList.toggle("active");
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].classList.toggle("active");
+        }
+
+        // Store the state in local storage
+        const isHeaderActive = header.classList.contains("active");
+        localStorage.setItem("isHeaderActive", isHeaderActive);
     });
+});
 </script>

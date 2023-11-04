@@ -1,93 +1,24 @@
-<%- include("../mobile_partials/header"); -%>
-<div id="about_page">
-  <div>
-    <h4>FAQ's</h4>
-  </div>
-  <div id="accordion">
-    <!-- Section 1 -->
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            What is the main motto of HungerHelp?
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
-          <!-- Your content for section 1 -->
-          Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.
+<%- include("../partials/header"); -%>
+<%- include("../partials/bg"); -%>
+<%- include("../components/devmsg"); -%>
+<div id="FAQ">
+    <% faq_obj.forEach((props)=>{ %>
+        <div class="faq-card">
+            <h6 class="faq-ques"><%= props.question %></h6>
+            <p class="faq-ans"><%= props.answer %></p>
         </div>
-      </div>
-    </div>
-  
-    <!-- Section 2 -->
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Does HungerHelp expect any kind of remuneration?
-          </button>
-        </h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        <div class="card-body">
-          <!-- Your content for section 2 -->
-          Introducing "HungerHelp" - a compassionate non-profit organization dedicated to eradicating hunger's plight. With unwavering determination and your support, we strive to bring hope and nourishment to those in need. Join us in our mission to create a world where no one goes to bed hungry.
-        </div>
-      </div>
-    </div>
-  
-    <!-- Section 3 -->
-    <div class="card">
-      <div class="card-header" id="headingThree">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Contact for any design suggestions
-          </button>
-        </h5>
-      </div>
-      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-        <div class="card-body">
-          <!-- Your content for section 3 -->
-          For any design queries or technical contact kindly reach sathvikworkmail@gmail.com. For any feedback related elements feel free to use the feedback form :)
-        </div>
-      </div>
-    </div>
-  
-    <!-- Section 4 -->
-    <div class="card">
-      <div class="card-header" id="headingFour">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Do i get paid if I join in HungerHelp?
-          </button>
-        </h5>
-      </div>
-      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-        <div class="card-body">
-          HungerHelp is purely a non-profit organisation which has been running on our self interest for now without any financial aid, So we would love to take volunteers who works for love :)
-        </div>
-      </div>
-    </div>
-  
-    <!-- Section 5 -->
-    <div class="card">
-      <div class="card-header" id="headingFive">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-            How can I join as a volunteer?
-          </button>
-        </h5>
-      </div>
-      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-        <div class="card-body">
-          Thanks for your interest please navigate to join page or <a href="https://sathvik-web.onrender.com/register">click here</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    <%})%>
 </div>
 <%- include("../components/feedback"); -%>
-<%- include("../mobile_partials/footer"); -%>
+<%- include("../partials/footer"); -%>
+<script>
+    const questions = document.getElementsByClassName("faq-ques");
+    const answers = document.getElementsByClassName("faq-ans");
+    Array.from(questions).forEach((question)=>{
+        question.addEventListener("click",()=>{
+            question.classList.toggle("active");
+            const answer = question.nextElementSibling;
+            answer.classList.toggle("active");
+        })
+    })
+</script>

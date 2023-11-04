@@ -2,6 +2,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import fetch from "node-fetch";
+import axios from "axios";
 import express from "express";
 const app = express();
 import bodyParser from "body-parser";
@@ -310,6 +311,8 @@ Fooddb.find({ expiry: { $lte: currentTime } })
       emphasis: emphasis_txt,
       obj: statBoxData,
       imgsrc: aside_img[[Math.floor(Math.random() * aside_img.length)]],
+      isAdmin : req.session.isadminbool,
+      login : req.session.isLoggedIn
     });
   }
 });
@@ -318,7 +321,7 @@ Fooddb.find({ expiry: { $lte: currentTime } })
 app.get("/register", function (req, res) {
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (isMobile) {
-    res.render("mobile/register");
+    res.render("mobile/register", { cdevmsg: devtxt, isAdmin: req.session.isadminbool,login : req.session.isLoggedIn });
   } else {
     res.render("desktop/register", { cdevmsg: devtxt, isAdmin: req.session.isadminbool,login : req.session.isLoggedIn });
   }
@@ -356,10 +359,12 @@ app.get("/donate-food", (req, res) => {
   {
       if (isMobile) {
         res.render("mobile/donate_food", {
+          cdevmsg: devtxt,
           loginState: req.session.isLoggedIn,
           errortxt: req.session.errmsg,
+          isAdmin: req.session.isadminbool,
           login : req.session.isLoggedIn
-        })
+        });
       }
       else {
       res.render("desktop/donate_food", {
@@ -441,7 +446,8 @@ app.get("/request-food", async (req, res) => {
     var availableFood = await Fooddb.find({});
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("mobile/req_food", {
+      res.render("desktop/req_food", {
+        cdevmsg: devtxt,
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
         data: availableFood,
@@ -470,10 +476,15 @@ app.get("/statistics", (req, res) => {
   {
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("mobile/stats", {
-        predictionDone: false,
+      res.render("desktop/stats", {
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
+        cdevmsg: devtxt,
+        predictionDone: false,
+        predictionDone1: false,
+        predictionDone2: false,
+        year: curryear,
+        isAdmin: req.session.isadminbool,
         login : req.session.isLoggedIn
       });
     } else {
@@ -526,7 +537,7 @@ app.get("/about", (req, res) => {
   req.session.redirecturl = "/about";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (isMobile) {
-    res.render("mobile/about");
+    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
   } else {
     res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
   }
@@ -557,10 +568,18 @@ app.post("/callbiogasprediction", async (req, res) => {
     // Send the data received from the Flask server as a response
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("mobile/stats", {
+      res.render("desktop/stats", {
+        cdevmsg: devtxt,
+        predictionDone: true,
+        predicteddata: predictedData,
+        biomass: biogasqty,
+        predictionDone1: false,
+        predictionDone2: false,
+        year: curryear,
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
-        predictionDone: true,
+        isAdmin : req.session.isadminbool,
+        login : req.session.isLoggedIn
       });
     } else {
       res.render("desktop/stats", {

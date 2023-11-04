@@ -1,3 +1,23 @@
 <footer>
     <p>Copyright &copy <%= new Date().getFullYear()-1 %> - <%= new Date().getFullYear() %></p>
 </footer>
+<script>
+    window.addEventListener("load", () => {
+        // Make a GET request to the specified URL
+        fetch("https://sathvik-biogas-predictor.onrender.com/")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Handle the response data here
+                console.log(data);
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch
+                console.error("Fetch error:", error);
+            });
+      });
+</script>
