@@ -2,119 +2,22 @@
 import dotenv from "dotenv";
 dotenv.config();
 import fetch from "node-fetch";
-import axios from "axios";
 import express from "express";
 const app = express();
 import bodyParser from "body-parser";
 import browserDetect from "browser-detect";
 import md5 from "md5";
 var devtxt = "ML, Responsiveness added!";
-import mongoose, { Schema } from "mongoose";
 import session from "express-session";
+import Biogasdb from "./models/BiogasModel.js";
+import Memberdb from "./models/MemberModel.js";
+import Fooddb from "./models/FoodModel.js";
+import db from "./db/dataBase.js";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 var curryear = new Date().getFullYear();
-// Database connection
-mongoose.connect(
-  process.env.DB_CODE
-);
-var db = mongoose.connection;
-db.on("error", () => console.log("Error in connection to Database"));
-db.once("open", () => console.log("Connected to Database Successfully"));
 
-const MemberSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  orgname: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true
-  },
-  isAdmin:{
-    type: Boolean,
-    required: true,
-  },
-});
-
-const DonateSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    unique: true,
-  },
-  ftype: {
-    type: String,
-    required: true,
-  },
-  quality: {
-    type: String,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  contact: {
-    type: String,
-    required: true,
-  },
-  organisation: {
-    type: String,
-    required: true,
-  },
-  expiry: {
-    type: BigInt,
-    required: true,
-  },
-  message: {
-    type: String,
-    required: true,
-  },
-});
-
-const BiogasSchema = new mongoose.Schema({
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  organisation: {
-    type: String,
-    required: true,
-  },
-});
-const FeedbackSchema = new mongoose.Schema({
-  email : {
-    required : true,
-    type : String,
-  },
-  username : {
-    required : true,
-    type : String,
-  },
-  feedback : {
-    required : true,
-    type : String,
-  }
-})
-
-var Memberdb = new mongoose.model("members", MemberSchema);
-var Fooddb = new mongoose.model("food", DonateSchema);
-var Biogasdb = new mongoose.model("biogas", BiogasSchema);
-var FeedbackDb = new mongoose.model("feedback",FeedbackSchema);
 
 app.use(session({
   secret : process.env.SECRET,
@@ -194,6 +97,8 @@ var statBoxData = [
       var biocount = result[0].totalQuantity;
       biocount = biocount * 0.03;
       statBoxData[0].count = biocount.toPrecision(3) + "m³";
+    }).catch((err)=>{
+      console.log(err);
     }),
   },
   {
