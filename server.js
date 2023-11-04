@@ -9,10 +9,13 @@ import browserDetect from "browser-detect";
 import md5 from "md5";
 var devtxt = "ML, Responsiveness added!";
 import session from "express-session";
+// db imports
 import Biogasdb from "./models/BiogasModel.js";
 import Memberdb from "./models/MemberModel.js";
 import Fooddb from "./models/FoodModel.js";
 import db from "./db/dataBase.js";
+// Home page constants
+import HomePage from "./constants/HomePage.js";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -52,17 +55,7 @@ const sessionTimeoutMiddleware = (req, res, next) => {
 
 app.use(sessionTimeoutMiddleware);
 // Home page code
-
-const title_txt = "Welcome to HungerHelp!";
-const desc_txt = [
-  "Together, we are tackling hunger and making a difference in our community. At HungerHelp, we connect local food establishments, food banks, shelters, and individuals in need, creating a seamless platform to reduce food waste and address food insecurity. Through our web application, you can easily donate surplus food, volunteer your time, and ensure that no one goes hungry. Join us in this meaningful mission and make a positive impact on the lives of others.",
-  "Together, we are joining forces to combat hunger and make a positive impact in our community. At HungerHelp, we foster connections between local food establishments, food banks, shelters, and individuals in need, offering a seamless platform to reduce food waste and address food insecurity. With our user-friendly web application, you can effortlessly donate surplus food, volunteer your time, and help ensure that no one goes hungry. Join us in this meaningful mission to improve the lives of others.",
-  "Working together, we are addressing hunger and creating change in our community. At HungerHelp, we bring together local food establishments, food banks, shelters, and those in need, establishing an efficient platform to combat food waste and tackle food insecurity. Using our intuitive web application, you can easily contribute surplus food, volunteer your time, and play a vital role in ensuring that everyone has enough to eat. Join us in this important endeavor to make a positive difference in the lives of many.",
-  "Collaboratively, we are taking on the challenge of hunger and making a significant impact in our community. HungerHelp connects local food establishments, food banks, shelters, and individuals in need, providing a streamlined platform to minimize food waste and address food insecurity. Through our accessible web application, you can conveniently donate surplus food, volunteer your time, and help ensure that no one experiences hunger. Join us in this meaningful cause to positively transform lives.",
-  "In unity, we are combatting hunger and bringing about positive change in our community. HungerHelp facilitates connections between local food establishments, food banks, shelters, and those in need, creating an integrated platform to reduce food waste and combat food insecurity. Utilize our user-friendly web application to easily contribute surplus food, offer your time as a volunteer, and contribute to the cause of ensuring that no one goes without food. Join us in this purposeful mission to impact lives for the better.",
-];
-const emphasis_txt = "Together, we can fight hunger, one meal at a time.";
-const curFeedbackState = true;
+const curFeedbackState = true; //refer
 var volunteercnt = 0;
 var membercnt = 0;
 async function getMembersCounts() {
@@ -138,13 +131,6 @@ var statBoxData = [
     }),
   },
 ];
-const aside_img = [
-  "https://media.istockphoto.com/id/1355624220/vector/vector-illustration-please-dont-waste-food-designs-for-world-food-day-and-international.jpg?s=612x612&w=0&k=20&c=_noGR7l39IG46d6RGE4x54DBC8sg1pD1xzDUfz5pb4E=",
-  "https://i.pinimg.com/736x/bd/42/24/bd4224bdc0d7361c33324daba0c59b53.jpg",
-  "https://media.istockphoto.com/id/1223169200/vector/food-and-grocery-donation.jpg?s=612x612&w=0&k=20&c=0fv8hwXeS9RCL-ewqkr2oyi0Nu8jAQxGtroS0XA9nsQ=",
-  "https://cdn1.i-scmp.com/sites/default/files/styles/1200x800/public/2013/10/16/4541f88991b90cae31fe995a28027086.jpg?itok=w_-PQMW2",
-  "https://static.vecteezy.com/system/resources/previews/013/926/882/original/biofuel-life-cycle-of-natural-materials-and-plants-with-green-barrels-or-biogas-production-energy-in-flat-cartoon-hand-drawn-templates-illustration-vector.jpg",
-];
 app.get("/", async (req, res) => {
   const currentTime = new Date().getTime(); // Get current time in milliseconds
 
@@ -199,23 +185,23 @@ Fooddb.find({ expiry: { $lte: currentTime } })
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (!isMobile) {
     res.render("desktop/index", {
-      cdevmsg: devtxt,
-      titleTxt: title_txt,
-      descTxt: desc_txt[[Math.floor(Math.random() * desc_txt.length)]],
-      emphasis: emphasis_txt,
+      cdevmsg: HomePage.devtxt,
+      titleTxt: HomePage.title_txt,
+      descTxt: HomePage.desc_txt[[Math.floor(Math.random() * HomePage.desc_txt.length)]],
+      emphasis: HomePage.emphasis_txt,
       obj: statBoxData,
-      imgsrc: aside_img[[Math.floor(Math.random() * aside_img.length)]],
+      imgsrc: HomePage.aside_img[[Math.floor(Math.random() * HomePage.aside_img.length)]],
       isAdmin : req.session.isadminbool,
       login : req.session.isLoggedIn
     });
   } else {
     res.render("mobile/index", {
-      cdevmsg: devtxt,
-      titleTxt: title_txt,
-      descTxt: desc_txt[[Math.floor(Math.random() * desc_txt.length)]],
-      emphasis: emphasis_txt,
+      cdevmsg: HomePage.devtxt,
+      titleTxt: HomePage.title_txt,
+      descTxt: HomePage.desc_txt[[Math.floor(Math.random() * HomePage.desc_txt.length)]],
+      emphasis: HomePage.emphasis_txt,
       obj: statBoxData,
-      imgsrc: aside_img[[Math.floor(Math.random() * aside_img.length)]],
+      imgsrc: HomePage.aside_img[[Math.floor(Math.random() * HomePage.aside_img.length)]],
       isAdmin : req.session.isadminbool,
       login : req.session.isLoggedIn
     });
