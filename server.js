@@ -265,7 +265,8 @@ app.get("/donate-food", (req, res) => {
           loginState: req.session.isLoggedIn,
           errortxt: req.session.errmsg,
           isAdmin: req.session.isadminbool,
-          login : req.session.isLoggedIn
+          login : req.session.isLoggedIn,
+          isMobile : true
         });
       }
       else {
@@ -274,12 +275,13 @@ app.get("/donate-food", (req, res) => {
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
         isAdmin: req.session.isadminbool,
-        login : req.session.isLoggedIn
+        login : req.session.isLoggedIn,
+        isMobile : false
       });
       }
   }
   else{
-    res.render("components/login",{isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,login : req.session.isLoggedIn});
+    res.render("components/login",{isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,login : req.session.isLoggedIn,isMobile : browserDetect(req.headers["user-agent"]).mobile});
   }
   console.log(req.session);
 });
@@ -348,13 +350,14 @@ app.get("/request-food", async (req, res) => {
     var availableFood = await Fooddb.find({});
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("desktop/req_food", {
+      res.render("mobile/req_food", {
         cdevmsg: devtxt,
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
         data: availableFood,
         isAdmin: req.session.isadminbool,
-        login : req.session.isLoggedIn
+        login : req.session.isLoggedIn,
+        isMobile : true
       });
     } else {
       res.render("desktop/req_food", {
@@ -363,12 +366,13 @@ app.get("/request-food", async (req, res) => {
         errortxt: req.session.errmsg,
         data: availableFood,
         isAdmin: req.session.isadminbool,
-        login : req.session.isLoggedIn
+        login : req.session.isLoggedIn,
+        isMobile : false
       });
     }
   }
   else{
-    res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg});
+    res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,isMobile:browserDetect(req.headers["user-agent"]).mobile});
   }
 });
 
@@ -568,7 +572,7 @@ app.get("/logout",(req,res)=>{
 
 app.get("/login",(req,res)=>{
   req.session.redirecturl = req.get("referer");
-  res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg});
+  res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,isMobile:browserDetect(req.headers["user-agent"]).mobile});
 });
 
 app.post("/feedback",async(req,res)=>{

@@ -51,7 +51,7 @@ header.active{
     padding: 2%;
     background-color: white;
     font-size: 1em;
-    width: 30dvw;
+    width: 40dvw;
     height: 5dvh;
     border-radius: 1em;
     margin-bottom: 2%;
@@ -395,4 +395,286 @@ opacity: 0.8;
     width: 50dvw;
     padding: 2%;
     margin: 2%;
+}
+
+/* donate food */
+#back, #next, #addfoodsubmit{
+    width: 50dvw;
+    margin: 2%;
+    text-align: center;
+}
+#addfoodcont{
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;margin: auto;
+    width: 90dvw;
+    height: 85dvh;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+}
+#addfoodimg{
+    width: 20dvw;
+    mix-blend-mode: darken;
+}
+#addfoodchild{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 90dvw;
+    height: fit-content;
+}
+#addfoodslider{
+    width: 85dvw;
+    height: 35dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: #EDEADE;
+    box-shadow: 2px 2px 8px #000;
+    border-radius: 1rem;
+}
+.slide1img{
+    aspect-ratio: 2/2;
+    object-fit: contain;
+    mix-blend-mode: darken;
+    width: 15dvw;
+    padding: 0.9dvw;
+    margin: 1rem;
+    box-shadow: 2px 2px 4px #000;
+    border-radius: 1rem;
+    background-color: white!important;
+}
+#imageOptions input[type="radio"]{
+    display: none;
+}
+#imageOptions input[type="radio"]:checked + #excessfoodopt{
+    box-shadow: 2px 2px 8px #86dc3d;
+}
+#imageOptions input[type="radio"]:checked + #leftoverfoodopt{
+    box-shadow: 2px 2px 8px #B8860B;
+}
+#imageOptions{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 20dvw;
+}
+#imageOptions label{
+    background-color: #fff;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+#page1{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#page2{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#imageOptions input[type="radio"]:checked + #vegfoodopt{
+    box-shadow: 2px 2px 8px #86dc3d;
+}
+#imageOptions input[type="radio"]:checked + #nonvegfoodopt{
+    box-shadow: 2px 2px 8px red;
+}
+#quantity{
+    border: none;
+    outline: none;
+    border-bottom: thin solid #86dc3d;
+}
+#quantity::placeholder{
+    opacity: 0.6;
+}
+#page3{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#page3 input{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    background-color: #EDEADE;
+}
+#page4{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20dvh;
+}
+#page4 input{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    width: 50%;
+    background-color: #EDEADE;
+}
+#page4 textarea{
+    border: none;
+    border-bottom: thin solid #86dc3d;
+    outline: none;
+    width: 50%;
+    background-color: #EDEADE;
+}
+#addfoodsubmit{
+    display: none;
+}
+#addfoodslider.active #addfoodsubmit{
+    display: flex;
+}
+#addfoodslider.active #next{
+    display: none;
+}
+#page1,#page2,#page3,#page4{
+    display: none;
+}
+#page1.active{
+    display: flex;
+}
+#page2.active{
+    display: flex;
+}
+#page3.active{
+    display: flex;
+}
+#page4.active{
+    display: flex;
+}
+#slidenavigator{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50dvw;
+    margin: auto;
+}
+#slidenavigator button{
+    background-color: #86dc3d;
+    padding: 2%;
+    border-radius: 1rem;
+}
+#progressbar{
+    width: 5dvw;
+    height: 2dvw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.pgbardots{
+    background-color: #87dc3d62;
+    width: 0.8dvw;
+    height: 0.8dvw;
+    border-radius: 100%;
+}
+.pgbardots.active{
+    background-color: #72d51b;
+    opacity: 100%;
+}
+/* request food */
+#vegetarian{
+    width: 20px;
+    height: 20px;
+    border: thin solid #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4caf50;
+}
+#vegetarian .vnv{
+    background-color: #4caf50;
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+}
+#non-vegetarian{
+    width: 20px;
+    height: 20px;
+    border: thin solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* color: #4caf50; */
+}
+#non-vegetarian .vnv{
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 2rem;
+}
+#reqfood_body{
+    position: absolute;
+    left: 0;right: 0;top: 0;bottom: 0;
+    margin: auto;
+    width: 85vw;
+    height: 70vh;
+}
+#available{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 85vw;
+    height: fit-content;
+    max-height: 72dvh;
+    flex-wrap: wrap;
+    overflow-x:hidden;
+    overflow: scroll;
+}
+.availcard{
+    width: 20dvw; 
+    height: fit-content;
+    max-height: 45dvh;
+    margin: 2%;
+    text-align: center;
+    line-height: 1.5;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+    background-color: #EDEADE;
+    padding: 4%;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.availcard p{
+    line-height: 1;
+}
+#reqbtn{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2%;
+    color: white;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+}
+#reqbtn:hover{
+    transform: translateY(5px);
+}
+#reqbtn.vegetarian{
+    background-color: #72d51b;
+}
+#reqbtn.non-vegetarian{
+    background-color: red;
+}
+.availcard:hover{
+    transform: scale(0.95);
+}
+.cardidvalue{
+    display: none;
 }
