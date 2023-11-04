@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/mobileStyle.css">
 </head>
 <body>
-    <header id="header">
+    <header>
         <h1 id="logo">HungerHelp</h1>
         <div id="buttons">
             <a class="nav-link-1 nav-link-btns" href="/">Home</a>
@@ -42,7 +42,7 @@
 </body>
 </html>
 <script>
-    document.getElementById("header").addEventListener("click",()=>{
-        document.getElementById("header").classList.toggle("active");
+    document.querySelector("header").addEventListener("click",()=>{
+        document.querySelector("header").classList.toggle("active");
     });
 </script>
