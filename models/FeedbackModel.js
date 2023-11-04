@@ -13,4 +13,5 @@ const FeedbackSchema = new mongoose.Schema({
       type : String,
     }
 })
-module.exports = new mongoose.model("feedback",FeedbackSchema);
+const FeedbackDb = new mongoose.model("feedback",FeedbackSchema);
+export default FeedbackDb;

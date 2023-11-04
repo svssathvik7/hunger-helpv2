@@ -4,18 +4,19 @@ dotenv.config();
 import cors from "cors";
 import axios from "axios";
 import express from "express";
+import session from "express-session";
 const app = express();
 app.use(cors());
 import bodyParser from "body-parser";
 import browserDetect from "browser-detect";
 import md5 from "md5";
 var devtxt = "ML, Responsiveness added!";
-import session from "express-session";
 // db imports
 import Biogasdb from "./models/BiogasModel.js";
 import Memberdb from "./models/MemberModel.js";
 import Fooddb from "./models/FoodModel.js";
-import db from "./db/dataBase.js";
+import db from "./Authentications/dataBase.js";
+import FeedbackDb from "./models/FeedbackModel.js";
 // Home page constants
 import HomePage from "./constants/HomePage.js";
 // faqs
@@ -25,39 +26,27 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 var curryear = new Date().getFullYear();
 
-
+// sessions
 app.use(session({
-  secret : process.env.SECRET,
+  secret: process.env.SECRET,
   resave: false,
-  saveUninitialized:true,
+  saveUninitialized: true,
   cookie: {
-    maxAge: 5 * 60 * 1000,
+    maxAge: 5 * 60 * 1000 // 5 minutes
   }
 }));
-app.use((req, res, next) => {
-  if (req.session.isLoggedIn) {
-    setTimeout(() => {
-      req.session.isLoggedIn = false;
-      console.log('Session timeout: isLoggedIn set to false');
-    }, 5*60*1000); 
-  }
-  next();
-});
-const sessionTimeoutMiddleware = (req, res, next) => {
-  if (req.session.isLoggedIn) {
-    // The session is active; do nothing
-    next();
-  } else {
-    // The session has timed out; reset variables
-    req.session.isLoggedIn = false;
-    req.session.isadminbool = false;
-    req.session.errmsg = "";
-    console.log(req.session);
-    next();
-  }
+
+const sessionChecker = (req, res, next) => {
+if (req.session && req.session.lastAccess && (Date.now() - req.session.lastAccess > 5 * 60 * 1000)) {
+  req.session.isLoggedIn = false;
+  req.session.isadminbool = false;
+  req.session.errmsg = '';
+}
+req.session.lastAccess = Date.now();
+next();
 };
 
-app.use(sessionTimeoutMiddleware);
+app.use(sessionChecker);
 // Home page code
 const curFeedbackState = true; //refer
 var volunteercnt = 0;
