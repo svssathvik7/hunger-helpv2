@@ -412,7 +412,7 @@ app.get("/about", (req, res) => {
   req.session.redirecturl = "/about";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (isMobile) {
-    res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
+    res.render("mobile/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
   } else {
     res.render("desktop/about", { cdevmsg: devtxt, faq_obj: faq,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn });
   }
@@ -438,7 +438,7 @@ app.post("/callbiogasprediction", async (req, res) => {
     // Send the data received from the Flask server as a response
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("desktop/stats", {
+      res.render("mobile/stats", {
         cdevmsg: devtxt,
         predictionDone: true,
         predicteddata: predictedData,
