@@ -1,0 +1,155 @@
+body{
+    overflow: hidden;
+    width: 100dvw;
+    height: 100dvh;
+}
+*{
+    padding: 0;margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+header{
+    width: 100dvw;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to right,rgb(36, 228, 36),rgb(93, 153, 93));
+    padding: 2%;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#buttons{
+    width: 100dvw;
+    padding: 2%;
+    height: fit-content;
+    display: none;
+}
+#logo{
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+header.active #logo{
+    display: none;
+}
+header.active #buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+header.active{
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    box-shadow: 2px 2px 8px #000;
+}
+.nav-link-btns{
+    padding: 2%;
+    background-color: white;
+    font-size: 1em;
+    width: 30dvw;
+    height: 5dvh;
+    border-radius: 1em;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+
+/* index page */
+#IndexFlex{
+    height: 100dvh;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#Body{
+    width: 90dvw;
+    height: fit-content;
+    text-align: center;
+}
+#statbar{
+    width: 90dvw;
+    height: 30dvh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.statbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 10dvh;
+}
+#simg{
+    width: 10dvw;
+}
+/* contact form */
+#feedback-block{
+    position: absolute;
+    bottom: 0;left: 0;
+    margin: 1%;
+}
+#feedbacklogo{
+    width: 10dvw;
+}
+#contactformbox {
+    width: 300px;
+    margin: 0 auto;
+    position: absolute;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    margin: 2%;
+    border: thin solid #000;
+    border-radius: 2%;
+    animation: show 0.3s ease;
+    z-index: 3;
+    transition: all 0.8s ease;
+    transform-style: preserve-3d;
+  }
+
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  #username,
+  #email,
+  textarea {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #fsubmit {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+  }
+  #close-button {
+    position: absolute;
+    right: 2%;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: red;
+    cursor: pointer;
+  }
+  #close-button:active #contactformbox{
+    animation: hide 0.8s ease;
+  }

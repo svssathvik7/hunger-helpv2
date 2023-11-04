@@ -3,12 +3,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import fs from "fs";
-import path from "path";
 import axios from "axios";
 import express from "express";
 import session from "express-session";
-const app = express();
-app.use(cors());
 import bodyParser from "body-parser";
 import browserDetect from "browser-detect";
 import md5 from "md5";
@@ -23,6 +20,10 @@ import FeedbackDb from "./models/FeedbackModel.js";
 import HomePage from "./constants/HomePage.js";
 // faqs
 import faq from "./constants/FAQ.js";
+
+// express app intialisation
+const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -71,7 +72,6 @@ app.use((req, res, next) => {
   next();
 });
 // Home page code
-const curFeedbackState = true; //refer
 var volunteercnt = 0;
 var membercnt = 0;
 async function getMembersCounts() {
@@ -148,37 +148,33 @@ var statBoxData = [
   },
 ];
 app.get("/", async (req, res) => {
-  const currentTime = new Date().getTime(); // Get current time in milliseconds
-
-// Find and process expired food items
-Fooddb.find({ expiry: { $lte: currentTime } })
-  .then(async (expiredFoodItems) => {
-    for (const item of expiredFoodItems) {
-      const existingBiogasEntry = await Biogasdb.findOne({
-        organisation: item.organisation,
-      });
-
-      if (existingBiogasEntry) {
-        // Update the existing Biogasdb entry by adding the current quantity
-        await Biogasdb.findOneAndUpdate(
-          { organisation: item.organisation },
-          { $set: { quantity: existingBiogasEntry.quantity + item.quantity } }
-        );
-      } else {
-        // Insert a new Biogasdb entry
-        const newBiogasEntry = new Biogasdb({
-          quantity: item.quantity,
-          organisation: item.organisation,
+    const currentTime = new Date().getTime(); // Get current time in milliseconds
+    // Find and process expired food items
+    Fooddb.find({ expiry: { $lte: currentTime } })
+      .then(async (expiredFoodItems) => {
+        for (const item of expiredFoodItems) {
+          const existingBiogasEntry = await Biogasdb.findOne({
+            organisation: item.organisation,
+          });
+          if (existingBiogasEntry) {
+          // Update the existing Biogasdb entry by adding the current quantity
+            await Biogasdb.findOneAndUpdate(
+              { organisation: item.organisation },
+              { $set: { quantity: existingBiogasEntry.quantity + item.quantity } }
+            );
+          } else {
+            // Insert a new Biogasdb entry
+            const newBiogasEntry = new Biogasdb({
+              quantity: item.quantity,
+              organisation: item.organisation,
+            });
+            await newBiogasEntry.save();
+          }
+        }
+        // Remove expired food items from Fooddb
+        const deleteResult = await Fooddb.deleteMany({
+          _id: { $in: expiredFoodItems.map((item) => item._id) },
         });
-        await newBiogasEntry.save();
-      }
-    }
-
-    // Remove expired food items from Fooddb
-    const deleteResult = await Fooddb.deleteMany({
-      _id: { $in: expiredFoodItems.map((item) => item._id) },
-    });
-
     console.log(`${deleteResult.deletedCount} items removed from Fooddb.`);
   })
   .catch((err) => {
@@ -196,7 +192,6 @@ Fooddb.find({ expiry: { $lte: currentTime } })
     biocount = biocount * 0.03;
     statBoxData[0].count = biocount.toPrecision(3) + "m³";
   });
-  // req.session.isLoggedIn = false;
   req.session.errmsg = "";
   var isMobile = browserDetect(req.headers["user-agent"]).mobile;
   if (!isMobile) {
@@ -557,10 +552,6 @@ app.post("/getOrgData",async(req,res)=>{
   const totalQuantity = cdata.reduce((sum, item) => sum + item.quantity, 0);
   var bdata = await Biogasdb.find({organisation:selectedOrganisation});
   var biodata = await Memberdb.find({orgname: selectedOrganisation});
-  console.log(cdata);
-  console.log(bdata);
-  console.log(biodata);
-  console.log(totalQuantity);
   res.render("desktop/orgstat",{currdata:totalQuantity,biogasdata:bdata,orgname:selectedOrganisation,info:biodata,isAdmin:req.session.isadminbool,login : req.session.isLoggedIn});
 });
 
