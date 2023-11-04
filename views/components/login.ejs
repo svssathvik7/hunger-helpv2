@@ -1,5 +1,9 @@
-<%- include("../partials/header"); -%>
-<%- include("../partials/bg"); -%>
+<% if(isMobile) {%>
+    <%- include("../mobile_partials/header"); -%>
+<%} else {%>
+    <%- include("../partials/header"); -%>
+    <%- include("../partials/bg"); -%>
+<%}%>
 <div id="logindiv">
     <form id="loginform" method="post" action="/login">
         <h3>Welcome back!</h3>

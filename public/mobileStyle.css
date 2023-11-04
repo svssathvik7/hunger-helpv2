@@ -202,3 +202,138 @@ opacity: 0.8;
 .faq-ques.active{
     box-shadow: 2px 2px 16px #000;
 }
+
+/* login box */
+#success {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 24px;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+#failure{
+    text-align: center;
+    margin-top: 100px;
+    font-size: 24px;
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#failure ul,li{
+    list-style:lower-roman;
+    text-align: left;
+}
+#logindiv{
+    position: absolute;
+    top: 0;left: 0;bottom: 0;right: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90dvw;
+    height: 85dvh;
+    flex-direction: column;
+    height: 60dvh;
+}
+#loginform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 40dvh;
+}
+#loginmaindiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#loginmaindiv input,button{
+    margin: 4%;
+}
+#loginsubmit{
+    padding: 0;margin: 0;
+    background-color: #86dc3d;
+    border-radius: 2rem;
+    width: 20dvw;
+    transition: all 0.3s ease;
+}
+#loginsubmit:hover{
+    box-shadow: 2px 2px #000;
+}
+#loginmaindiv input{
+    border: none;
+    width: 60dvw;
+    outline: none;
+    padding-bottom: 0;
+    transition: padding-bottom 0.3s ease;
+}
+#loginmaindiv input:focus{
+    border-bottom: thin solid #86dc3d!important;
+    padding-bottom: 2%;
+}
+#loginmaindiv input:valid{
+    border-bottom: thin solid #86dc3d!important;
+    padding-bottom: 2%;
+}
+#loginmaindiv input:hover{
+    border-bottom: thin solid #86dc3d;
+    padding-bottom: 2%;
+}
+#vline{
+    width: 0.5dvw;
+    height: 25dvh;
+    background-color: darkgray;
+    border-radius: 2rem;
+    transform: rotate(90deg);
+}
+#sociallogins{
+    height: 45dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.slogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70dvw;
+    height: 5dvh;
+    border: thin solid #000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
+}
+.sloginpic{
+    width: 5dvw;
+    margin: 2%;
+    display: inline;
+    z-index: 2;
+}
+.slogin{
+    border-radius: 2rem;
+    color: #000;
+    text-decoration: none;
+}
+#glogin:hover{
+    background-color: orangered;
+}
+#linkedinlogin:hover{
+    background-color: #00a1dc97;
+}
+#facebooklogin:hover{
+    background-color: #3b5998;
+}
+#errortxt{
+    color: red;
+}

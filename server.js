@@ -378,7 +378,7 @@ app.get("/statistics", (req, res) => {
   {
     var isMobile = browserDetect(req.headers["user-agent"]).mobile;
     if (isMobile) {
-      res.render("desktop/stats", {
+      res.render("mobile/stats", {
         loginState: req.session.isLoggedIn,
         errortxt: req.session.errmsg,
         cdevmsg: devtxt,
@@ -387,7 +387,8 @@ app.get("/statistics", (req, res) => {
         predictionDone2: false,
         year: curryear,
         isAdmin: req.session.isadminbool,
-        login : req.session.isLoggedIn
+        login : req.session.isLoggedIn,
+        isMobile : true
       });
     } else {
       res.render("desktop/stats", {
@@ -399,12 +400,13 @@ app.get("/statistics", (req, res) => {
         predictionDone2: false,
         year: curryear,
         isAdmin: req.session.isadminbool,
-        login : req.session.isLoggedIn
+        login : req.session.isLoggedIn,
+        isMobile : false
       });
     }
   }
   else{
-    res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg});
+    res.render("components/login",{login : req.session.isLoggedIn,isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,isMobile:browserDetect(req.headers["user-agent"]).mobile});
   }
 });
 
