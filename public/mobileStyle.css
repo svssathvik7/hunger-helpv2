@@ -678,3 +678,60 @@ opacity: 0.8;
 .cardidvalue{
     display: none;
 }
+
+/* register page */
+#signuppage{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    flex-direction: column;
+}
+#signupbox{
+    width: 90dvw;
+    height: 55dvh;
+}
+#signupform input{
+    display: block;
+    text-align: left;
+    padding: 2%;
+    width: 70dvw;
+    line-height: 2;
+    border: none;
+    border-bottom: thin solid #86dc3d;
+}
+#signupform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: transparent;
+    background-color: transparent;
+}
+#signupform #submit{
+    padding: 3%;
+    background-color: #86dc3d;
+    border-radius: 2rem;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 0.2s ease;
+}
+#signupform #submit:hover{
+    box-shadow: 2px 2px #000;
+}
+::placeholder{
+    color: #000000d0;
+}
+.dropdown-container {
+    width: 70dvw;
+    padding: 2%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: thin solid #4caf50; /* Green line at the bottom */
+    display: inline-block;
+    margin-bottom: 10px; /* Adjust as needed */
+    text-align: left;
+}
