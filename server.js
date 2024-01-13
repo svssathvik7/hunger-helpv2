@@ -303,7 +303,7 @@ app.post("/login", async (req, res) => {
       } else {
         req.session.errmsg = "Password incorrect";
         req.session.isLoggedIn = false;
-        res.render("components/login",{isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,login : req.session.isLoggedIn});
+        res.render("components/login",{isAdmin:req.session.isadminbool,errortxt:req.session.errmsg,login : req.session.isLoggedIn,isMobile:browserDetect(req.headers["user-agent"]).mobile});
       }
     } else {
       req.session.errmsg = "No user found";
